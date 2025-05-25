@@ -54,24 +54,40 @@
       border-radius: 10px;
     }
 
+    .progress-container {
+      background: #cce6ff;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 15px;
+    }
+
+    .progress-bar {
+      background: #007acc;
+      color: white;
+      padding: 4px;
+      text-align: right;
+    }
+
     .music-visualizer {
       display: flex;
       align-items: flex-end;
-      height: 50px;
+      height: 40px;
       margin-top: 20px;
+      justify-content: center;
+      gap: 2px;
     }
 
     .bar {
       width: 4px;
       height: 100%;
       background: black;
-      margin: 0 1px;
       animation: bounce 1s infinite ease-in-out;
     }
 
     .bar:nth-child(2n) {
       animation-delay: 0.1s;
     }
+
     .bar:nth-child(3n) {
       animation-delay: 0.2s;
     }
@@ -108,11 +124,20 @@
 
     <button onclick="toggleSection('skill')">Skill</button>
     <div class="section" id="skill">
-      <ul>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>WhatsApp Bot Development</li>
-      </ul>
+      <p>HTML</p>
+      <div class="progress-container">
+        <div class="progress-bar" style="width: 90%;">90%</div>
+      </div>
+
+      <p>CSS</p>
+      <div class="progress-container">
+        <div class="progress-bar" style="width: 70%;">70%</div>
+      </div>
+
+      <p>WhatsApp Bot Dev</p>
+      <div class="progress-container">
+        <div class="progress-bar" style="width: 85%;">85%</div>
+      </div>
     </div>
 
     <button onclick="toggleSection('kontak')">Kontak</button>
@@ -121,46 +146,55 @@
       <p>Instagram: @yourinstagram</p>
     </div>
 
-    <button onclick="toggleMusic(this)">Pause Musik</button>
+    <!-- Musik dan Visualizer di bawah -->
+    <div style="text-align: center; margin-top: 30px;">
+      <button id="musicBtn" onclick="toggleMusic()" style="background-color: #003366; font-size: 18px;">
+        ⏸ Pause Musik
+      </button>
 
-    <!-- Audio Player -->
-    <audio id="bgm" autoplay loop>
-      <source src="https://wilkazxq.github.io/musik.mp3" type="audio/mpeg">
-      Browser tidak mendukung pemutaran audio.
-    </audio>
+      <audio id="bgm" autoplay loop>
+        <source src="https://wilkazxq.github.io/musik.mp3" type="audio/mpeg">
+        Browser tidak mendukung pemutaran audio.
+      </audio>
 
-    <!-- Music Visualizer -->
-    <div class="music-visualizer">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
+      <div class="music-visualizer">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
     </div>
-
   </div>
 
   <script>
     function toggleSection(id) {
-      const section = document.getElementById(id);
-      section.style.display = section.style.display === 'block' ? 'none' : 'block';
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => {
+        if (section.id === id) {
+          section.style.display = section.style.display === 'block' ? 'none' : 'block';
+        } else {
+          section.style.display = 'none';
+        }
+      });
     }
 
     const audio = document.getElementById('bgm');
+    const musicBtn = document.getElementById('musicBtn');
     let isPlaying = true;
 
-    function toggleMusic(btn) {
+    function toggleMusic() {
       if (isPlaying) {
         audio.pause();
-        btn.innerText = "Play Musik";
+        musicBtn.innerText = '▶ Play Musik';
       } else {
         audio.play();
-        btn.innerText = "Pause Musik";
+        musicBtn.innerText = '⏸ Pause Musik';
       }
       isPlaying = !isPlaying;
     }
