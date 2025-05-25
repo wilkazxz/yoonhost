@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -8,9 +8,9 @@
     :root {
       --primary-color: #003366;
       --bg-color: #f4f4f9;
-      --text-color: #333;
+      --text-color: #222;
       --card-bg: #fff;
-      --border-radius: 10px;
+      --border-radius: 12px;
       --accent: #00cc99;
     }
 
@@ -25,7 +25,6 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
-      line-height: 1.6;
     }
 
     /* Splash screen */
@@ -62,8 +61,15 @@
     header {
       background-color: var(--primary-color);
       color: #fff;
-      padding: 60px 20px;
+      padding: 50px 20px;
       text-align: center;
+      border-bottom: 8px solid var(--accent);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
     }
 
     nav {
@@ -79,14 +85,15 @@
       background-color: var(--primary-color);
       color: #fff;
       border: none;
-      padding: 8px 16px;
+      padding: 10px 20px;
       border-radius: var(--border-radius);
       cursor: pointer;
       transition: background 0.3s ease, transform 0.1s ease;
+      font-size: 1rem;
     }
 
     nav button:hover {
-      background-color: #002b55;
+      background-color: #00264d;
     }
 
     nav button:active {
@@ -163,7 +170,7 @@
 </head>
 <body>
 
-  <!-- Splash -->
+  <!-- Splash Screen -->
   <div id="intro">
     <svg width="80" height="80" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
       <path d="M12 2l4 4-4 4-4-4 4-4zM2 12l4-4 4 4-4 4-4-4zM12 22l-4-4 4-4 4 4-4 4zM22 12l-4 4-4-4 4-4 4 4z"/>
@@ -173,19 +180,22 @@
     <button onclick="masukWebsite()">Mulai</button>
   </div>
 
+  <!-- Header -->
   <header>
     <h1>WILKA</h1>
-    <p>Welcome to my portfolio website</p>
+    <p>Selamat datang di portofolio saya</p>
   </header>
 
+  <!-- Navigation -->
   <nav>
-    <button onclick="toggleSection('skills')">Skills</button>
-    <button onclick="toggleSection('hobbies')">Hobbies</button>
-    <button onclick="toggleSection('contact')">Contact</button>
+    <button onclick="toggleSection('skills')">🧠 Skills</button>
+    <button onclick="toggleSection('hobbies')">🎯 Hobbies</button>
+    <button onclick="toggleSection('contact')">📞 Contact</button>
   </nav>
 
+  <!-- Skills Section -->
   <section id="skills" class="toggle-content">
-    <h2>Skills</h2>
+    <h2>🧠 Skills</h2>
     <div class="card">
       <div class="progress-bar"><span style="width: 90%">HTML - 90%</span></div>
       <div class="progress-bar"><span style="width: 70%">CSS - 70%</span></div>
@@ -193,33 +203,38 @@
     </div>
   </section>
 
+  <!-- Hobbies Section -->
   <section id="hobbies" class="toggle-content">
-    <h2>Hobbies</h2>
+    <h2>🎯 Hobbies</h2>
     <div class="card">
-      <p>I enjoy coding automation scripts, exploring new web technologies, and reading about AI and tech innovations.</p>
+      <p>Saya suka membuat script otomatis, mengeksplor teknologi web terbaru, dan membaca topik AI dan inovasi teknologi.</p>
     </div>
   </section>
 
+  <!-- Contact Section -->
   <section id="contact" class="toggle-content">
-    <h2>Contact</h2>
+    <h2>📞 Contact</h2>
     <div class="card">
       <p>Email: yourmail@example.com</p>
       <p>Instagram: @yourinstagram</p>
     </div>
   </section>
 
+  <!-- Music Player -->
   <div class="music-player">
-    <span>Musik:</span>
+    <span>🎵</span>
     <audio controls autoplay loop>
       <source src="musik.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
+      Browser kamu tidak mendukung audio.
     </audio>
   </div>
 
+  <!-- Footer -->
   <footer>
     &copy; 2025 WILKA. All rights reserved.
   </footer>
 
+  <!-- Script -->
   <script>
     function masukWebsite() {
       const intro = document.getElementById('intro');
@@ -230,11 +245,7 @@
     function toggleSection(id) {
       const sections = document.querySelectorAll('.toggle-content');
       sections.forEach(sec => {
-        if (sec.id === id) {
-          sec.style.display = sec.style.display === 'block' ? 'none' : 'block';
-        } else {
-          sec.style.display = 'none';
-        }
+        sec.style.display = (sec.id === id && sec.style.display !== 'block') ? 'block' : 'none';
       });
     }
   </script>
