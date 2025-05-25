@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>WILKA | Portfolio</title>
   <style>
     :root {
-      --primary-color: #6C63FF;
-      --bg-color: #f4f4f9;
+      --primary-color: #1266CC;      /* Tombol utama */
+      --bg-color: #E5FAF7;           /* Latar halaman */
       --text-color: #333;
-      --card-bg: #fff;
+      --card-bg: #C2E7F6;            /* Latar belakang card */
       --border-radius: 10px;
+      --card-border: #228BE6;        /* Border card */
+      --whatsapp-color: #25D366;     /* Tombol WhatsApp */
     }
 
     * {
@@ -59,7 +61,7 @@
     }
 
     nav button:hover {
-      background-color: #5848e6;
+      background-color: #0d4f99;
     }
 
     section {
@@ -85,6 +87,18 @@
       border-radius: var(--border-radius);
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       margin-bottom: 20px;
+      border: 2px solid var(--card-border);
+    }
+
+    .whatsapp-button {
+      display: inline-block;
+      background-color: var(--whatsapp-color);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 10px;
     }
 
     footer {
@@ -130,8 +144,12 @@
   <section id="contact">
     <h2>Contact</h2>
     <div class="card">
-      <p>Email: yourmail@example.com</p>
-      <p>Instagram: @yourinstagram</p>
+      <p>Nama: Wilkazxq</p>
+      <p>Telepon: +62 813-7165-2027</p>
+      <p>Email: wilkadev@gmail.com</p>
+      <p>Profesi: Developer & Creator</p>
+      <p>Website: wilkazxq.dev</p>
+      <a href="https://wa.me/6281371652027" class="whatsapp-button">Gabung WhatsApp</a>
     </div>
   </section>
 
