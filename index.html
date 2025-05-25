@@ -53,6 +53,7 @@
       gap: 15px;
       padding: 12px 20px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      flex-wrap: wrap;
     }
 
     nav button {
@@ -74,11 +75,15 @@
       padding: 40px 20px;
       max-width: 900px;
       margin: auto;
-      display: none;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: all 0.6s ease;
     }
 
     section.active {
-      display: block;
+      max-height: 800px;
+      opacity: 1;
     }
 
     h2 {
@@ -101,6 +106,23 @@
       padding-left: 20px;
     }
 
+    .progress-bar {
+      background-color: #e0e0e0;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar div {
+      height: 14px;
+      background-color: var(--primary-color);
+      text-align: right;
+      padding-right: 10px;
+      line-height: 14px;
+      color: #fff;
+      font-size: 12px;
+    }
+
     .whatsapp-button {
       display: inline-block;
       background-color: var(--whatsapp-color);
@@ -112,6 +134,25 @@
       margin-top: 15px;
     }
 
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+    }
+
+    form button {
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 10px 16px;
+      border: none;
+      border-radius: var(--border-radius);
+      font-weight: bold;
+      cursor: pointer;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -119,6 +160,10 @@
       font-size: 0.9rem;
       color: #666;
       margin-top: 40px;
+    }
+
+    .icon {
+      margin-right: 8px;
     }
   </style>
 </head>
@@ -132,36 +177,58 @@
   <nav>
     <button onclick="toggleSection('skills')">Skills</button>
     <button onclick="toggleSection('hobbies')">Hobbies</button>
+    <button onclick="toggleSection('music')">Musik</button>
     <button onclick="toggleSection('contact')">Contact</button>
   </nav>
 
   <section id="skills">
-    <h2>Skills</h2>
+    <h2>⚙️ Skills</h2>
     <div class="card">
-      <ul>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>WhatsApp Bot Development</li>
-      </ul>
+      <p>HTML</p>
+      <div class="progress-bar"><div style="width: 90%;">90%</div></div>
+      <p>CSS</p>
+      <div class="progress-bar"><div style="width: 85%;">85%</div></div>
+      <p>WhatsApp Bot Dev</p>
+      <div class="progress-bar"><div style="width: 95%;">95%</div></div>
     </div>
   </section>
 
   <section id="hobbies">
-    <h2>Hobbies</h2>
+    <h2>🎯 Hobbies</h2>
     <div class="card">
       <p>Saya suka membuat skrip otomatisasi, menjelajahi teknologi web terbaru, dan membaca tentang AI dan inovasi teknologi.</p>
     </div>
   </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
+  <section id="music">
+    <h2>🎵 Musik</h2>
     <div class="card">
-      <p><strong>Nama:</strong> Wilkazxq</p>
-      <p><strong>Telepon:</strong> +62 813-7165-2027</p>
-      <p><strong>Email:</strong> wilkadev@gmail.com</p>
-      <p><strong>Profesi:</strong> Developer & Creator</p>
-      <p><strong>Website:</strong> wilkazxq.dev</p>
+      <audio controls>
+        <source src="your-music.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung audio.
+      </audio>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>📞 Contact</h2>
+    <div class="card">
+      <p><strong>👤 Nama:</strong> Wilkazxq</p>
+      <p><strong>📱 Telepon:</strong> +62 813-7165-2027</p>
+      <p><strong>✉️ Email:</strong> wilkadev@gmail.com</p>
+      <p><strong>💼 Profesi:</strong> Developer & Creator</p>
+      <p><strong>🌐 Website:</strong> wilkazxq.dev</p>
       <a href="https://wa.me/6281371652027" class="whatsapp-button">Gabung WhatsApp</a>
+    </div>
+
+    <div class="card">
+      <h3>Kirim Pesan</h3>
+      <form onsubmit="event.preventDefault(); alert('Pesan dikirim!');">
+        <input type="text" placeholder="Nama Anda" required>
+        <input type="email" placeholder="Email Anda" required>
+        <textarea rows="4" placeholder="Tulis pesan di sini..." required></textarea>
+        <button type="submit">Kirim</button>
+      </form>
     </div>
   </section>
 
