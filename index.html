@@ -68,8 +68,9 @@
       text-align: center;
     }
 
-    header h1 {
-      font-size: 2.5rem;
+    #typing-text {
+      font-size: 1.2rem;
+      margin-top: 10px;
     }
 
     nav {
@@ -82,7 +83,6 @@
     }
 
     nav button {
-      text-decoration: none;
       background-color: var(--primary-color);
       color: #fff;
       padding: 8px 16px;
@@ -155,9 +155,20 @@
       cursor: pointer;
     }
 
-    .emoji {
-      margin-right: 5px;
+    #topBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 100;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
     }
+
   </style>
 </head>
 <body>
@@ -169,13 +180,14 @@
 
   <header>
     <h1>WILKA Portfolio</h1>
-    <p>Selamat datang di web portofolio pribadi!</p>
+    <div id="typing-text"></div>
   </header>
 
   <nav>
     <button onclick="showSection('skills')">🛠️ Skills</button>
     <button onclick="showSection('hobbies')">🎮 Hobbies</button>
     <button onclick="showSection('contact')">📱 Contact</button>
+    <button onclick="showSection('quotes')">✨ Quotes</button>
   </nav>
 
   <section id="skills" class="active">
@@ -202,10 +214,20 @@
     </div>
   </section>
 
+  <section id="quotes">
+    <h2>✨ Quotes</h2>
+    <div class="card">
+      <p>"Keep learning and keep building!"</p>
+      <p>- Wilka</p>
+    </div>
+  </section>
+
   <div class="music-player">
     <button onclick="toggleMusic()">▶️ Play Musik</button>
     <audio id="bg-music" src="musik.mp3" loop></audio>
   </div>
+
+  <button onclick="scrollToTop()" id="topBtn" title="Kembali ke atas">⬆️</button>
 
   <footer>
     &copy; 2025 WILKA. All rights reserved.
@@ -231,6 +253,37 @@
     function showSection(id) {
       document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
       document.getElementById(id).classList.add('active');
+    }
+
+    const texts = ["Frontend Dev", "Bot Builder", "Web Enthusiast"];
+    let count = 0;
+    let index = 0;
+    let currentText = '';
+    let letter = '';
+
+    function type() {
+      if (count === texts.length) count = 0;
+      currentText = texts[count];
+      letter = currentText.slice(0, ++index);
+      document.getElementById('typing-text').textContent = letter;
+      if (letter.length === currentText.length) {
+        count++;
+        index = 0;
+        setTimeout(type, 1000);
+      } else {
+        setTimeout(type, 100);
+      }
+    }
+
+    type();
+
+    const topBtn = document.getElementById("topBtn");
+    window.onscroll = function() {
+      topBtn.style.display = window.scrollY > 200 ? "block" : "none";
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
 
