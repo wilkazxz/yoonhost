@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>WILKA | Portfolio</title>
+  <title>Wilkazxq | Portfolio</title>
   <style>
     :root {
-      --primary-color: #6C63FF;
-      --bg-color: #f4f4f9;
-      --text-color: #333;
-      --card-bg: #fff;
-      --border-radius: 10px;
+      --primary-color: #003366;
+      --accent-color: #00cc99;
+      --text-color: #fff;
+      --card-bg: #ffffff;
+      --border-radius: 12px;
     }
 
     * {
@@ -21,61 +21,64 @@
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.6;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
     }
 
-    #start-screen {
+    /* INTRO */
+    #intro {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: var(--primary-color);
+      inset: 0;
+      background: var(--primary-color);
+      color: var(--text-color);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       z-index: 9999;
-      color: #fff;
+      text-align: center;
+      animation: fadeIn 1s ease-in;
     }
 
-    #start-screen h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
+    .intro-icon {
+      animation: rotateIcon 3s linear infinite;
     }
 
-    #start-screen button {
-      padding: 15px 30px;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: var(--border-radius);
-      background-color: #fff;
-      color: var(--primary-color);
+    @keyframes rotateIcon {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    button {
       cursor: pointer;
-      transition: transform 0.2s ease;
+      transition: transform 0.2s;
     }
 
-    #start-screen button:active {
+    button:active {
       transform: scale(0.95);
     }
 
     header {
-      border-bottom: 5px solid var(--primary-color);
       background-color: var(--primary-color);
-      color: #fff;
+      color: white;
       padding: 60px 20px;
       text-align: center;
+      border-bottom: 5px solid var(--accent-color);
     }
 
-    #typing-text {
-      font-size: 1.2rem;
-      margin-top: 10px;
+    header h1 {
+      font-size: 2.5rem;
     }
 
     nav {
-      background-color: #fff;
-      padding: 10px 20px;
+      background: white;
+      padding: 10px;
       display: flex;
       justify-content: center;
       gap: 15px;
@@ -84,33 +87,24 @@
 
     nav button {
       background-color: var(--primary-color);
-      color: #fff;
-      padding: 8px 16px;
+      color: white;
       border: none;
-      border-radius: var(--border-radius);
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    nav button:hover {
-      background-color: #5848e6;
+      padding: 10px 18px;
+      border-radius: 8px;
     }
 
     section {
       padding: 40px 20px;
       max-width: 900px;
       margin: auto;
-      display: none;
-    }
-
-    section.active {
-      display: block;
     }
 
     h2 {
       margin-bottom: 20px;
-      font-size: 2rem;
       color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .card {
@@ -121,13 +115,19 @@
       margin-bottom: 20px;
     }
 
-    .skill-bar {
-      margin: 10px 0;
+    .progress-bar {
+      background: #ccc;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 10px;
     }
 
-    .skill-bar span {
-      display: inline-block;
-      width: 150px;
+    .progress {
+      background: var(--accent-color);
+      color: white;
+      text-align: right;
+      padding: 5px;
+      border-radius: 20px;
     }
 
     footer {
@@ -139,151 +139,118 @@
     }
 
     .music-player {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary-color);
+      border-radius: 50px;
+      padding: 10px 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
 
     .music-player button {
-      background-color: var(--primary-color);
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1rem;
-      border-radius: 50px;
-      cursor: pointer;
-    }
-
-    #topBtn {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      z-index: 100;
-      background-color: var(--primary-color);
+      background: var(--accent-color);
       color: white;
       border: none;
-      padding: 12px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
+      padding: 8px 16px;
+      border-radius: 20px;
     }
 
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
 
-  <div id="start-screen">
-    <h1>✨ WILKA ✨</h1>
-    <button onclick="startWebsite()">Mulai</button>
+  <!-- INTRO -->
+  <div id="intro">
+    <svg class="intro-icon" width="80" height="80" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M12 2l4 4-4 4-4-4 4-4zM2 12l4-4 4 4-4 4-4-4zM12 22l-4-4 4-4 4 4-4 4zM22 12l-4 4-4-4 4-4 4 4z"/>
+    </svg>
+    <h1>Selamat Datang di Portofolio Wilkazxq</h1>
+    <p>Developer | Designer | Creator</p>
+    <button onclick="masukWebsite()">Mulai</button>
   </div>
 
+  <!-- HEADER -->
   <header>
-    <h1>WILKA Portfolio</h1>
-    <div id="typing-text"></div>
+    <h1>WILKA</h1>
+    <p>Welcome to my portfolio website</p>
   </header>
 
+  <!-- NAVIGATION -->
   <nav>
-    <button onclick="showSection('skills')">🛠️ Skills</button>
-    <button onclick="showSection('hobbies')">🎮 Hobbies</button>
-    <button onclick="showSection('contact')">📱 Contact</button>
-    <button onclick="showSection('quotes')">✨ Quotes</button>
+    <button onclick="toggleSection('skills')">⚙️ Skills</button>
+    <button onclick="toggleSection('hobbies')">🎮 Hobbies</button>
+    <button onclick="toggleSection('contact')">✉️ Contact</button>
   </nav>
 
-  <section id="skills" class="active">
-    <h2>🛠️ Skills</h2>
+  <!-- SECTIONS -->
+  <section id="skills" class="hidden">
+    <h2>⚙️ Skills</h2>
     <div class="card">
-      <div class="skill-bar"><span>HTML</span> ----------- 90%</div>
-      <div class="skill-bar"><span>CSS</span> ----------- 70%</div>
-      <div class="skill-bar"><span>WhatsApp Bot</span> ----------- 80%</div>
+      <p>HTML</p>
+      <div class="progress-bar"><div class="progress" style="width: 90%;">90%</div></div>
+      <p>CSS</p>
+      <div class="progress-bar"><div class="progress" style="width: 70%;">70%</div></div>
+      <p>WhatsApp Bot</p>
+      <div class="progress-bar"><div class="progress" style="width: 80%;">80%</div></div>
     </div>
   </section>
 
-  <section id="hobbies">
+  <section id="hobbies" class="hidden">
     <h2>🎮 Hobbies</h2>
     <div class="card">
-      <p>Saya suka membuat bot otomatis, mengeksplor teknologi web, dan membaca tentang AI.</p>
+      <p>I enjoy coding automation scripts, exploring new web technologies, and reading about AI and tech innovations.</p>
     </div>
   </section>
 
-  <section id="contact">
-    <h2>📱 Contact</h2>
+  <section id="contact" class="hidden">
+    <h2>✉️ Contact</h2>
     <div class="card">
       <p>Email: yourmail@example.com</p>
       <p>Instagram: @yourinstagram</p>
     </div>
   </section>
 
-  <section id="quotes">
-    <h2>✨ Quotes</h2>
-    <div class="card">
-      <p>"Keep learning and keep building!"</p>
-      <p>- Wilka</p>
-    </div>
-  </section>
-
-  <div class="music-player">
-    <button onclick="toggleMusic()">▶️ Play Musik</button>
-    <audio id="bg-music" src="musik.mp3" loop></audio>
-  </div>
-
-  <button onclick="scrollToTop()" id="topBtn" title="Kembali ke atas">⬆️</button>
-
+  <!-- FOOTER -->
   <footer>
-    &copy; 2025 WILKA. All rights reserved.
+    &copy; 2025 Wilkazxq. All rights reserved.
   </footer>
 
+  <!-- MUSIC PLAYER -->
+  <div class="music-player">
+    <button onclick="toggleMusic()">▶️ Play</button>
+    <audio id="audioPlayer" src="musik.mp3"></audio>
+  </div>
+
+  <!-- SCRIPT -->
   <script>
-    const music = document.getElementById('bg-music');
-    let musicPlaying = false;
+    function masukWebsite() {
+      document.getElementById("intro").style.display = "none";
+    }
+
+    let currentSection = null;
+    function toggleSection(id) {
+      const section = document.getElementById(id);
+      if (currentSection && currentSection !== section) {
+        currentSection.classList.add("hidden");
+      }
+      section.classList.toggle("hidden");
+      currentSection = section.classList.contains("hidden") ? null : section;
+    }
 
     function toggleMusic() {
-      if (musicPlaying) {
-        music.pause();
+      const audio = document.getElementById("audioPlayer");
+      const btn = document.querySelector(".music-player button");
+      if (audio.paused) {
+        audio.play();
+        btn.textContent = "⏸️ Pause";
       } else {
-        music.play();
+        audio.pause();
+        btn.textContent = "▶️ Play";
       }
-      musicPlaying = !musicPlaying;
-    }
-
-    function startWebsite() {
-      document.getElementById('start-screen').style.display = 'none';
-    }
-
-    function showSection(id) {
-      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
-
-    const texts = ["Frontend Dev", "Bot Builder", "Web Enthusiast"];
-    let count = 0;
-    let index = 0;
-    let currentText = '';
-    let letter = '';
-
-    function type() {
-      if (count === texts.length) count = 0;
-      currentText = texts[count];
-      letter = currentText.slice(0, ++index);
-      document.getElementById('typing-text').textContent = letter;
-      if (letter.length === currentText.length) {
-        count++;
-        index = 0;
-        setTimeout(type, 1000);
-      } else {
-        setTimeout(type, 100);
-      }
-    }
-
-    type();
-
-    const topBtn = document.getElementById("topBtn");
-    window.onscroll = function() {
-      topBtn.style.display = window.scrollY > 200 ? "block" : "none";
-    }
-
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
 
