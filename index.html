@@ -48,16 +48,17 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    nav a {
-      text-decoration: none;
+    nav button {
       background-color: var(--primary-color);
       color: #fff;
       padding: 8px 16px;
+      border: none;
       border-radius: var(--border-radius);
+      cursor: pointer;
       transition: background 0.3s ease;
     }
 
-    nav a:hover {
+    nav button:hover {
       background-color: #5848e6;
     }
 
@@ -65,6 +66,11 @@
       padding: 40px 20px;
       max-width: 900px;
       margin: auto;
+      display: none;
+    }
+
+    section.active {
+      display: block;
     }
 
     h2 {
@@ -98,9 +104,9 @@
   </header>
 
   <nav>
-    <a href="#skills">Skills</a>
-    <a href="#hobbies">Hobbies</a>
-    <a href="#contact">Contact</a>
+    <button onclick="toggleSection('skills')">Skills</button>
+    <button onclick="toggleSection('hobbies')">Hobbies</button>
+    <button onclick="toggleSection('contact')">Contact</button>
   </nav>
 
   <section id="skills">
@@ -132,6 +138,13 @@
   <footer>
     &copy; 2025 WILKA. All rights reserved.
   </footer>
+
+  <script>
+    function toggleSection(id) {
+      const section = document.getElementById(id);
+      section.classList.toggle('active');
+    }
+  </script>
 
 </body>
 </html>
