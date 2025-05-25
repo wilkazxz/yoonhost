@@ -27,37 +27,7 @@
       color: var(--text-color);
     }
 
-    /* Splash screen */
-    #intro {
-      position: fixed;
-      inset: 0;
-      background: var(--primary-color);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      text-align: center;
-      transition: opacity 0.6s ease;
-    }
-
-    #intro button {
-      margin-top: 30px;
-      background: var(--accent);
-      border: none;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 30px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-
-    #intro button:active {
-      transform: scale(0.95);
-    }
-
+    /* Header & Navigation Styles... (Same as before) */
     header {
       background-color: var(--primary-color);
       color: #fff;
@@ -149,36 +119,39 @@
       color: #666;
     }
 
-    .music-player {
+    /* Musik tombol sederhana */
+    .music-button {
       position: fixed;
       bottom: 20px;
-      left: 20px;
-      background: white;
-      border: 1px solid #ccc;
-      padding: 10px 20px;
-      border-radius: 50px;
+      right: 20px;
+      background: var(--accent);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
       display: flex;
       align-items: center;
-      gap: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 999;
     }
 
-    .music-player audio {
-      display: block;
+    .music-button:hover {
+      background-color: #00b38f;
+    }
+
+    .music-button svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    audio {
+      display: none;
     }
   </style>
 </head>
 <body>
-
-  <!-- Splash Screen -->
-  <div id="intro">
-    <svg width="80" height="80" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
-      <path d="M12 2l4 4-4 4-4-4 4-4zM2 12l4-4 4 4-4 4-4-4zM12 22l-4-4 4-4 4 4-4 4zM22 12l-4 4-4-4 4-4 4 4z"/>
-    </svg>
-    <h1>Selamat Datang di Portofolio Wilkazxq</h1>
-    <p>Developer | Designer | Creator</p>
-    <button onclick="masukWebsite()">Mulai</button>
-  </div>
 
   <!-- Header -->
   <header>
@@ -220,14 +193,16 @@
     </div>
   </section>
 
-  <!-- Music Player -->
-  <div class="music-player">
-    <span>🎵</span>
-    <audio controls autoplay loop>
-      <source src="musik.mp3" type="audio/mpeg">
-      Browser kamu tidak mendukung audio.
-    </audio>
+  <!-- Musik Tombol -->
+  <div class="music-button" onclick="toggleMusic()">
+    <svg id="music-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M8 5v14l11-7L8 5z"/>
+    </svg>
   </div>
+  <audio id="bg-music" loop>
+    <source src="musik.mp3" type="audio/mpeg">
+    Browser tidak mendukung audio.
+  </audio>
 
   <!-- Footer -->
   <footer>
@@ -236,19 +211,24 @@
 
   <!-- Script -->
   <script>
-    function masukWebsite() {
-      const intro = document.getElementById('intro');
-      intro.style.opacity = '0';
-      setTimeout(() => intro.style.display = 'none', 600);
-    }
-
     function toggleSection(id) {
       const sections = document.querySelectorAll('.toggle-content');
       sections.forEach(sec => {
         sec.style.display = (sec.id === id && sec.style.display !== 'block') ? 'block' : 'none';
       });
     }
-  </script>
 
+    function toggleMusic() {
+      const audio = document.getElementById('bg-music');
+      const icon = document.getElementById('music-icon');
+      if (audio.paused) {
+        audio.play();
+        icon.innerHTML = '<path d="M6 4h4v16H6zm8 0h4v16h-4z"/>';
+      } else {
+        audio.pause();
+        icon.innerHTML = '<path d="M8 5v14l11-7L8 5z"/>';
+      }
+    }
+  </script>
 </body>
 </html>
