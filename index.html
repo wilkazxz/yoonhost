@@ -6,12 +6,11 @@
   <title>WILKA | Portfolio</title>
   <style>
     :root {
-      --primary-color: #003366;
+      --primary-color: #6C63FF;
       --bg-color: #f4f4f9;
-      --text-color: #222;
+      --text-color: #333;
       --card-bg: #fff;
-      --border-radius: 12px;
-      --accent: #00cc99;
+      --border-radius: 10px;
     }
 
     * {
@@ -25,52 +24,52 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
+      line-height: 1.6;
     }
 
-    .hidden { display: none; }
-
-    /* Tombol MULAI awal */
     #start-screen {
       position: fixed;
       top: 0; left: 0;
-      width: 100%; height: 100vh;
+      width: 100%; height: 100%;
       background-color: var(--primary-color);
-      color: white;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
-      z-index: 1000;
+      z-index: 9999;
+      color: #fff;
+    }
+
+    #start-screen h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
     }
 
     #start-screen button {
-      background-color: var(--accent);
-      color: white;
-      font-size: 1.5rem;
       padding: 15px 30px;
+      font-size: 1.2rem;
       border: none;
       border-radius: var(--border-radius);
+      background-color: #fff;
+      color: var(--primary-color);
       cursor: pointer;
-      transition: transform 0.2s ease, background 0.3s ease;
+      transition: transform 0.2s ease;
     }
 
-    #start-screen button:hover {
-      background-color: #00b38f;
-      transform: scale(1.05);
+    #start-screen button:active {
+      transform: scale(0.95);
     }
 
     header {
+      border-bottom: 5px solid var(--primary-color);
       background-color: var(--primary-color);
       color: #fff;
-      padding: 50px 20px;
+      padding: 60px 20px;
       text-align: center;
-      border-bottom: 8px solid var(--accent);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
     header h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
+      font-size: 2.5rem;
     }
 
     nav {
@@ -83,28 +82,29 @@
     }
 
     nav button {
+      text-decoration: none;
       background-color: var(--primary-color);
       color: #fff;
+      padding: 8px 16px;
       border: none;
-      padding: 10px 20px;
       border-radius: var(--border-radius);
       cursor: pointer;
-      transition: background 0.3s ease, transform 0.1s ease;
-      font-size: 1rem;
+      transition: background 0.3s ease;
     }
 
     nav button:hover {
-      background-color: #00264d;
-    }
-
-    nav button:active {
-      transform: scale(0.95);
+      background-color: #5848e6;
     }
 
     section {
       padding: 40px 20px;
       max-width: 900px;
       margin: auto;
+      display: none;
+    }
+
+    section.active {
+      display: block;
     }
 
     h2 {
@@ -121,25 +121,13 @@
       margin-bottom: 20px;
     }
 
-    .progress-bar {
-      background: #ddd;
-      border-radius: 20px;
-      overflow: hidden;
-      margin-bottom: 10px;
+    .skill-bar {
+      margin: 10px 0;
     }
 
-    .progress-bar span {
-      display: block;
-      height: 20px;
-      background: var(--primary-color);
-      color: white;
-      padding-left: 10px;
-      line-height: 20px;
-    }
-
-    .toggle-content {
-      display: none;
-      margin-top: 10px;
+    .skill-bar span {
+      display: inline-block;
+      width: 150px;
     }
 
     footer {
@@ -150,122 +138,101 @@
       color: #666;
     }
 
-    .music-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--accent);
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
+    .music-player {
       display: flex;
-      align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      align-items: center;
+      padding: 20px;
+    }
+
+    .music-player button {
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 50px;
       cursor: pointer;
-      z-index: 999;
     }
 
-    .music-button:hover {
-      background-color: #00b38f;
-    }
-
-    .music-button svg {
-      width: 24px;
-      height: 24px;
-      fill: white;
-    }
-
-    audio {
-      display: none;
+    .emoji {
+      margin-right: 5px;
     }
   </style>
 </head>
 <body>
 
-  <!-- START SCREEN -->
   <div id="start-screen">
-    <h1>Selamat Datang di Website WILKA</h1>
+    <h1>✨ WILKA ✨</h1>
     <button onclick="startWebsite()">Mulai</button>
   </div>
 
-  <!-- WEBSITE CONTENT -->
-  <div id="main-content" class="hidden">
-    <header>
-      <h1>WILKA</h1>
-      <p>Selamat datang di portofolio saya</p>
-    </header>
+  <header>
+    <h1>WILKA Portfolio</h1>
+    <p>Selamat datang di web portofolio pribadi!</p>
+  </header>
 
-    <nav>
-      <button onclick="toggleSection('skills')">🧠 Skills</button>
-      <button onclick="toggleSection('hobbies')">🎯 Hobbies</button>
-      <button onclick="toggleSection('contact')">📞 Contact</button>
-    </nav>
+  <nav>
+    <button onclick="showSection('skills')">🛠️ Skills</button>
+    <button onclick="showSection('hobbies')">🎮 Hobbies</button>
+    <button onclick="showSection('contact')">📱 Contact</button>
+  </nav>
 
-    <section id="skills" class="toggle-content">
-      <h2>🧠 Skills</h2>
-      <div class="card">
-        <div class="progress-bar"><span style="width: 90%">HTML - 90%</span></div>
-        <div class="progress-bar"><span style="width: 70%">CSS - 70%</span></div>
-        <div class="progress-bar"><span style="width: 80%">WhatsApp Bot Dev - 80%</span></div>
-      </div>
-    </section>
-
-    <section id="hobbies" class="toggle-content">
-      <h2>🎯 Hobbies</h2>
-      <div class="card">
-        <p>Saya suka membuat script otomatis, mengeksplor teknologi web terbaru, dan membaca topik AI dan inovasi teknologi.</p>
-      </div>
-    </section>
-
-    <section id="contact" class="toggle-content">
-      <h2>📞 Contact</h2>
-      <div class="card">
-        <p>Email: yourmail@example.com</p>
-        <p>Instagram: @yourinstagram</p>
-      </div>
-    </section>
-
-    <footer>
-      &copy; 2025 WILKA. All rights reserved.
-    </footer>
-
-    <!-- Musik Tombol -->
-    <div class="music-button" onclick="toggleMusic()">
-      <svg id="music-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M8 5v14l11-7L8 5z"/>
-      </svg>
+  <section id="skills" class="active">
+    <h2>🛠️ Skills</h2>
+    <div class="card">
+      <div class="skill-bar"><span>HTML</span> ----------- 90%</div>
+      <div class="skill-bar"><span>CSS</span> ----------- 70%</div>
+      <div class="skill-bar"><span>WhatsApp Bot</span> ----------- 80%</div>
     </div>
-    <audio id="bg-music" loop>
-      <source src="musik.mp3" type="audio/mpeg">
-    </audio>
+  </section>
+
+  <section id="hobbies">
+    <h2>🎮 Hobbies</h2>
+    <div class="card">
+      <p>Saya suka membuat bot otomatis, mengeksplor teknologi web, dan membaca tentang AI.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>📱 Contact</h2>
+    <div class="card">
+      <p>Email: yourmail@example.com</p>
+      <p>Instagram: @yourinstagram</p>
+    </div>
+  </section>
+
+  <div class="music-player">
+    <button onclick="toggleMusic()">▶️ Play Musik</button>
+    <audio id="bg-music" src="musik.mp3" loop></audio>
   </div>
 
-  <!-- Script -->
-  <script>
-    function startWebsite() {
-      document.getElementById('start-screen').style.display = 'none';
-      document.getElementById('main-content').classList.remove('hidden');
-    }
+  <footer>
+    &copy; 2025 WILKA. All rights reserved.
+  </footer>
 
-    function toggleSection(id) {
-      const sections = document.querySelectorAll('.toggle-content');
-      sections.forEach(sec => {
-        sec.style.display = (sec.id === id && sec.style.display !== 'block') ? 'block' : 'none';
-      });
-    }
+  <script>
+    const music = document.getElementById('bg-music');
+    let musicPlaying = false;
 
     function toggleMusic() {
-      const audio = document.getElementById('bg-music');
-      const icon = document.getElementById('music-icon');
-      if (audio.paused) {
-        audio.play();
-        icon.innerHTML = '<path d="M6 4h4v16H6zm8 0h4v16h-4z"/>';
+      if (musicPlaying) {
+        music.pause();
       } else {
-        audio.pause();
-        icon.innerHTML = '<path d="M8 5v14l11-7L8 5z"/>';
+        music.play();
       }
+      musicPlaying = !musicPlaying;
+    }
+
+    function startWebsite() {
+      document.getElementById('start-screen').style.display = 'none';
+    }
+
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
     }
   </script>
+
 </body>
 </html>
