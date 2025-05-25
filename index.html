@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Wilkazxq | Portfolio</title>
+  <title>WILKA | Portfolio</title>
   <style>
     :root {
-      --primary-color: #003366;
-      --accent-color: #00cc99;
-      --text-color: #fff;
-      --card-bg: #ffffff;
-      --border-radius: 12px;
+      --primary-color: #6C63FF;
+      --bg-color: #f4f4f9;
+      --text-color: #333;
+      --card-bg: #fff;
+      --border-radius: 10px;
     }
 
     * {
@@ -21,28 +21,27 @@
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f4f9;
-      color: #333;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
     }
 
-    /* INTRO */
     #intro {
       position: fixed;
       inset: 0;
-      background: var(--primary-color);
-      color: var(--text-color);
+      background: #003366;
+      color: white;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       z-index: 9999;
       text-align: center;
-      animation: fadeIn 1s ease-in;
     }
 
-    .intro-icon {
-      animation: rotateIcon 3s linear infinite;
+    #intro svg {
+      animation: rotateIcon 4s linear infinite;
     }
 
     @keyframes rotateIcon {
@@ -50,61 +49,52 @@
       100% { transform: rotate(360deg); }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    button {
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    button:active {
-      transform: scale(0.95);
-    }
-
     header {
       background-color: var(--primary-color);
-      color: white;
+      color: #fff;
       padding: 60px 20px;
       text-align: center;
-      border-bottom: 5px solid var(--accent-color);
-    }
-
-    header h1 {
-      font-size: 2.5rem;
+      border-bottom: 5px solid #5848e6;
     }
 
     nav {
-      background: white;
-      padding: 10px;
+      background-color: #fff;
+      padding: 10px 20px;
       display: flex;
       justify-content: center;
       gap: 15px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    nav button {
+    nav a {
+      text-decoration: none;
       background-color: var(--primary-color);
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 8px;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: var(--border-radius);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    nav a:hover {
+      background-color: #5848e6;
+      transform: scale(1.05);
     }
 
     section {
       padding: 40px 20px;
       max-width: 900px;
       margin: auto;
+      display: none;
+    }
+
+    section.active {
+      display: block;
     }
 
     h2 {
       margin-bottom: 20px;
+      font-size: 2rem;
       color: var(--primary-color);
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
 
     .card {
@@ -115,19 +105,19 @@
       margin-bottom: 20px;
     }
 
-    .progress-bar {
-      background: #ccc;
-      border-radius: 20px;
-      overflow: hidden;
-      margin-bottom: 10px;
+    .skill-bar {
+      margin: 10px 0;
     }
 
-    .progress {
-      background: var(--accent-color);
-      color: white;
-      text-align: right;
-      padding: 5px;
-      border-radius: 20px;
+    .skill-bar span {
+      display: block;
+      font-weight: bold;
+    }
+
+    .skill-bar-fill {
+      height: 10px;
+      border-radius: 5px;
+      background: #00cc99;
     }
 
     footer {
@@ -138,121 +128,135 @@
       color: #666;
     }
 
-    .music-player {
+    #musicControl {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: var(--primary-color);
-      border-radius: 50px;
-      padding: 10px 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-
-    .music-player button {
-      background: var(--accent-color);
+      background: #00cc99;
       color: white;
       border: none;
-      padding: 8px 16px;
-      border-radius: 20px;
-    }
-
-    .hidden {
-      display: none;
+      padding: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
   </style>
 </head>
 <body>
 
-  <!-- INTRO -->
-  <div id="intro">
-    <svg class="intro-icon" width="80" height="80" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
-      <path d="M12 2l4 4-4 4-4-4 4-4zM2 12l4-4 4 4-4 4-4-4zM12 22l-4-4 4-4 4 4-4 4zM22 12l-4 4-4-4 4-4 4 4z"/>
+<!-- INTRO -->
+<div id="intro">
+  <svg width="80" height="80" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+    <path d="M12 2l4 4-4 4-4-4 4-4zM2 12l4-4 4 4-4 4-4-4zM12 22l-4-4 4-4 4 4-4 4zM22 12l-4 4-4-4 4-4 4 4z"/>
+  </svg>
+  <h1 style="margin-top: 20px;">Selamat Datang di Portofolio Wilkazxq</h1>
+  <p>Developer | Designer | Creator</p>
+  <button onclick="masukWebsite()" style="
+    margin-top: 30px;
+    background: linear-gradient(135deg, #00cc99, #009966);
+    border: none;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 204, 153, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  ">
+    <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
+      <path d="M5 12h14M13 6l6 6-6 6"/>
     </svg>
-    <h1>Selamat Datang di Portofolio Wilkazxq</h1>
-    <p>Developer | Designer | Creator</p>
-    <button onclick="masukWebsite()">Mulai</button>
+    Mulai
+  </button>
+</div>
+
+<header>
+  <h1>WILKA</h1>
+  <p>Welcome to my portfolio website</p>
+</header>
+
+<nav>
+  <a href="#skills" onclick="toggleSection('skills')">⚙️ Skills</a>
+  <a href="#hobbies" onclick="toggleSection('hobbies')">🎮 Hobbies</a>
+  <a href="#contact" onclick="toggleSection('contact')">✉️ Contact</a>
+</nav>
+
+<section id="skills">
+  <h2>⚙️ Skills</h2>
+  <div class="card">
+    <div class="skill-bar">
+      <span>HTML — 90%</span>
+      <div class="skill-bar-fill" style="width: 90%;"></div>
+    </div>
+    <div class="skill-bar">
+      <span>CSS — 70%</span>
+      <div class="skill-bar-fill" style="width: 70%;"></div>
+    </div>
+    <div class="skill-bar">
+      <span>WhatsApp Bot Development — 80%</span>
+      <div class="skill-bar-fill" style="width: 80%;"></div>
+    </div>
   </div>
+</section>
 
-  <!-- HEADER -->
-  <header>
-    <h1>WILKA</h1>
-    <p>Welcome to my portfolio website</p>
-  </header>
-
-  <!-- NAVIGATION -->
-  <nav>
-    <button onclick="toggleSection('skills')">⚙️ Skills</button>
-    <button onclick="toggleSection('hobbies')">🎮 Hobbies</button>
-    <button onclick="toggleSection('contact')">✉️ Contact</button>
-  </nav>
-
-  <!-- SECTIONS -->
-  <section id="skills" class="hidden">
-    <h2>⚙️ Skills</h2>
-    <div class="card">
-      <p>HTML</p>
-      <div class="progress-bar"><div class="progress" style="width: 90%;">90%</div></div>
-      <p>CSS</p>
-      <div class="progress-bar"><div class="progress" style="width: 70%;">70%</div></div>
-      <p>WhatsApp Bot</p>
-      <div class="progress-bar"><div class="progress" style="width: 80%;">80%</div></div>
-    </div>
-  </section>
-
-  <section id="hobbies" class="hidden">
-    <h2>🎮 Hobbies</h2>
-    <div class="card">
-      <p>I enjoy coding automation scripts, exploring new web technologies, and reading about AI and tech innovations.</p>
-    </div>
-  </section>
-
-  <section id="contact" class="hidden">
-    <h2>✉️ Contact</h2>
-    <div class="card">
-      <p>Email: yourmail@example.com</p>
-      <p>Instagram: @yourinstagram</p>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    &copy; 2025 Wilkazxq. All rights reserved.
-  </footer>
-
-  <!-- MUSIC PLAYER -->
-  <div class="music-player">
-    <button onclick="toggleMusic()">▶️ Play</button>
-    <audio id="audioPlayer" src="musik.mp3"></audio>
+<section id="hobbies">
+  <h2>🎮 Hobbies</h2>
+  <div class="card">
+    <p>I enjoy coding automation scripts, exploring new web technologies, and reading about AI and tech innovations.</p>
   </div>
+</section>
 
-  <!-- SCRIPT -->
-  <script>
-    function masukWebsite() {
-      document.getElementById("intro").style.display = "none";
-    }
+<section id="contact">
+  <h2>✉️ Contact</h2>
+  <div class="card">
+    <p>Email: yourmail@example.com</p>
+    <p>Instagram: @yourinstagram</p>
+  </div>
+</section>
 
-    let currentSection = null;
-    function toggleSection(id) {
-      const section = document.getElementById(id);
-      if (currentSection && currentSection !== section) {
-        currentSection.classList.add("hidden");
-      }
-      section.classList.toggle("hidden");
-      currentSection = section.classList.contains("hidden") ? null : section;
-    }
+<footer>
+  &copy; 2025 WILKA. All rights reserved.
+</footer>
 
-    function toggleMusic() {
-      const audio = document.getElementById("audioPlayer");
-      const btn = document.querySelector(".music-player button");
-      if (audio.paused) {
-        audio.play();
-        btn.textContent = "⏸️ Pause";
+<!-- MUSIC PLAYER -->
+<audio id="backgroundMusic" src="musik.mp3" loop></audio>
+<button id="musicControl" onclick="toggleMusic()">
+  ▶️
+</button>
+
+<script>
+  function masukWebsite() {
+    document.getElementById("intro").style.display = "none";
+  }
+
+  function toggleSection(sectionId) {
+    const sections = document.querySelectorAll('section');
+    sections.forEach(sec => {
+      if (sec.id === sectionId) {
+        sec.classList.add('active');
       } else {
-        audio.pause();
-        btn.textContent = "▶️ Play";
+        sec.classList.remove('active');
       }
+    });
+  }
+
+  const audio = document.getElementById("backgroundMusic");
+  const musicBtn = document.getElementById("musicControl");
+
+  function toggleMusic() {
+    if (audio.paused) {
+      audio.play();
+      musicBtn.textContent = "⏸️";
+    } else {
+      audio.pause();
+      musicBtn.textContent = "▶️";
     }
-  </script>
+  }
+</script>
 
 </body>
 </html>
