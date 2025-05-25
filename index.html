@@ -184,6 +184,55 @@
       padding: 20px 0;
       font-size: 0.9rem;
     }
+
+    /* Rounded Buttons */
+    .rounded-btn {
+      background-color: #1abc9c;
+      color: white;
+      padding: 15px 30px;
+      border-radius: 50%;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .rounded-btn:hover {
+      background-color: #16a085;
+    }
+
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-card img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin: 0 auto 15px;
+    }
+
+    .feature-card h3 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
@@ -210,34 +259,58 @@
     </div>
   </section>
 
-  <!-- Services Section -->
-  <section class="services" id="services">
+  <!-- Features Section -->
+  <section class="features" id="services">
     <div class="container">
-      <h2>Layanan Kami</h2>
-      <div class="service-grid">
+      <h2>Fitur Kami</h2>
+      <div class="feature-grid">
 
-        <!-- Service 1 -->
-        <div class="card">
-          <img src="https://via.placeholder.com/100x100?text=Noko+WA " alt="Noko WhatsApp">
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <img src="https://via.placeholder.com/80x80?text=Noko+WA " alt="Noko WhatsApp">
           <h3>Noko WhatsApp</h3>
-          <p>Jual beli nomor kosong WhatsApp dengan harga murah dan cepat.</p>
-          <a href="#" class="btn">Pesan Sekarang</a>
+          <p>Jual beli nomor kosong WhatsApp dengan harga murah.</p>
+          <a href="#" class="rounded-btn">Pesan Sekarang</a>
         </div>
 
-        <!-- Service 2 -->
-        <div class="card">
-          <img src="https://via.placeholder.com/100x100?text=Pterodactyl " alt="Panel Pterodactyl">
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <img src="https://via.placeholder.com/80x80?text=Pterodactyl " alt="Panel Pterodactyl">
           <h3>Panel Pterodactyl</h3>
           <p>Panel game hosting berkualitas tinggi untuk server Minecraft dan lainnya.</p>
-          <a href="#" class="btn">Beli Panel</a>
+          <a href="#" class="rounded-btn">Beli Panel</a>
         </div>
 
-        <!-- Service 3 -->
-        <div class="card">
-          <img src="https://via.placeholder.com/100x100?text=Pulsa " alt="Pulsa & Paket">
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <img src="https://via.placeholder.com/80x80?text=Pulsa " alt="Pulsa & Paket">
           <h3>Pulsa & Paket Data</h3>
-          <p>Top-up pulsa dan paket internet dengan diskon besar dan cepat.</p>
-          <a href="#" class="btn">Isi Ulang</a>
+          <p>Top-up pulsa dan paket internet dengan diskon besar.</p>
+          <a href="#" class="rounded-btn">Isi Ulang</a>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card">
+          <img src="https://via.placeholder.com/80x80?text=Hosting " alt="Hosting Game">
+          <h3>Hosting Game</h3>
+          <p>Hosting game khusus untuk server gaming Anda.</p>
+          <a href="#" class="rounded-btn">Daftar Sekarang</a>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card">
+          <img src="https://via.placeholder.com/80x80?text=Token+PLN " alt="Token PLN">
+          <h3>Token PLN</h3>
+          <p>Bayar tagihan listrik dengan mudah.</p>
+          <a href="#" class="rounded-btn">Bayar Sekarang</a>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card">
+          <img src="https://via.placeholder.com/80x80?text=Support " alt="Dukungan Pelanggan">
+          <h3>Dukungan Pelanggan</h3>
+          <p>Bantuan 24/7 melalui WhatsApp.</p>
+          <a href="https://wa.me/6282293786539 " target="_blank" class="rounded-btn">Chat via WhatsApp</a>
         </div>
 
       </div>
