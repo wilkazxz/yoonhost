@@ -50,11 +50,19 @@
     }
 
     header {
-      background-color: var(--primary-color);
-      color: #fff;
-      padding: 60px 20px;
-      text-align: center;
-      border-bottom: 5px solid #5848e6;
+      background: linear-gradient(135deg, #6C63FF, #5A54E6);
+      color: white;
+      padding: 40px 20px;
+      border-bottom: 4px solid #4a42c4;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 0 0 20px 20px;
+    }
+
+    header div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
     }
 
     nav {
@@ -175,8 +183,13 @@
 </div>
 
 <header>
-  <h1>WILKA</h1>
-  <p>Welcome to my portfolio website</p>
+  <div>
+    <img src="https://cdn-icons-png.flaticon.com/512/1053/1053244.png" alt="logo" width="60" style="border-radius: 50%; background: white; padding: 8px;">
+    <div>
+      <h1 style="margin: 0; font-size: 2rem;">WILKA</h1>
+      <p style="margin: 0;">Welcome to my portfolio website</p>
+    </div>
+  </div>
 </header>
 
 <nav>
