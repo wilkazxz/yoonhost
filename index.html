@@ -1,151 +1,141 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Kim Kiro Portfolio</title>
-<style>
-  /* Reset dan style dasar */
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-  }
-  body {
-    background: #111;
-    color: #eee;
-    line-height: 1.6;
-  }
-  a {
-    color: #6ea5ff;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  header {
-    background: #222;
-    padding: 20px;
-    text-align: center;
-  }
-  header h1 {
-    font-weight: 700;
-    font-size: 2.4rem;
-    letter-spacing: 2px;
-  }
-  nav {
-    margin-top: 10px;
-  }
-  nav a {
-    margin: 0 12px;
-    font-weight: 500;
-  }
-  main {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 0 20px;
-  }
-  section {
-    margin-bottom: 40px;
-  }
-  h2 {
-    color: #6ea5ff;
-    font-weight: 700;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #6ea5ff;
-    display: inline-block;
-    padding-bottom: 5px;
-  }
-  p {
-    margin-bottom: 15px;
-    font-weight: 400;
-  }
-  ul.skills {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  ul.skills li {
-    background: #333;
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    flex: 1 0 30%;
-    max-width: 150px;
-    text-align: center;
-  }
-  footer {
-    text-align: center;
-    padding: 25px 10px;
-    font-size: 0.9rem;
-    color: #777;
-    border-top: 1px solid #444;
-    margin-top: 60px;
-  }
-
-  /* Responsive */
-  @media (max-width: 600px) {
-    ul.skills {
-      flex-direction: column;
-    }
-    ul.skills li {
-      max-width: 100%;
-    }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YoonJirou - Layanan Digital</title>
+    <style>
+        /* CSS Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            gap: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        main {
+            padding: 20px;
+        }
+        .service-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .service-card img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 8px;
+        }
+        .contact-section {
+            background-color: #e74c3c;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+        .footer {
+            background-color: #34495e;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <img src="images/logo.png" alt="Logo YoonJirou" class="logo" style="width: 100px; height: auto;">
+            <nav>
+                <ul>
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#services">Layanan</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<header>
-  <h1>Kim Kiro</h1>
-  <nav>
-    <a href="#about">Tentang</a>
-    <a href="#skills">Keahlian</a>
-    <a href="#projects">Proyek</a>
-    <a href="#music">Musik</a>
-  </nav>
-</header>
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h1>Selamat Datang di YoonJirou</h1>
+                <p>Kami menyediakan layanan digital terlengkap dengan harga terjangkau.</p>
+                <a href="#services" class="cta-button">Lihat Layanan</a>
+            </div>
+        </section>
 
-<main>
-  <section id="about">
-    <h2>Tentang Kim Kiro</h2>
-    <p>Kim Kiro adalah profesional kreatif asal Indonesia dengan pengalaman lebih dari dua tahun di bidang IT, desain, editing, dan pemasaran.</p>
-    <p>Lulusan SMK N1 Air Putih jurusan Teknik Komputer dan Jaringan (TKJ).</p>
-    <p>Minat: fotografi, membaca, memasak, pendakian, musik, seni digital.</p>
-  </section>
+        <!-- Services Section -->
+        <section id="services" class="services-section">
+            <div class="container">
+                <h2>Layanan Kami</h2>
+                <div class="services-grid">
+                    <!-- Service Card 1 -->
+                    <div class="service-card">
+                        <img src="images/noko-whatsapp.jpg" alt="Noko WhatsApp">
+                        <h3>Noko WhatsApp</h3>
+                        <p>Jual beli nomor kosong WhatsApp dengan harga murah.</p>
+                        <a href="#" class="cta-button">Beli Sekarang</a>
+                    </div>
 
-  <section id="skills">
-    <h2>Keahlian Profesional</h2>
-    <ul class="skills">
-      <li>Desain Grafis (90%)</li>
-      <li>Pengembangan Web (85%)</li>
-      <li>Fotografi (80%)</li>
-      <li>Editing Video (75%)</li>
-      <li>Copywriting (70%)</li>
-      <li>Manajemen Media Sosial (85%)</li>
-    </ul>
-  </section>
+                    <!-- Service Card 2 -->
+                    <div class="service-card">
+                        <img src="images/pterodactyl-panel.jpg" alt="Panel Pterodactyl">
+                        <h3>Panel Pterodactyl</h3>
+                        <p>Jual panel hosting game Pterodactyl dengan spesifikasi tinggi.</p>
+                        <a href="#" class="cta-button">Pesan Sekarang</a>
+                    </div>
 
-  <section id="projects">
-    <h2>Proyek Terkait</h2>
-    <ul>
-      <li><b>Grain Symbol Universe</b>: Kumpulan simbol dan karakter khusus.</li>
-      <li><b>GameZone</b>: Portal berita dan ulasan game.</li>
-      <li><b>Otakudesukai</b>: Platform streaming anime subtitle Indonesia.</li>
-      <li><b>All Payment Kiro</b>: Solusi pembayaran digital.</li>
-    </ul>
-  </section>
+                    <!-- Service Card 3 -->
+                    <div class="service-card">
+                        <img src="images/pulsa-paket.jpg" alt="Pulsa & Paket Data">
+                        <h3>Pulsa & Paket Data</h3>
+                        <p>Top-up pulsa dan paket data internet dengan diskon besar.</p>
+                        <a href="#" class="cta-button">Isi Ulang</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <section id="music">
-    <h2>Musik Favorit</h2>
-    <p>Beberapa lagu favorit Kim Kiro termasuk karya The Weeknd, Last Child, Christina Perri, dan Hindia.</p>
-  </section>
-</main>
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Kontak Kami</h2>
+                <p>Jika ada pertanyaan atau ingin memesan langsung, hubungi kami melalui WhatsApp:</p>
+                <a href="https://wa.me/6282293786539 " target="_blank" class="cta-button">Hubungi via WhatsApp</a>
+            </div>
+        </section>
+    </main>
 
-<footer>
-  &copy; 2025 Kim Kiro. All rights reserved.
-</footer>
-
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2023 YoonJirou. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
