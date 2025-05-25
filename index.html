@@ -39,11 +39,16 @@
       border-radius: 12px;
       font-size: 1rem;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.1s ease;
     }
 
     button:hover {
       background-color: #005f99;
+    }
+
+    button:active {
+      transform: scale(0.97);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) inset;
     }
 
     .section {
