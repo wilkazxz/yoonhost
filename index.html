@@ -1,232 +1,243 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portofolio Wilkazxq</title>
+  <title>WILKA | Portfolio</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #dff8f6;
-      color: #003366;
+    :root {
+      --primary-color: #003366;
+      --bg-color: #f4f4f9;
+      --text-color: #333;
+      --card-bg: #fff;
+      --border-radius: 10px;
+      --accent: #00cc99;
+    }
+
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
     }
 
-    .container {
-      max-width: 500px;
-      margin: 30px auto;
-      background: #a3d9ff;
-      border: 3px solid #007acc;
-      border-radius: 16px;
-      padding: 25px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
     }
 
-    h1 {
+    /* Splash screen */
+    #intro {
+      position: fixed;
+      inset: 0;
+      background: var(--primary-color);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
       text-align: center;
+      transition: opacity 0.6s ease;
+    }
+
+    #intro button {
+      margin-top: 30px;
+      background: var(--accent);
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    #intro button:active {
+      transform: scale(0.95);
+    }
+
+    header {
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    nav button {
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.1s ease;
+    }
+
+    nav button:hover {
+      background-color: #002b55;
+    }
+
+    nav button:active {
+      transform: scale(0.95);
+    }
+
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      margin-bottom: 20px;
       font-size: 2rem;
+      color: var(--primary-color);
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      padding: 20px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       margin-bottom: 20px;
     }
 
-    button {
-      width: 100%;
-      background-color: #007acc;
+    .progress-bar {
+      background: #ddd;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar span {
+      display: block;
+      height: 20px;
+      background: var(--primary-color);
       color: white;
-      border: none;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 12px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.1s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
+      padding-left: 10px;
+      line-height: 20px;
     }
 
-    button:hover {
-      background-color: #005f99;
-    }
-
-    button:active {
-      transform: scale(0.97);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) inset;
-    }
-
-    .section {
+    .toggle-content {
       display: none;
       margin-top: 10px;
-      padding: 10px;
-      background-color: #e6f5ff;
-      border-radius: 10px;
     }
 
-    .progress-container {
-      background: #cce6ff;
-      border-radius: 8px;
-      overflow: hidden;
-      margin-bottom: 15px;
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #eee;
+      font-size: 0.9rem;
+      color: #666;
     }
 
-    .progress-bar {
-      background: #007acc;
-      color: white;
-      padding: 4px;
-      text-align: right;
-    }
-
-    .music-visualizer {
+    .music-player {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 10px 20px;
+      border-radius: 50px;
       display: flex;
-      align-items: flex-end;
-      height: 40px;
-      margin-top: 20px;
-      justify-content: center;
-      gap: 2px;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
-    .bar {
-      width: 4px;
-      height: 100%;
-      background: black;
-      animation: bounce 1s infinite ease-in-out;
-    }
-
-    .bar:nth-child(2n) { animation-delay: 0.1s; }
-    .bar:nth-child(3n) { animation-delay: 0.2s; }
-
-    @keyframes bounce {
-      0%, 100% { height: 20%; }
-      50% { height: 100%; }
-    }
-
-    svg.icon {
-      width: 18px;
-      height: 18px;
-      stroke: white;
+    .music-player audio {
+      display: block;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>Portofolio Wilkazxq</h1>
-
-    <button onclick="toggleSection('tentang')">
-      <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4Zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4Z"/>
-      </svg>
-      Tentang Saya
-    </button>
-    <div class="section" id="tentang">
-      <p>Halo! Saya Wilkazxq, seorang developer dan creator yang suka eksplorasi teknologi baru.</p>
-    </div>
-
-    <button onclick="toggleSection('pengalaman')">
-      <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path d="M2 7h20M6 7V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2M3 7v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7"/>
-      </svg>
-      Pengalaman
-    </button>
-    <div class="section" id="pengalaman">
-      <ul>
-        <li>Android App Developer</li>
-        <li>Web Designer</li>
-        <li>Digital Produk Creator</li>
-        <li>Teknisi HP & Jaringan</li>
-      </ul>
-    </div>
-
-    <button onclick="toggleSection('skill')">
-      <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path d="M12 20v-6m0 0a4 4 0 1 0-4-4h.01a4 4 0 0 0 3.99 4z" />
-      </svg>
-      Skill
-    </button>
-    <div class="section" id="skill">
-      <p>HTML</p>
-      <div class="progress-container">
-        <div class="progress-bar" style="width: 90%;">90%</div>
-      </div>
-
-      <p>CSS</p>
-      <div class="progress-container">
-        <div class="progress-bar" style="width: 70%;">70%</div>
-      </div>
-
-      <p>WhatsApp Bot Dev</p>
-      <div class="progress-container">
-        <div class="progress-bar" style="width: 85%;">85%</div>
-      </div>
-    </div>
-
-    <button onclick="toggleSection('kontak')">
-      <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path d="M4 4h16v16H4z M4 4l8 8m0 0l8-8"/>
-      </svg>
-      Kontak
-    </button>
-    <div class="section" id="kontak">
-      <p>Email: wilkadev@gmail.com</p>
-      <p>Instagram: @yourinstagram</p>
-    </div>
-
-    <!-- Musik di bawah -->
-    <div style="text-align: center; margin-top: 30px;">
-      <button id="musicBtn" onclick="toggleMusic()" style="background-color: #003366; font-size: 18px;">
-        <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path d="M9 19V6l12-2v13"/>
-        </svg>
-        ⏸ Pause Musik
-      </button>
-
-      <audio id="bgm" autoplay loop>
-        <source src="https://wilkazxq.github.io/musik.mp3" type="audio/mpeg">
-        Browser tidak mendukung pemutaran audio.
-      </audio>
-
-      <div class="music-visualizer">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-      </div>
-    </div>
+  <!-- Splash -->
+  <div id="intro">
+    <svg width="80" height="80" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M12 2l4 4-4 4-4-4 4-4zM2 12l4-4 4 4-4 4-4-4zM12 22l-4-4 4-4 4 4-4 4zM22 12l-4 4-4-4 4-4 4 4z"/>
+    </svg>
+    <h1>Selamat Datang di Portofolio Wilkazxq</h1>
+    <p>Developer | Designer | Creator</p>
+    <button onclick="masukWebsite()">Mulai</button>
   </div>
 
+  <header>
+    <h1>WILKA</h1>
+    <p>Welcome to my portfolio website</p>
+  </header>
+
+  <nav>
+    <button onclick="toggleSection('skills')">Skills</button>
+    <button onclick="toggleSection('hobbies')">Hobbies</button>
+    <button onclick="toggleSection('contact')">Contact</button>
+  </nav>
+
+  <section id="skills" class="toggle-content">
+    <h2>Skills</h2>
+    <div class="card">
+      <div class="progress-bar"><span style="width: 90%">HTML - 90%</span></div>
+      <div class="progress-bar"><span style="width: 70%">CSS - 70%</span></div>
+      <div class="progress-bar"><span style="width: 80%">WhatsApp Bot Dev - 80%</span></div>
+    </div>
+  </section>
+
+  <section id="hobbies" class="toggle-content">
+    <h2>Hobbies</h2>
+    <div class="card">
+      <p>I enjoy coding automation scripts, exploring new web technologies, and reading about AI and tech innovations.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="toggle-content">
+    <h2>Contact</h2>
+    <div class="card">
+      <p>Email: yourmail@example.com</p>
+      <p>Instagram: @yourinstagram</p>
+    </div>
+  </section>
+
+  <div class="music-player">
+    <span>Musik:</span>
+    <audio controls autoplay loop>
+      <source src="musik.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <footer>
+    &copy; 2025 WILKA. All rights reserved.
+  </footer>
+
   <script>
+    function masukWebsite() {
+      const intro = document.getElementById('intro');
+      intro.style.opacity = '0';
+      setTimeout(() => intro.style.display = 'none', 600);
+    }
+
     function toggleSection(id) {
-      const sections = document.querySelectorAll('.section');
-      sections.forEach(section => {
-        if (section.id === id) {
-          section.style.display = section.style.display === 'block' ? 'none' : 'block';
+      const sections = document.querySelectorAll('.toggle-content');
+      sections.forEach(sec => {
+        if (sec.id === id) {
+          sec.style.display = sec.style.display === 'block' ? 'none' : 'block';
         } else {
-          section.style.display = 'none';
+          sec.style.display = 'none';
         }
       });
     }
-
-    const audio = document.getElementById('bgm');
-    const musicBtn = document.getElementById('musicBtn');
-    let isPlaying = true;
-
-    function toggleMusic() {
-      if (isPlaying) {
-        audio.pause();
-        musicBtn.innerHTML = `<svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 3v18l14-9L5 3z"/></svg> ▶ Play Musik`;
-      } else {
-        audio.play();
-        musicBtn.innerHTML = `<svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M9 19V6l12-2v13"/></svg> ⏸ Pause Musik`;
-      }
-      isPlaying = !isPlaying;
-    }
   </script>
+
 </body>
 </html>
