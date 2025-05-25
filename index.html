@@ -27,7 +27,38 @@
       color: var(--text-color);
     }
 
-    /* Header & Navigation Styles... (Same as before) */
+    .hidden { display: none; }
+
+    /* Tombol MULAI awal */
+    #start-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100vh;
+      background-color: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 1000;
+    }
+
+    #start-screen button {
+      background-color: var(--accent);
+      color: white;
+      font-size: 1.5rem;
+      padding: 15px 30px;
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    #start-screen button:hover {
+      background-color: #00b38f;
+      transform: scale(1.05);
+    }
+
     header {
       background-color: var(--primary-color);
       color: #fff;
@@ -119,7 +150,6 @@
       color: #666;
     }
 
-    /* Musik tombol sederhana */
     .music-button {
       position: fixed;
       bottom: 20px;
@@ -153,64 +183,71 @@
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <h1>WILKA</h1>
-    <p>Selamat datang di portofolio saya</p>
-  </header>
-
-  <!-- Navigation -->
-  <nav>
-    <button onclick="toggleSection('skills')">🧠 Skills</button>
-    <button onclick="toggleSection('hobbies')">🎯 Hobbies</button>
-    <button onclick="toggleSection('contact')">📞 Contact</button>
-  </nav>
-
-  <!-- Skills Section -->
-  <section id="skills" class="toggle-content">
-    <h2>🧠 Skills</h2>
-    <div class="card">
-      <div class="progress-bar"><span style="width: 90%">HTML - 90%</span></div>
-      <div class="progress-bar"><span style="width: 70%">CSS - 70%</span></div>
-      <div class="progress-bar"><span style="width: 80%">WhatsApp Bot Dev - 80%</span></div>
-    </div>
-  </section>
-
-  <!-- Hobbies Section -->
-  <section id="hobbies" class="toggle-content">
-    <h2>🎯 Hobbies</h2>
-    <div class="card">
-      <p>Saya suka membuat script otomatis, mengeksplor teknologi web terbaru, dan membaca topik AI dan inovasi teknologi.</p>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="toggle-content">
-    <h2>📞 Contact</h2>
-    <div class="card">
-      <p>Email: yourmail@example.com</p>
-      <p>Instagram: @yourinstagram</p>
-    </div>
-  </section>
-
-  <!-- Musik Tombol -->
-  <div class="music-button" onclick="toggleMusic()">
-    <svg id="music-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-      <path d="M8 5v14l11-7L8 5z"/>
-    </svg>
+  <!-- START SCREEN -->
+  <div id="start-screen">
+    <h1>Selamat Datang di Website WILKA</h1>
+    <button onclick="startWebsite()">Mulai</button>
   </div>
-  <audio id="bg-music" loop>
-    <source src="musik.mp3" type="audio/mpeg">
-    Browser tidak mendukung audio.
-  </audio>
 
-  <!-- Footer -->
-  <footer>
-    &copy; 2025 WILKA. All rights reserved.
-  </footer>
+  <!-- WEBSITE CONTENT -->
+  <div id="main-content" class="hidden">
+    <header>
+      <h1>WILKA</h1>
+      <p>Selamat datang di portofolio saya</p>
+    </header>
+
+    <nav>
+      <button onclick="toggleSection('skills')">🧠 Skills</button>
+      <button onclick="toggleSection('hobbies')">🎯 Hobbies</button>
+      <button onclick="toggleSection('contact')">📞 Contact</button>
+    </nav>
+
+    <section id="skills" class="toggle-content">
+      <h2>🧠 Skills</h2>
+      <div class="card">
+        <div class="progress-bar"><span style="width: 90%">HTML - 90%</span></div>
+        <div class="progress-bar"><span style="width: 70%">CSS - 70%</span></div>
+        <div class="progress-bar"><span style="width: 80%">WhatsApp Bot Dev - 80%</span></div>
+      </div>
+    </section>
+
+    <section id="hobbies" class="toggle-content">
+      <h2>🎯 Hobbies</h2>
+      <div class="card">
+        <p>Saya suka membuat script otomatis, mengeksplor teknologi web terbaru, dan membaca topik AI dan inovasi teknologi.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="toggle-content">
+      <h2>📞 Contact</h2>
+      <div class="card">
+        <p>Email: yourmail@example.com</p>
+        <p>Instagram: @yourinstagram</p>
+      </div>
+    </section>
+
+    <footer>
+      &copy; 2025 WILKA. All rights reserved.
+    </footer>
+
+    <!-- Musik Tombol -->
+    <div class="music-button" onclick="toggleMusic()">
+      <svg id="music-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7L8 5z"/>
+      </svg>
+    </div>
+    <audio id="bg-music" loop>
+      <source src="musik.mp3" type="audio/mpeg">
+    </audio>
+  </div>
 
   <!-- Script -->
   <script>
+    function startWebsite() {
+      document.getElementById('start-screen').style.display = 'none';
+      document.getElementById('main-content').classList.remove('hidden');
+    }
+
     function toggleSection(id) {
       const sections = document.querySelectorAll('.toggle-content');
       sections.forEach(sec => {
