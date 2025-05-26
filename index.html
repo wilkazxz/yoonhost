@@ -3,269 +3,460 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portofolio</title>
+  <title>WILKA | Portfolio</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    :root {
+      --primary-color: #6C63FF;
+      --bg-color: #f4f4f9;
+      --text-color: #333;
+      --card-bg: #fff;
+      --border-radius: 10px;
+    }
+
+    * {
       margin: 0;
       padding: 0;
-      color: white;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
     }
 
     #intro {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.9);
+      inset: 0;
+      background: #003366;
+      color: white;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       z-index: 9999;
+      text-align: center;
+    }
+
+    #intro svg {
+      animation: rotateIcon 4s linear infinite;
+    }
+
+    @keyframes rotateIcon {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeInText {
+      0% { opacity: 0; transform: translateX(-30px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    #intro h1, #intro p {
+      opacity: 0;
+      animation: fadeInText 1s forwards;
     }
 
     #intro h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      animation: slideIn 1.5s ease-out;
+      animation-delay: 0.5s;
     }
 
-    #intro button {
-      padding: 14px 28px;
-      font-size: 1.2rem;
-      border: none;
-      background-color: #25d366;
-      color: white;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    @keyframes slideIn {
-      from { transform: translateX(-50%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+    #intro p {
+      animation-delay: 1s;
     }
 
     header {
+      position: relative;
+      overflow: hidden;
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 60px 20px;
       text-align: center;
-      padding: 60px 20px 30px;
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-      animation: slideIn 1.5s ease-out;
-    }
-
-    header p {
-      font-size: 1.1rem;
-      margin-top: 10px;
-      animation: slideIn 2s ease-out;
+      border-bottom: 5px solid #5848e6;
+      border: 3px solid #fff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      border-radius: 0 0 20px 20px;
     }
 
     nav {
-      text-align: center;
-      margin-bottom: 30px;
+      background-color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     nav a {
-      display: inline-block;
-      margin: 8px;
-      padding: 12px 20px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid #fff;
-      color: white;
-      border-radius: 12px;
       text-decoration: none;
-      transition: background 0.3s ease;
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: var(--border-radius);
+      transition: background 0.3s ease, transform 0.2s ease;
     }
 
     nav a:hover {
-      background: rgba(255,255,255,0.3);
+      background-color: #5848e6;
+      transform: scale(1.05);
     }
 
     section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
       display: none;
-      max-width: 700px;
-      margin: 0 auto 40px;
-      background: rgba(255,255,255,0.1);
-      padding: 30px;
-      border-radius: 15px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.6s ease-out;
     }
 
     section.active {
       display: block;
     }
 
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      color: var(--primary-color);
+    }
+
     .card {
-      background: rgba(255,255,255,0.2);
+      background-color: var(--card-bg);
       padding: 20px;
-      border-radius: 10px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       margin-bottom: 20px;
     }
 
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    input, button {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: none;
-      margin-top: 5px;
-    }
-
-    button {
-      background-color: #25d366;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-
-    .progress-bar {
-      background: rgba(255,255,255,0.3);
-      border-radius: 10px;
-      overflow: hidden;
+    .skill-bar {
       margin: 10px 0;
     }
 
-    .progress {
-      background: #25d366;
-      height: 20px;
-      width: 0%;
-      color: white;
-      text-align: center;
-      font-size: 0.9rem;
-      transition: width 1s ease-in-out;
+    .skill-bar span {
+      display: block;
+      font-weight: bold;
     }
 
-    audio {
+    .skill-bar-fill {
+      height: 10px;
+      border-radius: 5px;
+      background: #00cc99;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #eee;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    #musicControl {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #00cc99;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    canvas#headerVisualizer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+    }
+
+    canvas#visualizerPlay {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      z-index: 999;
+      pointer-events: none;
+    }
+
+    /* Buy Panel */
+    .popup {
       display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .popup-content h3 {
+      margin-bottom: 20px;
+    }
+
+    .popup-content input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .popup-content button {
+      background: #00cc99;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .popup-content button:hover {
+      background: #009977;
     }
   </style>
 </head>
 <body>
 
-<!-- Intro -->
+<!-- INTRO -->
 <div id="intro">
-  <h1>Selamat Datang di Website Saya</h1>
-  <button onclick="mulai()">Mulai</button>
+  <svg width="80" height="80" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+    <path d="M12 2l4 4-4 4-4-4 4-4zM2 12l4-4 4 4-4 4-4-4zM12 22l-4-4 4-4 4 4-4 4zM22 12l-4 4-4-4 4-4 4 4z"/>
+  </svg>
+  <h1 style="margin-top: 20px;">Selamat Datang di Portofolio Wilkazxq</h1>
+  <p>Developer | Designer | Creator</p>
+  <button onclick="masukWebsite()" style="
+    margin-top: 30px;
+    background: linear-gradient(135deg, #00cc99, #009966);
+    border: none;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 204, 153, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  ">
+    <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
+      <path d="M5 12h14M13 6l6 6-6 6"/>
+    </svg>
+    Mulai
+  </button>
 </div>
 
-<!-- Musik -->
-<audio id="music" autoplay loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
-</audio>
-
 <header>
-  <h1>Portofolio Saya</h1>
-  <p>Silakan pilih fitur di bawah ini</p>
+  <canvas id="headerVisualizer"></canvas>
+  <h1>WILKA</h1>
+  <p>Welcome to my portfolio website</p>
 </header>
 
 <nav>
   <a href="#skills" onclick="toggleSection('skills')">⚙️ Skills</a>
   <a href="#hobbies" onclick="toggleSection('hobbies')">🎮 Hobbies</a>
   <a href="#contact" onclick="toggleSection('contact')">✉️ Contact</a>
-  <a href="#group" onclick="toggleSection('group')">👥 Group Developer</a>
-  <a href="#buypanel" onclick="toggleSection('buypanel')">🛒 Buy Panel</a>
+  <a href="#group" onclick="window.open('https://chat.whatsapp.com/CtzrdM40BIH7hxYGNogr89','_blank')">👨‍💻 Group Developer</a>
+  <a href="#" onclick="document.getElementById('buyPanelPopup').style.display='flex'">🛒 Buy Panel</a>
 </nav>
 
 <section id="skills">
   <h2>⚙️ Skills</h2>
   <div class="card">
-    <p>HTML</p>
-    <div class="progress-bar"><div class="progress" style="width: 90%;">90%</div></div>
-    <p>CSS</p>
-    <div class="progress-bar"><div class="progress" style="width: 85%;">85%</div></div>
-    <p>JavaScript</p>
-    <div class="progress-bar"><div class="progress" style="width: 75%;">75%</div></div>
-    <p>UI Design</p>
-    <div class="progress-bar"><div class="progress" style="width: 80%;">80%</div></div>
+    <div class="skill-bar">
+      <span>HTML — 90%</span>
+      <div class="skill-bar-fill" style="width: 90%;"></div>
+    </div>
+    <div class="skill-bar">
+      <span>CSS — 70%</span>
+      <div class="skill-bar-fill" style="width: 70%;"></div>
+    </div>
+    <div class="skill-bar">
+      <span>WhatsApp Bot Development — 80%</span>
+      <div class="skill-bar-fill" style="width: 80%;"></div>
+    </div>
   </div>
 </section>
 
 <section id="hobbies">
   <h2>🎮 Hobbies</h2>
-  <div class="feature-grid">
-    <div class="card">Gaming</div>
-    <div class="card">Coding</div>
-    <div class="card">Music</div>
-    <div class="card">Traveling</div>
+  <div class="card">
+    <p>I enjoy coding automation scripts, exploring new web technologies, and reading about AI and tech innovations.</p>
   </div>
 </section>
 
 <section id="contact">
   <h2>✉️ Contact</h2>
   <div class="card">
-    <p>Email: contoh@email.com</p>
-    <p>WhatsApp: +62 812-3456-7890</p>
+    <p>Email: yourmail@example.com</p>
+    <p>Instagram: @yourinstagram</p>
   </div>
 </section>
 
-<section id="group">
-  <h2>👥 Group Developer</h2>
-  <div class="card">
-    <p>Gabung grup kami:</p>
-    <a href="https://chat.whatsapp.com/CtzrdM40BIH7hxYGNogr89" target="_blank" style="
-      display: inline-block;
-      padding: 10px 20px;
-      background: #25d366;
-      color: white;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-    ">Join WhatsApp Group</a>
-  </div>
-</section>
+<footer>
+  &copy; 2025 WILKA. All rights reserved.
+</footer>
 
-<section id="buypanel">
-  <h2>🛒 Beli Panel</h2>
-  <div class="card">
-    <form id="buyPanelForm" onsubmit="return redirectToWhatsApp()">
-      <div class="form-group">
-        <label>Jumlah Panel:</label>
-        <input type="number" id="jumlah" required>
-      </div>
-      <div class="form-group">
-        <label>Ukuran Panel (GB):</label>
-        <input type="text" id="ukuran" required>
-      </div>
-      <div class="form-group">
-        <label>Nomor WhatsApp Anda:</label>
-        <input type="tel" id="nomor" required>
-      </div>
-      <button type="submit">Beli Sekarang</button>
-    </form>
+<audio id="backgroundMusic" src="musik.mp3" loop></audio>
+<button id="musicControl" onclick="toggleMusic()">▶️</button>
+<canvas id="visualizerPlay" width="80" height="80"></canvas>
+
+<!-- Buy Panel Popup -->
+<div id="buyPanelPopup" class="popup" onclick="if(event.target.id==='buyPanelPopup') this.style.display='none'">
+  <div class="popup-content">
+    <h3>Buy Panel</h3>
+    <input type="number" id="jumlahPanel" placeholder="Jumlah Panel">
+    <input type="text" id="ukuranPanel" placeholder="Ukuran (GB)">
+    <input type="text" id="waUser" placeholder="Nomor WhatsApp Anda">
+    <button onclick="beliPanel()">Beli</button>
   </div>
-</section>
+</div>
 
 <script>
-  function toggleSection(id) {
-    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+  function masukWebsite() {
+    document.getElementById("intro").style.display = "none";
   }
 
-  function mulai() {
-    document.getElementById('intro').style.display = 'none';
-    document.getElementById('music').play();
+  function toggleSection(sectionId) {
+    const sections = document.querySelectorAll('section');
+    sections.forEach(sec => {
+      sec.classList.remove('active');
+      sec.classList.remove('visible');
+      if (sec.id === sectionId) {
+        sec.classList.add('active');
+        setTimeout(() => sec.classList.add('visible'), 10);
+      }
+    });
   }
 
-  function redirectToWhatsApp() {
-    const jumlah = document.getElementById("jumlah").value;
-    const ukuran = document.getElementById("ukuran").value;
-    const nomor = document.getElementById("nomor").value;
-    const pesan = `Halo! Saya ingin membeli panel:\nJumlah: ${jumlah}\nUkuran: ${ukuran} GB\nNomor WA Saya: ${nomor}`;
-    const url = `https://wa.me/6285123581626?text=${encodeURIComponent(pesan)}`;
+  const audio = document.getElementById("backgroundMusic");
+  const musicBtn = document.getElementById("musicControl");
+  const canvasPlay = document.getElementById("visualizerPlay");
+  const ctxPlay = canvasPlay.getContext("2d");
+
+  let audioCtx, analyser, source, bufferLength, dataArray;
+
+  function toggleMusic() {
+    if (!audioCtx) initAudio();
+    if (audio.paused) {
+      audio.play();
+      musicBtn.textContent = "⏸️";
+      drawPlayVisualizer();
+      drawHeaderVisualizer();
+    } else {
+      audio.pause();
+      musicBtn.textContent = "▶️";
+    }
+  }
+
+  function initAudio() {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    analyser = audioCtx.createAnalyser();
+    source = audioCtx.createMediaElementSource(audio);
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    analyser.fftSize = 128;
+    bufferLength = analyser.frequencyBinCount;
+    dataArray = new Uint8Array(bufferLength);
+  }
+
+  function drawPlayVisualizer() {
+    requestAnimationFrame(drawPlayVisualizer);
+    if (!analyser) return;
+    analyser.getByteFrequencyData(dataArray);
+    ctxPlay.clearRect(0, 0, canvasPlay.width, canvasPlay.height);
+    const centerX = canvasPlay.width / 2;
+    const centerY = canvasPlay.height / 2;
+    const radius = 20;
+    for (let i = 0; i < bufferLength; i++) {
+      const angle = (i / bufferLength) * 2 * Math.PI;
+      const length = dataArray[i] / 6;
+      const x1 = centerX + Math.cos(angle) * radius;
+      const y1 = centerY + Math.sin(angle) * radius;
+      const x2 = centerX + Math.cos(angle) * (radius + length);
+      const y2 = centerY + Math.sin(angle) * (radius + length);
+      ctxPlay.strokeStyle = `hsl(${i * 4}, 100%, 50%)`;
+      ctxPlay.beginPath();
+      ctxPlay.moveTo(x1, y1);
+      ctxPlay.lineTo(x2, y2);
+      ctxPlay.stroke();
+    }
+  }
+
+  function drawHeaderVisualizer() {
+    const canvas = document.getElementById("headerVisualizer");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      if (!analyser) return;
+
+      analyser.getByteFrequencyData(dataArray);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const barWidth = canvas.width / bufferLength;
+      for (let i = 0; i < bufferLength; i++) {
+        const barHeight = dataArray[i];
+        ctx.fillStyle = `hsl(${i * 4}, 100%, 60%)`;
+        ctx.fillRect(i * barWidth, canvas.height - barHeight, barWidth - 1, barHeight);
+      }
+    }
+
+    animate();
+  }
+
+  function beliPanel() {
+    const jumlah = document.getElementById('jumlahPanel').value;
+    const ukuran = document.getElementById('ukuranPanel').value;
+    const wa = document.getElementById('waUser').value;
+    if (!jumlah || !ukuran || !wa) {
+      alert('Harap isi semua data!');
+      return;
+    }
+    const url = `https://wa.me/6285123581626?text=Halo,%20saya%20ingin%20beli%20panel.%0AJumlah:%20${jumlah}%0AUkuran:%20${ukuran}GB%0ANo.%20Saya:%20${wa}`;
     window.open(url, '_blank');
-    return false;
   }
-</script>
 
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('section').forEach(section => {
+    observer.observe(section);
+  });
+</script>
 </body>
 </html>
