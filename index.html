@@ -45,26 +45,34 @@
       animation: rotateIcon 4s linear infinite;
     }
 
-    #intro h1, #intro p, #intro button {
-      opacity: 0;
-      transform: translateX(-50px);
-      animation: slideIn 1s forwards;
+    @keyframes rotateIcon {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
-    #intro h1 { animation-delay: 0.3s; }
-    #intro p { animation-delay: 0.6s; }
-    #intro button { animation-delay: 0.9s; }
+    .intro-animated {
+      opacity: 0;
+      transform: translateX(-30px);
+      animation: slideIn 0.6s forwards;
+    }
+
+    .intro-animated:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+
+    .intro-animated:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+
+    .intro-animated:nth-child(4) {
+      animation-delay: 1s;
+    }
 
     @keyframes slideIn {
       to {
         opacity: 1;
         transform: translateX(0);
       }
-    }
-
-    @keyframes rotateIcon {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
     }
 
     header {
@@ -83,22 +91,29 @@
     nav {
       background-color: #fff;
       padding: 10px 20px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
+      text-align: center;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    nav a {
+    .nav-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+
+    .nav-row a {
       text-decoration: none;
       background-color: var(--primary-color);
       color: #fff;
-      padding: 8px 16px;
+      padding: 10px 20px;
       border-radius: var(--border-radius);
+      font-weight: bold;
       transition: background 0.3s ease, transform 0.2s ease;
     }
 
-    nav a:hover {
+    .nav-row a:hover {
       background-color: #5848e6;
       transform: scale(1.05);
     }
@@ -197,9 +212,9 @@
   <svg width="80" height="80" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
     <path d="M12 2l4 4-4 4-4-4 4-4zM2 12l4-4 4 4-4 4-4-4zM12 22l-4-4 4-4 4 4-4 4zM22 12l-4 4-4-4 4-4 4 4z"/>
   </svg>
-  <h1 style="margin-top: 20px;">Selamat Datang di Portofolio Wilkazxq</h1>
-  <p>Developer | Designer | Creator</p>
-  <button onclick="masukWebsite()" style="
+  <h1 class="intro-animated">Selamat Datang di Portofolio Wilkazxq</h1>
+  <p class="intro-animated">Developer | Designer | Creator</p>
+  <button onclick="masukWebsite()" class="intro-animated" style="
     margin-top: 30px;
     background: linear-gradient(135deg, #00cc99, #009966);
     border: none;
@@ -229,10 +244,12 @@
 </header>
 
 <nav>
-  <a href="#skills" onclick="toggleSection('skills')">⚙️ Skills</a>
-  <a href="#hobbies" onclick="toggleSection('hobbies')">🎮 Hobbies</a>
-  <a href="#contact" onclick="toggleSection('contact')">✉️ Contact</a>
-  <a href="#group" onclick="toggleSection('group')">👥 Group Developer</a>
+  <div class="nav-row">
+    <a href="#skills" onclick="toggleSection('skills')">⚙️ Skills</a>
+    <a href="#hobbies" onclick="toggleSection('hobbies')">🎮 Hobbies</a>
+    <a href="#contact" onclick="toggleSection('contact')">✉️ Contact</a>
+    <a href="#group" onclick="toggleSection('group')">👥 Group Developer</a>
+  </div>
 </nav>
 
 <section id="skills">
@@ -271,18 +288,11 @@
 <section id="group">
   <h2>👥 Group Developer</h2>
   <div class="card">
-    <p>Bergabunglah bersama komunitas developer lainnya untuk saling berbagi ilmu dan diskusi.</p>
-    <a href="https://chat.whatsapp.com/CtzrdM40BIH7hxYGNogr89" target="_blank" style="
-      display: inline-block;
-      margin-top: 10px;
-      background-color: #25D366;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s ease;
-    ">Join WhatsApp Group</a>
+    <p>Bergabunglah dengan grup WhatsApp untuk berdiskusi dan berbagi:</p>
+    <a href="https://chat.whatsapp.com/CtzrdM40BIH7hxYGNogr89" target="_blank"
+       style="display: inline-block; margin-top: 10px; background-color: #25D366; color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: bold;">
+      Gabung Grup WhatsApp
+    </a>
   </div>
 </section>
 
