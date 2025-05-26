@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -304,7 +302,7 @@
 <section id="hobbies">
   <h2>🎮 Hobbies</h2>
   <div class="card">
-    <p>I saya hobi menganalisis pasar market,politik,inovassi baru seperti Ai artificial intelligent,self improve dan lain lain.</p>
+    <p>Saya hobi menganalisis pasar market, politik, inovasi baru seperti AI (Artificial Intelligence), self-improvement, dan lain-lain.</p>
   </div>
 </section>
 
@@ -318,6 +316,7 @@
 
 <footer>
   &copy; 2025 WILKA. All rights reserved.
+  <p id="visitorCount">Total Kunjungan: Memuat...</p>
 </footer>
 
 <audio id="backgroundMusic" src="musik.mp3" loop></audio>
@@ -328,7 +327,7 @@
 <div id="buyPanelPopup" class="popup" onclick="if(event.target.id==='buyPanelPopup') this.style.display='none'">
   <div class="popup-content">
     <h3>Buy Panel</h3>
-    <input type="number" id="Jumlah Panel" placeholder="Jumlah Panel">
+    <input type="number" id="jumlahPanel" placeholder="Jumlah Panel">
     <input type="text" id="ukuranPanel" placeholder="Ukuran (GB)">
     <input type="text" id="waUser" placeholder="Nomor WhatsApp Anda">
     <button onclick="beliPanel()">Beli</button>
@@ -459,6 +458,13 @@
   document.querySelectorAll('section').forEach(section => {
     observer.observe(section);
   });
+
+  // Visitor Counter
+  fetch('https://api.countapi.xyz/hit/wilkazxq-portfolio/home')
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('visitorCount').innerText = `Total Kunjungan: ${data.value}`;
+    });
 </script>
 </body>
 </html>
