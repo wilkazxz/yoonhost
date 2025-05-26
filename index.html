@@ -147,7 +147,10 @@
     canvas#visualizer {
       display: block;
       width: 100%;
+      height: 100px;
       background: #e8e8f8;
+      margin-top: 40px;
+      border-top: 2px solid #ccc;
     }
   </style>
 </head>
@@ -188,9 +191,6 @@
   <p>Welcome to my portfolio website</p>
 </header>
 
-<!-- VISUALIZER -->
-<canvas id="visualizer" height="100"></canvas>
-
 <nav>
   <a href="#skills" onclick="toggleSection('skills')">⚙️ Skills</a>
   <a href="#hobbies" onclick="toggleSection('hobbies')">🎮 Hobbies</a>
@@ -229,6 +229,9 @@
     <p>Instagram: @yourinstagram</p>
   </div>
 </section>
+
+<!-- VISUALIZER DIPINDAHKAN KE SINI -->
+<canvas id="visualizer" height="100"></canvas>
 
 <footer>
   &copy; 2025 WILKA. All rights reserved.
@@ -271,7 +274,6 @@
     }
   }
 
-  // Visualizer setup
   const canvas = document.getElementById("visualizer");
   const ctx = canvas.getContext("2d");
   let audioCtx, analyser, source, bufferLength, dataArray;
