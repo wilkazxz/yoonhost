@@ -54,18 +54,10 @@
       color: #fff;
       padding: 60px 20px;
       text-align: center;
-      border-bottom: 5px solid #5848e6;
-    }
-
-    .wave-container {
-      line-height: 0;
-      overflow: hidden;
-    }
-
-    .wave {
-      display: block;
-      width: 100%;
-      height: 80px;
+      border: 4px solid #fff; /* Bingkai putih */
+      border-radius: 20px;
+      margin: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
     }
 
     nav {
@@ -190,19 +182,6 @@
   <p>Welcome to my portfolio website</p>
 </header>
 
-<!-- WAVE ANIMASI -->
-<div class="wave-container">
-  <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="wave">
-    <path d="M0,40 C480,120 960,0 1440,80 L1440,120 L0,120 Z" fill="#6C63FF">
-      <animate attributeName="d" dur="8s" repeatCount="indefinite"
-        values="
-        M0,40 C480,120 960,0 1440,80 L1440,120 L0,120 Z;
-        M0,60 C480,40 960,140 1440,60 L1440,120 L0,120 Z;
-        M0,40 C480,120 960,0 1440,80 L1440,120 L0,120 Z" />
-    </path>
-  </svg>
-</div>
-
 <nav>
   <a href="#skills" onclick="toggleSection('skills')">⚙️ Skills</a>
   <a href="#hobbies" onclick="toggleSection('hobbies')">🎮 Hobbies</a>
@@ -248,9 +227,7 @@
 
 <!-- MUSIC PLAYER -->
 <audio id="backgroundMusic" src="musik.mp3" loop></audio>
-<button id="musicControl" onclick="toggleMusic()">
-  ▶️
-</button>
+<button id="musicControl" onclick="toggleMusic()">▶️</button>
 
 <script>
   function masukWebsite() {
