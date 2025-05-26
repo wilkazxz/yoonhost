@@ -149,8 +149,6 @@
       width: 100%;
       height: 100px;
       background: #e8e8f8;
-      margin-top: 40px;
-      border-top: 2px solid #ccc;
     }
   </style>
 </head>
@@ -191,6 +189,8 @@
   <p>Welcome to my portfolio website</p>
 </header>
 
+<canvas id="visualizer"></canvas>
+
 <nav>
   <a href="#skills" onclick="toggleSection('skills')">⚙️ Skills</a>
   <a href="#hobbies" onclick="toggleSection('hobbies')">🎮 Hobbies</a>
@@ -230,18 +230,12 @@
   </div>
 </section>
 
-<!-- VISUALIZER DIPINDAHKAN KE SINI -->
-<canvas id="visualizer" height="100"></canvas>
-
 <footer>
   &copy; 2025 WILKA. All rights reserved.
 </footer>
 
-<!-- MUSIC PLAYER -->
 <audio id="backgroundMusic" src="musik.mp3" loop></audio>
-<button id="musicControl" onclick="toggleMusic()">
-  ▶️
-</button>
+<button id="musicControl" onclick="toggleMusic()">▶️</button>
 
 <script>
   function masukWebsite() {
@@ -285,7 +279,7 @@
       source = audioCtx.createMediaElementSource(audio);
       source.connect(analyser);
       analyser.connect(audioCtx.destination);
-      analyser.fftSize = 256;
+      analyser.fftSize = 128;
       bufferLength = analyser.frequencyBinCount;
       dataArray = new Uint8Array(bufferLength);
     }
@@ -296,13 +290,22 @@
     if (!analyser) return;
 
     analyser.getByteFrequencyData(dataArray);
-
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const barWidth = canvas.width / bufferLength;
+    const barWidth = 8;
+    const gap = 2;
+    let x = 0;
+
     for (let i = 0; i < bufferLength; i++) {
-      const barHeight = dataArray[i] / 2;
-      ctx.fillStyle = `hsl(${i * 2}, 100%, 50%)`;
-      ctx.fillRect(i * barWidth, canvas.height - barHeight, barWidth - 1, barHeight);
+      const barHeight = dataArray[i] * 1.2;
+
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      gradient.addColorStop(0, "#00ffe0");
+      gradient.addColorStop(1, "#0066ff");
+
+      ctx.fillStyle = gradient;
+      ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+
+      x += barWidth + gap;
     }
   }
 </script>
