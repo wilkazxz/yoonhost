@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -11,297 +10,261 @@
       --text-color: #333;
       --card-bg: #fff;
       --border-radius: 10px;
-    }
+    }* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+#intro {
+  position: fixed;
+  inset: 0;
+  background: #003366;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  text-align: center;
+  transition: opacity 0.5s ease;
+}
 
-    /* INTRO */
-    #intro {
-      position: fixed;
-      inset: 0;
-      background: #003366;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      text-align: center;
-    }
+#intro.hide {
+  opacity: 0;
+  pointer-events: none;
+}
 
-    #intro svg {
-      animation: rotateIcon 4s linear infinite;
-    }
+#intro svg {
+  animation: rotateIcon 4s linear infinite;
+}
 
-    @keyframes rotateIcon {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+@keyframes rotateIcon {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
-    /* HEADER */
-    header {
-      background-color: var(--primary-color);
-      color: #fff;
-      padding: 60px 20px;
-      text-align: center;
-      border-bottom: 5px solid #5848e6;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      border-radius: 0 0 30px 30px;
-    }
+header {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 60px 20px;
+  text-align: center;
+  border-bottom: 5px solid #5848e6;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  border-radius: 0 0 30px 30px;
+  position: relative;
+  z-index: 1;
+}
 
-    nav {
-      background-color: #fff;
-      padding: 10px 20px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
+nav {
+  background-color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-    nav a {
-      text-decoration: none;
-      background-color: var(--primary-color);
-      color: #fff;
-      padding: 8px 16px;
-      border-radius: var(--border-radius);
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
+nav a {
+  text-decoration: none;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
 
-    nav a:hover {
-      background-color: #5848e6;
-      transform: scale(1.05);
-    }
+nav a:hover {
+  background-color: #5848e6;
+  transform: scale(1.05);
+}
 
-    section {
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: auto;
-      display: none;
-    }
+section {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: auto;
+  display: none;
+}
 
-    section.active {
-      display: block;
-    }
+section.active {
+  display: block;
+}
 
-    h2 {
-      margin-bottom: 20px;
-      font-size: 2rem;
-      color: var(--primary-color);
-    }
+h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: var(--primary-color);
+}
 
-    .card {
-      background-color: var(--card-bg);
-      padding: 20px;
-      border-radius: var(--border-radius);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
-    }
+.card {
+  background-color: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
 
-    .skill-bar {
-      margin: 10px 0;
-    }
+.skill-bar {
+  margin: 10px 0;
+}
 
-    .skill-bar span {
-      display: block;
-      font-weight: bold;
-    }
+.skill-bar span {
+  display: block;
+  font-weight: bold;
+}
 
-    .skill-bar-fill {
-      height: 10px;
-      border-radius: 5px;
-      background: #00cc99;
-    }
+.skill-bar-fill {
+  height: 10px;
+  border-radius: 5px;
+  background: #00cc99;
+}
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #eee;
-      font-size: 0.9rem;
-      color: #666;
-    }
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #eee;
+  font-size: 0.9rem;
+  color: #666;
+}
 
-    #musicControl {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #00cc99;
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      font-size: 1.2rem;
-    }
+#musicControl {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #00cc99;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  z-index: 999;
+}
 
-    canvas#visualizer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100px;
-      pointer-events: none;
-      z-index: -1;
-    }
+#visualizer {
+  width: 100%;
+  height: 100px;
+  background: #000;
+}
 
-    /* Efek visual tambahan */
-    .effect {
-      width: 100%;
-      height: 150px;
-      background: linear-gradient(45deg, #f4f4f9, #e0e0f8);
-      animation: wave 6s ease-in-out infinite;
-    }
-
-    @keyframes wave {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-    }
   </style>
 </head>
 <body>
-
-<!-- INTRO -->
-<div id="intro">
-  <svg width="80" height="80" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
-    <path d="M12 2l4 4-4 4-4-4 4-4zM2 12l4-4 4 4-4 4-4-4zM12 22l-4-4 4-4 4 4-4 4zM22 12l-4 4-4-4 4-4 4 4z"/>
-  </svg>
-  <h1 style="margin-top: 20px;">Selamat Datang di Portofolio Wilkazxq</h1>
-  <p>Developer | Designer | Creator</p>
-  <button onclick="masukWebsite()" style="margin-top: 30px; background: linear-gradient(135deg, #00cc99, #009966); border: none; color: white; padding: 14px 32px; border-radius: 50px; font-size: 1.1rem; cursor: pointer; font-weight: bold; box-shadow: 0 4px 15px rgba(0, 204, 153, 0.5); display: flex; align-items: center; gap: 10px;">
-    <svg width=\"20\" height=\"20\" fill=\"white\" viewBox=\"0 0 24 24\">
-      <path d=\"M5 12h14M13 6l6 6-6 6\"/>
+  <div id="intro">
+    <svg width="80" height="80" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M12 2l4 4-4 4-4-4 4-4zM2 12l4-4 4 4-4 4-4-4zM12 22l-4-4 4-4 4 4-4 4zM22 12l-4 4-4-4 4-4 4 4z"/>
     </svg>
-    Mulai
-  </button>
-</div>
-
-<header>
-  <h1>WILKA</h1>
-  <p>Welcome to my portfolio website</p>
-</header>
-
-<div class="effect"></div>
-
-<nav>
-  <a href=\"#skills\" onclick=\"toggleSection('skills')\">⚙️ Skills</a>
-  <a href=\"#hobbies\" onclick=\"toggleSection('hobbies')\">🎮 Hobbies</a>
-  <a href=\"#contact\" onclick=\"toggleSection('contact')\">✉️ Contact</a>
-</nav>
-
-<section id=\"skills\">
-  <h2>⚙️ Skills</h2>
-  <div class=\"card\">
-    <div class=\"skill-bar\">
-      <span>HTML — 90%</span>
-      <div class=\"skill-bar-fill\" style=\"width: 90%;\"></div>
+    <h1 style="margin-top: 20px;">Selamat Datang di Portofolio Wilkazxq</h1>
+    <p>Developer | Designer | Creator</p>
+    <button onclick="masukWebsite()" style="margin-top: 30px; background: linear-gradient(135deg, #00cc99, #009966); border: none; color: white; padding: 14px 32px; border-radius: 50px; font-size: 1.1rem; cursor: pointer; transition: 0.3s; font-weight: bold; box-shadow: 0 4px 15px rgba(0,204,153,0.5); display: flex; align-items: center; gap: 10px;">
+      <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
+        <path d="M5 12h14M13 6l6 6-6 6"/>
+      </svg>
+      Mulai
+    </button>
+  </div>  <header>
+    <h1>WILKA</h1>
+    <p>Welcome to my portfolio website</p>
+  </header>  <div id="visualizer">
+    <canvas id="canvas" width="1000" height="100"></canvas>
+  </div>  <nav>
+    <a href="#skills" onclick="toggleSection('skills')">⚙️ Skills</a>
+    <a href="#hobbies" onclick="toggleSection('hobbies')">🎮 Hobbies</a>
+    <a href="#contact" onclick="toggleSection('contact')">✉️ Contact</a>
+  </nav>  <section id="skills">
+    <h2>⚙️ Skills</h2>
+    <div class="card">
+      <div class="skill-bar">
+        <span>HTML — 90%</span>
+        <div class="skill-bar-fill" style="width: 90%;"></div>
+      </div>
+      <div class="skill-bar">
+        <span>CSS — 70%</span>
+        <div class="skill-bar-fill" style="width: 70%;"></div>
+      </div>
+      <div class="skill-bar">
+        <span>WhatsApp Bot Development — 80%</span>
+        <div class="skill-bar-fill" style="width: 80%;"></div>
+      </div>
     </div>
-    <div class=\"skill-bar\">
-      <span>CSS — 70%</span>
-      <div class=\"skill-bar-fill\" style=\"width: 70%;\"></div>
+  </section>  <section id="hobbies">
+    <h2>🎮 Hobbies</h2>
+    <div class="card">
+      <p>I enjoy coding automation scripts, exploring new web technologies, and reading about AI and tech innovations.</p>
     </div>
-    <div class=\"skill-bar\">
-      <span>WhatsApp Bot Development — 80%</span>
-      <div class=\"skill-bar-fill\" style=\"width: 80%;\"></div>
+  </section>  <section id="contact">
+    <h2>✉️ Contact</h2>
+    <div class="card">
+      <p>Email: yourmail@example.com</p>
+      <p>Instagram: @yourinstagram</p>
     </div>
-  </div>
-</section>
+  </section>  <footer>
+    &copy; 2025 WILKA. All rights reserved.
+  </footer><audio id="backgroundMusic" src="musik.mp3" loop></audio> <button id="musicControl" onclick="toggleMusic()">▶️</button>
 
-<section id=\"hobbies\">
-  <h2>🎮 Hobbies</h2>
-  <div class=\"card\">
-    <p>I enjoy coding automation scripts, exploring new web technologies, and reading about AI and tech innovations.</p>
-  </div>
-</section>
-
-<section id=\"contact\">
-  <h2>✉️ Contact</h2>
-  <div class=\"card\">
-    <p>Email: yourmail@example.com</p>
-    <p>Instagram: @yourinstagram</p>
-  </div>
-</section>
-
-<footer>
-  &copy; 2025 WILKA. All rights reserved.
-</footer>
-
-<audio id=\"backgroundMusic\" src=\"musik.mp3\" loop></audio>
-<button id=\"musicControl\" onclick=\"toggleMusic()\">▶️</button>
-<canvas id=\"visualizer\"></canvas>
-
-<script>
-  function masukWebsite() {
-    document.getElementById(\"intro\").style.display = \"none\";
-  }
-
-  function toggleSection(sectionId) {
-    const sections = document.querySelectorAll('section');
-    sections.forEach(sec => {
-      sec.classList.remove('active');
-    });
-    document.getElementById(sectionId).classList.add('active');
-  }
-
-  const audio = document.getElementById(\"backgroundMusic\");
-  const musicBtn = document.getElementById(\"musicControl\");
-  const canvas = document.getElementById(\"visualizer\");
-  const ctx = canvas.getContext(\"2d\");
-  canvas.width = window.innerWidth;
-  canvas.height = 100;
-
-  function toggleMusic() {
-    if (audio.paused) {
-      audio.play();
-      musicBtn.textContent = \"⏸️\";
-    } else {
-      audio.pause();
-      musicBtn.textContent = \"▶️\";
+  <script>
+    function masukWebsite() {
+      document.getElementById("intro").classList.add("hide");
     }
-  }
 
-  const context = new AudioContext();
-  const src = context.createMediaElementSource(audio);
-  const analyser = context.createAnalyser();
-  src.connect(analyser);
-  analyser.connect(context.destination);
-  analyser.fftSize = 256;
-  const bufferLength = analyser.frequencyBinCount;
-  const dataArray = new Uint8Array(bufferLength);
-
-  function draw() {
-    requestAnimationFrame(draw);
-    analyser.getByteFrequencyData(dataArray);
-    ctx.fillStyle = \"#f4f4f9\";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    const barWidth = (canvas.width / bufferLength) * 2.5;
-    let x = 0;
-    for (let i = 0; i < bufferLength; i++) {
-      const barHeight = dataArray[i];
-      ctx.fillStyle = `rgb(${barHeight + 100}, 50, 150)`;
-      ctx.fillRect(x, canvas.height - barHeight / 2, barWidth, barHeight / 2);
-      x += barWidth + 1;
+    function toggleSection(sectionId) {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(sec => {
+        sec.classList.toggle('active', sec.id === sectionId);
+      });
     }
-  }
 
-  audio.onplay = () => {
-    if (context.state === \"suspended\") context.resume();
+    const audio = document.getElementById("backgroundMusic");
+    const musicBtn = document.getElementById("musicControl");
+
+    function toggleMusic() {
+      if (audio.paused) {
+        audio.play();
+        musicBtn.textContent = "⏸️";
+      } else {
+        audio.pause();
+        musicBtn.textContent = "▶️";
+      }
+    }
+
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const analyser = audioCtx.createAnalyser();
+    const source = audioCtx.createMediaElementSource(audio);
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    analyser.fftSize = 256;
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+
+    function draw() {
+      requestAnimationFrame(draw);
+      analyser.getByteFrequencyData(dataArray);
+
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const barWidth = (canvas.width / bufferLength) * 2.5;
+      let x = 0;
+
+      for (let i = 0; i < bufferLength; i++) {
+        const barHeight = dataArray[i];
+        ctx.fillStyle = `rgb(${barHeight+100},50,150)`;
+        ctx.fillRect(x, canvas.height - barHeight / 2, barWidth, barHeight / 2);
+        x += barWidth + 1;
+      }
+    }
+
     draw();
-  };
-</script>
-
-</body>
+  </script></body>
 </html>
