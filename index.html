@@ -6,10 +6,10 @@
   <title>WILKA | Portfolio</title>
   <style>
     :root {
-      --primary-color: #8A89C0;  /* Soft purple instead of bright violet */
-      --bg-color: #f8f9fa;      /* Very light gray background */
-      --text-color: #555;       /* Dark gray instead of pure black */
-      --card-bg: #fff;          /* White cards */
+      --primary-color: #7a77b8; /* Soft muted purple */
+      --bg-color: #f0f4f8; /* Light grey-blue background */
+      --text-color: #444; /* Dark gray text */
+      --card-bg: #ffffff; /* White cards for contrast */
       --border-radius: 10px;
     }
 
@@ -30,7 +30,7 @@
     #intro {
       position: fixed;
       inset: 0;
-      background: #4a6fa5;  /* Softer blue */
+      background: #4a6fa5;
       color: white;
       display: flex;
       flex-direction: column;
@@ -69,7 +69,7 @@
       color: #fff;
       padding: 60px 20px;
       text-align: center;
-      border-bottom: 5px solid #6d6a9e;  /* Darker soft purple */
+      border-bottom: 5px solid #6d6a9e;
       border-radius: 0 0 20px 20px;
     }
 
@@ -80,7 +80,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 15px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
     nav a {
@@ -93,7 +93,7 @@
     }
 
     nav a:hover {
-      background-color: #6d6a9e;  /* Darker soft purple */
+      background-color: #6d6a9e;
       transform: scale(1.05);
     }
 
@@ -123,8 +123,14 @@
       background-color: var(--card-bg);
       padding: 20px;
       border-radius: var(--border-radius);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       margin-bottom: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     .skill-bar {
@@ -139,13 +145,13 @@
     .skill-bar-fill {
       height: 10px;
       border-radius: 5px;
-      background: #66b3a6;  /* Soft teal */
+      background: #66b3a6;
     }
 
     footer {
       text-align: center;
       padding: 20px;
-      background-color: #eee;
+      background-color: #e6ecf2;
       font-size: 0.9rem;
       color: #666;
     }
@@ -154,13 +160,13 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: #66b3a6;  /* Soft teal */
+      background: #66b3a6;
       color: white;
       border: none;
       padding: 12px;
       border-radius: 50%;
       cursor: pointer;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
     canvas#heartbeatVisualizer {
@@ -170,7 +176,7 @@
       z-index: -1;
       width: 100%;
       height: 200px;
-      opacity: 0.3;  /* More subtle visualizer */
+      opacity: 0.3;
     }
 
     .popup {
@@ -189,37 +195,46 @@
       border-radius: 10px;
       width: 90%;
       max-width: 400px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     }
 
     .popup-content h3 {
       margin-bottom: 20px;
+      color: var(--primary-color);
     }
 
     .popup-content input {
       width: 100%;
       padding: 10px;
       margin-bottom: 12px;
-      border: 1px solid #ccc;
+      border: 1px solid #ddd;
       border-radius: 6px;
+      transition: border 0.3s ease;
+    }
+
+    .popup-content input:focus {
+      border-color: var(--primary-color);
+      outline: none;
     }
 
     .popup-content button {
-      background: #66b3a6;  /* Soft teal */
+      background: #66b3a6;
       color: white;
       border: none;
       padding: 10px 20px;
       border-radius: 6px;
       cursor: pointer;
+      transition: background 0.3s ease;
     }
 
     .popup-content button:hover {
-      background: #4d998c;  /* Darker soft teal */
+      background: #4d998c;
     }
 
     .price-list {
       margin-bottom: 15px;
-      background: #f0f4f8;  /* Very light blue-gray */
-      padding: 10px;
+      background: #f8fafc;
+      padding: 15px;
       border-radius: 8px;
       font-size: 0.9rem;
     }
@@ -227,6 +242,7 @@
     .price-title {
       font-weight: bold;
       margin-bottom: 8px;
+      color: var(--primary-color);
     }
 
     .gb-options {
@@ -237,25 +253,24 @@
     }
 
     .gb-option {
-      background: #e6f0f7;  /* Very light blue */
+      background: #e6f0f7;
       padding: 8px 12px;
       border-radius: 6px;
       cursor: pointer;
       transition: all 0.2s;
-      border: 1px solid #c8d6e5;  /* Light blue border */
+      border: 1px solid #c8d6e5;
     }
 
     .gb-option:hover {
-      background: #c8d6e5;  /* Light blue */
+      background: #d0e0ed;
     }
 
     .gb-option.active {
-      background: #8A89C0;  /* Matching primary color */
+      background: var(--primary-color);
       color: white;
-      border-color: #6d6a9e;
+      border-color: var(--primary-color);
     }
     
-    /* Tambahan untuk popup token */
     #tokenPopup {
       display: none;
     }
@@ -265,7 +280,7 @@
     }
     
     .token-error {
-      color: red;
+      color: #e74c3c;
       font-size: 0.8rem;
       margin-top: 5px;
       display: none;
@@ -274,13 +289,14 @@
 </head>
 <body>
 
+<!-- All your existing HTML content remains exactly the same -->
 <div id="intro">
   <svg width="80" height="80" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
     <path d="M12 2l4 4-4 4-4-4 4-4zM2 12l4-4 4 4-4 4-4-4zM12 22l-4-4 4-4 4 4-4 4zM22 12l-4 4-4-4 4-4 4 4z"/>
   </svg>
   <h1 style="margin-top: 20px;">Selamat Datang di Portofolio Wilkazxq</h1>
   <p>Developer | Designer | Creator</p>
-  <button onclick="masukWebsite()" style="margin-top:30px;background:linear-gradient(135deg,#66b3a6,#4d998c);border:none;color:white;padding:14px 32px;border-radius:50px;font-size:1.1rem;cursor:pointer;transition:transform 0.3s ease,box-shadow 0.3s ease;font-weight:bold;box-shadow:0 4px 15px rgba(102,179,166,0.5);display:flex;align-items:center;gap:10px;">
+  <button onclick="masukWebsite()" style="margin-top:30px;background:linear-gradient(135deg,#66b3a6,#4d998c);border:none;color:white;padding:14px 32px;border-radius:50px;font-size:1.1rem;cursor:pointer;transition:transform 0.3s ease,box-shadow 0.3s ease;font-weight:bold;box-shadow:0 4px 15px rgba(102,179,166,0.3);display:flex;align-items:center;gap:10px;">
     <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
     Mulai
   </button>
@@ -344,7 +360,7 @@
   </div>
 </div>
 
-<!-- Popup Buy Panel (akan ditampilkan setelah token benar) -->
+<!-- Popup Buy Panel -->
 <div id="buyPanelPopup" class="popup" onclick="if(event.target.id==='buyPanelPopup') this.style.display='none'">
   <div class="popup-content">
     <h3>Buy Panel</h3>
@@ -372,7 +388,7 @@
 </div>
 
 <script>
-// Variabel untuk menyimpan status token
+// Your existing JavaScript remains exactly the same
 let isTokenVerified = false;
 
 function masukWebsite() {
@@ -437,17 +453,17 @@ function drawHeartbeat() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.lineWidth = 2;
-    ctx.strokeStyle = "#8A89C0";  /* Matching primary color */
+    ctx.strokeStyle = "#7a77b8";
     ctx.beginPath();
 
     const sliceWidth = canvas.width / bufferLength;
     let x = 0;
-  for (let i = 0; i < bufferLength; i++) {
-    const y = (dataArray[i] * 0.5 + 0.5) * canvas.height;
-    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-    x += sliceWidth;
-  }
-  ctx.stroke();
+    for (let i = 0; i < bufferLength; i++) {
+      const y = (dataArray[i] * 0.5 + 0.5) * canvas.height;
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      x += sliceWidth;
+    }
+    ctx.stroke();
   }
 
   animate();
@@ -468,35 +484,26 @@ function beliPanel() {
 }
 
 function selectGbOption(gb, priceText) {
-  // Remove active class from all options
   document.querySelectorAll('.gb-option').forEach(option => {
     option.classList.remove('active');
   });
   
-  // Add active class to clicked option
   event.target.classList.add('active');
-  
-  // Set the GB value in the input field
   document.getElementById('ukuranPanel').value = gb === 'unlimited' ? 'Unlimited' : `${gb}GB`;
-  
-  // Optional: Show price in console or somewhere else
   console.log(`Selected: ${priceText}`);
 }
 
-// Fungsi untuk menampilkan popup token
 function showTokenPopup() {
   document.getElementById('tokenPopup').style.display = 'flex';
   document.getElementById('tokenInput').focus();
 }
 
-// Fungsi untuk menyembunyikan popup token
 function hideTokenPopup() {
   document.getElementById('tokenPopup').style.display = 'none';
   document.getElementById('tokenError').style.display = 'none';
   document.getElementById('tokenInput').value = '';
 }
 
-// Fungsi untuk verifikasi token
 function verifyToken() {
   const tokenInput = document.getElementById('tokenInput').value;
   const tokenError = document.getElementById('tokenError');
