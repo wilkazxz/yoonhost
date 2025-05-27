@@ -9,12 +9,11 @@
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #003366, #6C63FF);
       color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       margin: 0;
+      min-height: 100vh;
     }
+    
+    /* Login Styles */
     .login-box {
       background: rgba(0, 0, 0, 0.7);
       padding: 30px;
@@ -22,7 +21,12 @@
       width: 350px;
       text-align: center;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
+    
     input {
       width: 100%;
       padding: 12px;
@@ -32,6 +36,7 @@
       background: rgba(255, 255, 255, 0.2);
       color: white;
     }
+    
     button {
       background: #00cc99;
       color: white;
@@ -42,13 +47,111 @@
       cursor: pointer;
       font-weight: bold;
       margin-top: 10px;
+      transition: all 0.3s;
     }
+    
+    button:hover {
+      background: #009977;
+      transform: translateY(-2px);
+    }
+    
+    /* Admin Dashboard Styles */
     #adminContent {
       display: none;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .card {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      padding: 20px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .stat-card {
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: bold;
+      display: block;
+      margin: 10px 0;
+      color: #00cc99;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    th {
+      background: rgba(0,0,0,0.2);
+    }
+    
+    .btn-danger {
+      background: #ff4444;
+    }
+    
+    .btn-danger:hover {
+      background: #cc0000;
+    }
+    
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #00cc99;
+      color: white;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      display: none;
+      z-index: 1000;
+    }
+    
+    .emergency-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #ff4444;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1000;
     }
   </style>
 </head>
 <body>
+  <!-- Login Form -->
   <div class="login-box" id="loginForm">
     <h2>WILKA ADMIN</h2>
     <input type="password" id="adminPassword" placeholder="Masukkan Password">
@@ -56,12 +159,290 @@
     <p id="errorMsg" style="color: red; display: none;">Password salah!</p>
   </div>
 
+  <!-- Admin Dashboard -->
   <div id="adminContent">
-    <h1>Selamat Datang, WILKA!</h1>
-    <p>Ini adalah panel admin eksklusif.</p>
-    <!-- Konten admin di sini -->
+    <div class="admin-header">
+      <h1>Selamat Datang, WILKA!</h1>
+      <button onclick="logout()">Logout</button>
+    </div>
+    
+    <!-- Stats Dashboard -->
+    <div class="dashboard-grid">
+      <div class="card stat-card">
+        <h3>📊 Total Pengunjung</h3>
+        <span class="stat-value" id="visitorCount">0</span>
+        <p>Hari ini: <span id="todayVisitors">0</span></p>
+      </div>
+      
+      <div class="card stat-card">
+        <h3>🛒 Total Pesanan</h3>
+        <span class="stat-value" id="orderCount">0</span>
+        <p>Pending: <span id="pendingOrders">0</span></p>
+      </div>
+      
+      <div class="card stat-card">
+        <h3>💰 Pendapatan</h3>
+        <span class="stat-value" id="revenueCount">Rp0</span>
+        <p>Bulan ini: <span id="monthRevenue">Rp0</span></p>
+      </div>
+    </div>
+    
+    <!-- Order Management -->
+    <div class="card">
+      <h3>📦 Pesanan Terbaru</h3>
+      <table id="orderTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Produk</th>
+            <th>Pelanggan</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Orders will be populated by JS -->
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Product Management -->
+    <div class="card">
+      <h3>🎛️ Kelola Produk</h3>
+      <button onclick="showAddProductForm()">+ Tambah Produk</button>
+      <table id="productTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>Stok</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Products will be populated by JS -->
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Activity Log -->
+    <div class="card">
+      <h3>📝 Log Aktivitas</h3>
+      <ul id="activityLog">
+        <li>[System] Admin panel initialized</li>
+      </ul>
+    </div>
   </div>
+  
+  <!-- Notification -->
+  <div class="notification" id="notification"></div>
+  
+  <!-- Emergency Button -->
+  <button class="emergency-btn" onclick="emergencyLock()">🚨 Emergency Lock</button>
 
-  <script src="auth.js"></script>
+  <script>
+    // Password Configuration
+    const SUPER_SECRET_PASSWORD = "V0lMS0EyMDI1IQ=="; // "WILKA2025!" in base64
+    const EMERGENCY_CODE = "WILKALOCK";
+    
+    // Sample Data
+    let products = [
+      { id: 1, name: "Panel 1GB", price: "Rp1.500", stock: 10 },
+      { id: 2, name: "Panel Unlimited", price: "Rp11.000", stock: 5 }
+    ];
+    
+    let orders = [
+      { id: 1001, product: "Panel 1GB", customer: "user@example.com", status: "Pending" },
+      { id: 1002, product: "Panel Unlimited", customer: "client@domain.com", status: "Completed" }
+    ];
+    
+    // DOM Elements
+    const loginForm = document.getElementById('loginForm');
+    const adminContent = document.getElementById('adminContent');
+    const notification = document.getElementById('notification');
+    
+    // Check Admin Credentials
+    function checkAdmin() {
+      const inputPass = document.getElementById('adminPassword').value;
+      const encryptedInput = btoa(inputPass);
+      
+      if (encryptedInput === SUPER_SECRET_PASSWORD) {
+        localStorage.setItem('adminAuth', 'true');
+        showAdminPanel();
+        addLog("Login berhasil");
+      } else {
+        document.getElementById('errorMsg').style.display = 'block';
+      }
+    }
+    
+    // Show Admin Panel
+    function showAdminPanel() {
+      loginForm.style.display = 'none';
+      adminContent.style.display = 'block';
+      renderDashboard();
+      startLiveUpdates();
+    }
+    
+    // Render Dashboard Data
+    function renderDashboard() {
+      // Update stats
+      document.getElementById('visitorCount').textContent = '1,024';
+      document.getElementById('todayVisitors').textContent = '24';
+      document.getElementById('orderCount').textContent = orders.length;
+      document.getElementById('pendingOrders').textContent = orders.filter(o => o.status === 'Pending').length;
+      document.getElementById('revenueCount').textContent = 'Rp15,500';
+      document.getElementById('monthRevenue').textContent = 'Rp245,000';
+      
+      // Render orders table
+      const orderTable = document.getElementById('orderTable').querySelector('tbody');
+      orderTable.innerHTML = orders.map(order => `
+        <tr>
+          <td>${order.id}</td>
+          <td>${order.product}</td>
+          <td>${order.customer}</td>
+          <td>${order.status}</td>
+          <td>
+            <button onclick="updateOrderStatus(${order.id}, 'Completed')">✓ Selesai</button>
+            ${order.status === 'Pending' ? `<button class="btn-danger" onclick="cancelOrder(${order.id})">✕ Batalkan</button>` : ''}
+          </td>
+        </tr>
+      `).join('');
+      
+      // Render products table
+      const productTable = document.getElementById('productTable').querySelector('tbody');
+      productTable.innerHTML = products.map(product => `
+        <tr>
+          <td>${product.id}</td>
+          <td>${product.name}</td>
+          <td>${product.price}</td>
+          <td>${product.stock}</td>
+          <td>
+            <button onclick="editProduct(${product.id})">✏️ Edit</button>
+            <button class="btn-danger" onclick="deleteProduct(${product.id})">🗑️ Hapus</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+    
+    // Product Management Functions
+    function showAddProductForm() {
+      const name = prompt("Nama Produk:");
+      const price = prompt("Harga:");
+      const stock = prompt("Stok:");
+      
+      if (name && price && stock) {
+        const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+        products.push({
+          id: newId,
+          name: name,
+          price: price,
+          stock: parseInt(stock)
+        });
+        renderDashboard();
+        addLog(`Menambah produk: ${name}`);
+        showNotification(`Produk ${name} berhasil ditambahkan`);
+      }
+    }
+    
+    function editProduct(id) {
+      const product = products.find(p => p.id === id);
+      if (product) {
+        const newName = prompt("Nama Produk:", product.name);
+        const newPrice = prompt("Harga:", product.price);
+        const newStock = prompt("Stok:", product.stock);
+        
+        if (newName && newPrice && newStock) {
+          product.name = newName;
+          product.price = newPrice;
+          product.stock = parseInt(newStock);
+          renderDashboard();
+          addLog(`Mengedit produk ID ${id}`);
+          showNotification(`Produk ${newName} berhasil diupdate`);
+        }
+      }
+    }
+    
+    function deleteProduct(id) {
+      if (confirm("Yakin ingin menghapus produk ini?")) {
+        products = products.filter(p => p.id !== id);
+        renderDashboard();
+        addLog(`Menghapus produk ID ${id}`);
+        showNotification("Produk berhasil dihapus");
+      }
+    }
+    
+    // Order Management Functions
+    function updateOrderStatus(id, status) {
+      const order = orders.find(o => o.id === id);
+      if (order) {
+        order.status = status;
+        renderDashboard();
+        addLog(`Mengupdate order ${id} ke status: ${status}`);
+        showNotification(`Order #${id} diperbarui`);
+      }
+    }
+    
+    function cancelOrder(id) {
+      if (confirm("Batalkan order ini?")) {
+        orders = orders.filter(o => o.id !== id);
+        renderDashboard();
+        addLog(`Membatalkan order ${id}`);
+        showNotification(`Order #${id} dibatalkan`);
+      }
+    }
+    
+    // Utility Functions
+    function addLog(message) {
+      const log = document.getElementById('activityLog');
+      const date = new Date().toLocaleString();
+      log.innerHTML = `<li>[${date}] ${message}</li>` + log.innerHTML;
+    }
+    
+    function showNotification(message) {
+      notification.textContent = message;
+      notification.style.display = 'block';
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 3000);
+    }
+    
+    function startLiveUpdates() {
+      // Simulate live data updates
+      setInterval(() => {
+        // In a real app, you would fetch from API here
+        const randomVisitors = Math.floor(Math.random() * 10);
+        document.getElementById('todayVisitors').textContent = 
+          parseInt(document.getElementById('todayVisitors').textContent) + randomVisitors;
+      }, 10000);
+    }
+    
+    function logout() {
+      localStorage.removeItem('adminAuth');
+      loginForm.style.display = 'block';
+      adminContent.style.display = 'none';
+      document.getElementById('adminPassword').value = '';
+    }
+    
+    function emergencyLock() {
+      const code = prompt("Masukkan kode emergency:");
+      if (code === EMERGENCY_CODE) {
+        localStorage.removeItem('adminAuth');
+        window.location.href = "admin.html";
+      } else {
+        alert("Kode emergency salah!");
+      }
+    }
+    
+    // Check if already logged in
+    window.onload = function() {
+      if (localStorage.getItem('adminAuth') === 'true') {
+        showAdminPanel();
+      }
+      
+      // Add some sample logs
+      addLog("Sistem admin diakses");
+    };
+  </script>
 </body>
 </html>
