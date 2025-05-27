@@ -6,10 +6,10 @@
   <title>WILKA | Portfolio</title>
   <style>
     :root {
-      --primary-color: #6C63FF;
-      --bg-color: #f4f4f9;
-      --text-color: #333;
-      --card-bg: #fff;
+      --primary-color: #8A89C0;  /* Soft purple instead of bright violet */
+      --bg-color: #f8f9fa;      /* Very light gray background */
+      --text-color: #555;       /* Dark gray instead of pure black */
+      --card-bg: #fff;          /* White cards */
       --border-radius: 10px;
     }
 
@@ -30,7 +30,7 @@
     #intro {
       position: fixed;
       inset: 0;
-      background: #003366;
+      background: #4a6fa5;  /* Softer blue */
       color: white;
       display: flex;
       flex-direction: column;
@@ -69,7 +69,7 @@
       color: #fff;
       padding: 60px 20px;
       text-align: center;
-      border-bottom: 5px solid #5848e6;
+      border-bottom: 5px solid #6d6a9e;  /* Darker soft purple */
       border-radius: 0 0 20px 20px;
     }
 
@@ -93,7 +93,7 @@
     }
 
     nav a:hover {
-      background-color: #5848e6;
+      background-color: #6d6a9e;  /* Darker soft purple */
       transform: scale(1.05);
     }
 
@@ -139,7 +139,7 @@
     .skill-bar-fill {
       height: 10px;
       border-radius: 5px;
-      background: #00cc99;
+      background: #66b3a6;  /* Soft teal */
     }
 
     footer {
@@ -154,7 +154,7 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: #00cc99;
+      background: #66b3a6;  /* Soft teal */
       color: white;
       border: none;
       padding: 12px;
@@ -170,6 +170,7 @@
       z-index: -1;
       width: 100%;
       height: 200px;
+      opacity: 0.3;  /* More subtle visualizer */
     }
 
     .popup {
@@ -203,7 +204,7 @@
     }
 
     .popup-content button {
-      background: #00cc99;
+      background: #66b3a6;  /* Soft teal */
       color: white;
       border: none;
       padding: 10px 20px;
@@ -212,12 +213,12 @@
     }
 
     .popup-content button:hover {
-      background: #009977;
+      background: #4d998c;  /* Darker soft teal */
     }
 
     .price-list {
       margin-bottom: 15px;
-      background: #f0f8ff;
+      background: #f0f4f8;  /* Very light blue-gray */
       padding: 10px;
       border-radius: 8px;
       font-size: 0.9rem;
@@ -236,23 +237,22 @@
     }
 
     .gb-option {
-      background: #e1f5fe;
+      background: #e6f0f7;  /* Very light blue */
       padding: 8px 12px;
       border-radius: 6px;
       cursor: pointer;
       transition: all 0.2s;
-      border: 1px solid #b3e5fc;
+      border: 1px solid #c8d6e5;  /* Light blue border */
     }
 
     .gb-option:hover {
-      background: #b3e5fc;
-      transform: translateY(-2px);
+      background: #c8d6e5;  /* Light blue */
     }
 
     .gb-option.active {
-      background: #4fc3f7;
+      background: #8A89C0;  /* Matching primary color */
       color: white;
-      border-color: #039be5;
+      border-color: #6d6a9e;
     }
     
     /* Tambahan untuk popup token */
@@ -280,7 +280,7 @@
   </svg>
   <h1 style="margin-top: 20px;">Selamat Datang di Portofolio Wilkazxq</h1>
   <p>Developer | Designer | Creator</p>
-  <button onclick="masukWebsite()" style="margin-top:30px;background:linear-gradient(135deg,#00cc99,#009966);border:none;color:white;padding:14px 32px;border-radius:50px;font-size:1.1rem;cursor:pointer;transition:transform 0.3s ease,box-shadow 0.3s ease;font-weight:bold;box-shadow:0 4px 15px rgba(0,204,153,0.5);display:flex;align-items:center;gap:10px;">
+  <button onclick="masukWebsite()" style="margin-top:30px;background:linear-gradient(135deg,#66b3a6,#4d998c);border:none;color:white;padding:14px 32px;border-radius:50px;font-size:1.1rem;cursor:pointer;transition:transform 0.3s ease,box-shadow 0.3s ease;font-weight:bold;box-shadow:0 4px 15px rgba(102,179,166,0.5);display:flex;align-items:center;gap:10px;">
     <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
     Mulai
   </button>
@@ -437,7 +437,7 @@ function drawHeartbeat() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.lineWidth = 2;
-    ctx.strokeStyle = "#00ccff";
+    ctx.strokeStyle = "#8A89C0";  /* Matching primary color */
     ctx.beginPath();
 
     const sliceWidth = canvas.width / bufferLength;
