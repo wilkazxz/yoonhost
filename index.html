@@ -223,13 +223,36 @@
       font-size: 0.9rem;
     }
 
-    .price-list p {
-      margin: 3px 0;
-    }
-
     .price-title {
       font-weight: bold;
       margin-bottom: 8px;
+    }
+
+    .gb-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .gb-option {
+      background: #e1f5fe;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid #b3e5fc;
+    }
+
+    .gb-option:hover {
+      background: #b3e5fc;
+      transform: translateY(-2px);
+    }
+
+    .gb-option.active {
+      background: #4fc3f7;
+      color: white;
+      border-color: #039be5;
     }
   </style>
 </head>
@@ -297,14 +320,23 @@
   <div class="popup-content">
     <h3>Buy Panel</h3>
     <div class="price-list">
-      <p class="price-title">Daftar Harga Panel:</p>
-      <p>1GB = Rp1.500 | 2GB = Rp2.500 | 3GB = Rp3.000</p>
-      <p>4GB = Rp4.000 | 5GB = Rp5.500 | 6GB = Rp6.500</p>
-      <p>7GB = Rp7.500 | 8GB = Rp8.500 | 9GB = Rp9.500</p>
-      <p>10GB = Rp10.000 | Unlimited = Rp11.000</p>
+      <p class="price-title">Pilih Ukuran Panel:</p>
+      <div class="gb-options">
+        <div class="gb-option" onclick="selectGbOption(1, '1GB = Rp1.500')">1GB</div>
+        <div class="gb-option" onclick="selectGbOption(2, '2GB = Rp2.500')">2GB</div>
+        <div class="gb-option" onclick="selectGbOption(3, '3GB = Rp3.000')">3GB</div>
+        <div class="gb-option" onclick="selectGbOption(4, '4GB = Rp4.000')">4GB</div>
+        <div class="gb-option" onclick="selectGbOption(5, '5GB = Rp5.500')">5GB</div>
+        <div class="gb-option" onclick="selectGbOption(6, '6GB = Rp6.500')">6GB</div>
+        <div class="gb-option" onclick="selectGbOption(7, '7GB = Rp7.500')">7GB</div>
+        <div class="gb-option" onclick="selectGbOption(8, '8GB = Rp8.500')">8GB</div>
+        <div class="gb-option" onclick="selectGbOption(9, '9GB = Rp9.500')">9GB</div>
+        <div class="gb-option" onclick="selectGbOption(10, '10GB = Rp10.000')">10GB</div>
+        <div class="gb-option" onclick="selectGbOption('unlimited', 'Unlimited = Rp11.000')">Unlimited</div>
+      </div>
     </div>
     <input type="number" id="jumlahPanel" placeholder="Jumlah Panel">
-    <input type="text" id="ukuranPanel" placeholder="Ukuran (GB)">
+    <input type="text" id="ukuranPanel" placeholder="Ukuran (GB)" readonly>
     <input type="text" id="waUser" placeholder="Nomor WhatsApp Anda">
     <button onclick="beliPanel()">Beli</button>
   </div>
@@ -394,8 +426,24 @@ function beliPanel() {
   const ukuran = document.getElementById('ukuranPanel').value;
   const wa = document.getElementById('waUser').value;
   if (!jumlah || !ukuran || !wa) return alert('Harap isi semua data!');
-  const url = `https://wa.me/6285123581626?text=Halo,%20saya%20ingin%20beli%20panel.%0AJumlah:%20${jumlah}%0AUkuran:%20${ukuran}GB%0ANo.%20Saya:%20${wa}`;
+  const url = `https://wa.me/6285123581626?text=Halo,%20saya%20ingin%20beli%20panel.%0AJumlah:%20${jumlah}%0AUkuran:%20${ukuran}%0ANo.%20Saya:%20${wa}`;
   window.open(url, '_blank');
+}
+
+function selectGbOption(gb, priceText) {
+  // Remove active class from all options
+  document.querySelectorAll('.gb-option').forEach(option => {
+    option.classList.remove('active');
+  });
+  
+  // Add active class to clicked option
+  event.target.classList.add('active');
+  
+  // Set the GB value in the input field
+  document.getElementById('ukuranPanel').value = gb === 'unlimited' ? 'Unlimited' : `${gb}GB`;
+  
+  // Optional: Show price in console or somewhere else
+  console.log(`Selected: ${priceText}`);
 }
 
 fetch('https://api.countapi.xyz/hit/wilkazxq-portfolio/home')
