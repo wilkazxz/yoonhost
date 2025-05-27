@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - WILKA</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #003366, #6C63FF);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-box {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 15px;
+      width: 350px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+    button {
+      background: #00cc99;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    #adminContent {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box" id="loginForm">
+    <h2>WILKA ADMIN</h2>
+    <input type="password" id="adminPassword" placeholder="Masukkan Password">
+    <button onclick="checkAdmin()">MASUK</button>
+    <p id="errorMsg" style="color: red; display: none;">Password salah!</p>
+  </div>
+
+  <div id="adminContent">
+    <h1>Selamat Datang, WILKA!</h1>
+    <p>Ini adalah panel admin eksklusif.</p>
+    <!-- Konten admin di sini -->
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>
