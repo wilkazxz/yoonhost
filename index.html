@@ -214,6 +214,23 @@
     .popup-content button:hover {
       background: #009977;
     }
+
+    .price-list {
+      margin-bottom: 15px;
+      background: #f0f8ff;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .price-list p {
+      margin: 3px 0;
+    }
+
+    .price-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
   </style>
 </head>
 <body>
@@ -279,6 +296,13 @@
 <div id="buyPanelPopup" class="popup" onclick="if(event.target.id==='buyPanelPopup') this.style.display='none'">
   <div class="popup-content">
     <h3>Buy Panel</h3>
+    <div class="price-list">
+      <p class="price-title">Daftar Harga Panel:</p>
+      <p>1GB = Rp1.500 | 2GB = Rp2.500 | 3GB = Rp3.000</p>
+      <p>4GB = Rp4.000 | 5GB = Rp5.500 | 6GB = Rp6.500</p>
+      <p>7GB = Rp7.500 | 8GB = Rp8.500 | 9GB = Rp9.500</p>
+      <p>10GB = Rp10.000 | Unlimited = Rp11.000</p>
+    </div>
     <input type="number" id="jumlahPanel" placeholder="Jumlah Panel">
     <input type="text" id="ukuranPanel" placeholder="Ukuran (GB)">
     <input type="text" id="waUser" placeholder="Nomor WhatsApp Anda">
