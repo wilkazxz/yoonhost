@@ -6,10 +6,10 @@
   <title>WILKA | Portfolio</title>
   <style>
     :root {
-      --primary-color: #7a77b8;
-      --bg-color: #f0f4f8;
-      --text-color: #444;
-      --card-bg: #ffffff;
+      --primary-color: #7a77b8; /* Ungu muda */
+      --bg-color: #f0f4f8; /* Background biru-abu muda */
+      --text-color: #444; /* Teks abu gelap */
+      --card-bg: #ffffff; /* Kartu putih */
       --border-radius: 10px;
     }
 
@@ -179,6 +179,7 @@
       opacity: 0.3;
     }
 
+    /* Style untuk Anti-DDoS Tool */
     .anti-ddos-tool {
       background-color: var(--card-bg);
       padding: 25px;
@@ -247,7 +248,7 @@
     .protection-step {
       display: flex;
       gap: 10px;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       align-items: flex-start;
     }
     
@@ -262,20 +263,6 @@
       justify-content: center;
       flex-shrink: 0;
       font-size: 0.8rem;
-    }
-    
-    .step-content {
-      flex: 1;
-    }
-    
-    .step-content ul {
-      margin: 8px 0 0 0;
-      padding-left: 20px;
-    }
-    
-    .step-content li {
-      margin-bottom: 6px;
-      line-height: 1.5;
     }
     
     .loading {
@@ -299,6 +286,7 @@
       100% { transform: rotate(360deg); }
     }
     
+    /* Style untuk popup */
     .popup {
       display: none;
       position: fixed;
@@ -405,6 +393,26 @@
       margin-top: 5px;
       display: none;
     }
+
+    /* Base64 Tool Styles */
+    #base64Input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    #base64Result {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 10px;
+      white-space: pre-wrap;
+    }
   </style>
 </head>
 <body>
@@ -432,6 +440,7 @@
   <a href="#hobbies" onclick="toggleSection('hobbies')">🎮 Hobi</a>
   <a href="#contact" onclick="toggleSection('contact')">✉️ Kontak</a>
   <a href="#antiDDoS" onclick="toggleSection('antiDDoS')">🛡️ Anti-DDoS</a>
+  <a href="#base64" onclick="toggleSection('base64')">🔐 Base64 Tool</a>
   <a href="#group" onclick="window.open('https://chat.whatsapp.com/CtzrdM40BIH7hxYGNogr89','_blank')">👨‍💻 Grup Developer</a>
   <a href="#" onclick="showTokenPopup()">🛒 Beli Panel</a>
 </nav>
@@ -489,6 +498,30 @@
         <div style="margin-top: 20px; padding: 15px; background-color: #e8f4f8; border-radius: 6px;">
           <p><strong>Catatan:</strong> Rekomendasi ini bersifat umum. Untuk perlindungan maksimal, pertimbangkan layanan profesional seperti Cloudflare, Akamai, atau AWS Shield.</p>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="base64">
+  <h2>🔐 Base64 Encode/Decode</h2>
+  <div class="card">
+    <p>Tool untuk mengencode dan mendecode teks menggunakan Base64.</p>
+    
+    <div class="anti-ddos-tool">
+      <div class="anti-ddos-form">
+        <textarea id="base64Input" placeholder="Masukkan teks atau Base64 di sini..." rows="4"></textarea>
+        <div style="display: flex; gap: 10px;">
+          <button onclick="encodeBase64()" style="flex: 1;">Encode</button>
+          <button onclick="decodeBase64()" style="flex: 1;">Decode</button>
+          <button onclick="clearBase64()" style="flex: 1; background: #f0f0f0; color: #444;">Clear</button>
+        </div>
+      </div>
+      
+      <div class="result-container" id="base64ResultContainer">
+        <h4>Hasil:</h4>
+        <div id="base64Result"></div>
+        <button onclick="copyBase64Result()" style="margin-top: 10px; background: #66b3a6;">Copy</button>
       </div>
     </div>
   </div>
@@ -687,84 +720,99 @@ function analyzeDomain() {
   loadingIndicator.style.display = 'block';
   resultContainer.style.display = 'none';
   
-  // Simulasi analisis
+  // Simulasi analisis (di aplikasi nyata, ini akan berupa API call)
   setTimeout(() => {
     loadingIndicator.style.display = 'none';
     document.getElementById('resultDomain').textContent = domainInput;
     
-    // Generate langkah perlindungan dengan format rapi
+    // Generate langkah perlindungan
     protectionSteps.innerHTML = `
       <div class="protection-step">
         <div class="step-number">1</div>
-        <div class="step-content">
-          <strong>Pasang Cloudflare</strong>
-          <ul>
-            <li>Daftar akun di <a href="https://www.cloudflare.com" target="_blank">cloudflare.com</a></li>
-            <li>Klik "Add Site" dan masukkan ${domainInput}</li>
-            <li>Pilih plan gratis dan lanjutkan</li>
-            <li>Ganti nameserver domain dengan yang diberikan Cloudflare</li>
-            <li>Tunggu propagasi DNS (biasanya 1-24 jam)</li>
-          </ul>
+        <div>
+          <strong>Gunakan Layanan CDN:</strong> Aktifkan Cloudflare atau layanan CDN lainnya untuk ${domainInput}. 
+          Ini akan menyembunyikan IP asli server Anda dan menyaring lalu lintas berbahaya.
         </div>
       </div>
-      
       <div class="protection-step">
         <div class="step-number">2</div>
-        <div class="step-content">
-          <strong>Aktifkan Firewall dan Keamanan</strong>
-          <ul>
-            <li>Di dashboard Cloudflare, pilih menu "Security"</li>
-            <li>Aktifkan "Under Attack Mode" saat terjadi serangan</li>
-            <li>Konfigurasi "Security Level" ke tingkat Medium atau High</li>
-            <li>Aktifkan "Web Application Firewall" (WAF)</li>
-            <li>Tambahkan rule untuk memblokir IP mencurigakan</li>
-          </ul>
+        <div>
+          <strong>Aktifkan Perlindungan DDoS:</strong> Di dashboard Cloudflare, aktifkan "Under Attack Mode" dan "DDoS Protection" 
+          untuk ${domainInput}. Ini akan memblokir lalu lintas mencurigakan otomatis.
         </div>
       </div>
-      
       <div class="protection-step">
         <div class="step-number">3</div>
-        <div class="step-content">
-          <strong>Optimasi Rate Limiting</strong>
-          <ul>
-            <li>Di menu "Security > Rate Limiting", buat rule baru</li>
-            <li>Setel batas 100-200 request per menit dari IP yang sama</li>
-            <li>Atur action menjadi "Block" untuk pelanggar</li>
-            <li>Simpan dan aktifkan rule tersebut</li>
-          </ul>
+        <div>
+          <strong>Rate Limiting:</strong> Atur batas permintaan untuk ${domainInput} (contoh: 100 permintaan/menit per IP). 
+          Ini mencegah serangan brute force dan flood.
         </div>
       </div>
-      
       <div class="protection-step">
         <div class="step-number">4</div>
-        <div class="step-content">
-          <strong>Konfigurasi Server</strong>
-          <ul>
-            <li>Aktifkan mod_evasive/mod_security di Apache</li>
-            <li>Atau fail2ban/iptables di Linux server</li>
-            <li>Batasi koneksi simultan ke server</li>
-            <li>Update semua software ke versi terbaru</li>
-          </ul>
+        <div>
+          <strong>Web Application Firewall (WAF):</strong> Aktifkan WAF untuk ${domainInput} dengan aturan yang memblokir pola serangan umum 
+          seperti SQL injection dan XSS.
         </div>
       </div>
-      
       <div class="protection-step">
         <div class="step-number">5</div>
-        <div class="step-content">
-          <strong>Monitoring dan Backup</strong>
-          <ul>
-            <li>Pasang tools monitoring seperti UptimeRobot</li>
-            <li>Lakukan backup rutin database dan file website</li>
-            <li>Pertimbangkan layanan DDoS protection premium jika diperlukan</li>
-            <li>Pantau traffic melalui analitik Cloudflare</li>
-          </ul>
+        <div>
+          <strong>Backup Rutin:</strong> Pastikan Anda memiliki backup terbaru untuk ${domainInput}. 
+          Meskipun DDoS tidak merusak data, penting untuk selalu siap.
         </div>
       </div>
     `;
     
     resultContainer.style.display = 'block';
+    
+    // Scroll ke hasil
     resultContainer.scrollIntoView({ behavior: 'smooth' });
   }, 2000);
+}
+
+// Base64 Functions
+function encodeBase64() {
+  const input = document.getElementById('base64Input').value;
+  if (!input) {
+    alert('Masukkan teks terlebih dahulu!');
+    return;
+  }
+  const result = btoa(unescape(encodeURIComponent(input)));
+  document.getElementById('base64Result').textContent = result;
+  document.getElementById('base64ResultContainer').style.display = 'block';
+}
+
+function decodeBase64() {
+  const input = document.getElementById('base64Input').value;
+  if (!input) {
+    alert('Masukkan Base64 terlebih dahulu!');
+    return;
+  }
+  try {
+    const result = decodeURIComponent(escape(atob(input)));
+    document.getElementById('base64Result').textContent = result;
+    document.getElementById('base64ResultContainer').style.display = 'block';
+  } catch (e) {
+    alert('Input bukan Base64 yang valid!');
+  }
+}
+
+function clearBase64() {
+  document.getElementById('base64Input').value = '';
+  document.getElementById('base64Result').textContent = '';
+  document.getElementById('base64ResultContainer').style.display = 'none';
+}
+
+function copyBase64Result() {
+  const result = document.getElementById('base64Result').textContent;
+  if (!result) return;
+  
+  navigator.clipboard.writeText(result).then(() => {
+    const btn = event.target;
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
 }
 
 fetch('https://api.countapi.xyz/hit/wilkazxq-portfolio/home')
