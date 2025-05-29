@@ -6,13 +6,17 @@
   <title>WILKA | Portfolio</title>
   <style>
     :root {
-      --primary-color: #7a77b8;
-      --bg-color: #f0f4f8;
-      --text-color: #444;
-      --card-bg: #ffffff;
-      --border-radius: 10px;
-      --button-hover: #6d6a9e;
-      --success-color: #66b3a6;
+      --orix-primary-dark-purple: #3C335B;
+      --orix-primary-light-purple: #5E5383;
+      --orix-secondary-peach: #FFD4A2;
+      --orix-accent-green: #66b3a6;
+      --orix-text-dark: #333333;
+      --orix-text-light: #F0F0F0;
+      --orix-light-grey: #F5F5F5;
+      --orix-medium-grey: #E0E0E0;
+      --orix-card-shadow: 0 10px 30px rgba(60, 51, 91, 0.15);
+      --border-radius: 16px;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
     * {
@@ -24,15 +28,18 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      background: linear-gradient(135deg, #f9f7ff 0%, #f0edf7 100%);
+      color: var(--orix-text-dark);
       line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
+    /* ==== INTRO SCREEN ==== */
     #intro {
       position: fixed;
       inset: 0;
-      background: #4a6fa5;
+      background: linear-gradient(135deg, var(--orix-primary-dark-purple) 0%, var(--orix-primary-light-purple) 100%);
       color: white;
       display: flex;
       flex-direction: column;
@@ -40,6 +47,7 @@
       justify-content: center;
       z-index: 9999;
       text-align: center;
+      padding: 20px;
     }
 
     #intro svg {
@@ -61,54 +69,133 @@
       animation: fadeInText 1s forwards;
     }
 
-    #intro h1 { animation-delay: 0.5s; }
-    #intro p { animation-delay: 1s; }
+    #intro h1 { 
+      animation-delay: 0.5s; 
+      font-size: 2.8rem;
+      margin: 20px 0 10px;
+    }
+    
+    #intro p { 
+      animation-delay: 1s; 
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      opacity: 0.9;
+    }
+
+    /* ==== MAIN LAYOUT ==== */
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: transparent;
+    }
 
     header {
       position: relative;
       overflow: hidden;
-      background-color: var(--primary-color);
-      color: #fff;
-      padding: 60px 20px;
+      background: linear-gradient(135deg, var(--orix-primary-dark-purple) 0%, var(--orix-primary-light-purple) 100%);
+      color: var(--orix-text-light);
+      padding: 80px 20px 50px;
       text-align: center;
-      border-bottom: 5px solid var(--button-hover);
-      border-radius: 0 0 20px 20px;
+      border-radius: 0 0 40px 40px;
+      box-shadow: var(--orix-card-shadow);
+      z-index: 10;
+      margin-bottom: 30px;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 10% 20%, rgba(255, 212, 162, 0.1) 0%, transparent 20%);
+      pointer-events: none;
+    }
+
+    header h1 {
+        font-size: 3.2rem;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+        font-weight: 700;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    header p {
+        font-size: 1.3rem;
+        opacity: 0.85;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    canvas#heartbeatVisualizer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      opacity: 0.15;
+    }
+
+    .main-content-wrapper {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        max-width: 1200px;
+        margin: 0 auto 40px;
+        padding: 0 20px;
+        gap: 30px;
     }
 
     nav {
-      background-color: #fff;
-      padding: 15px 20px;
+      background: white;
+      padding: 18px 25px;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 12px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      gap: 15px;
+      box-shadow: var(--orix-card-shadow);
+      border-radius: var(--border-radius);
+      margin: -50px auto 0;
+      position: sticky;
+      top: 20px;
+      z-index: 50;
+      max-width: calc(100% - 40px);
     }
 
     nav a {
       text-decoration: none;
-      background-color: var(--primary-color);
-      color: #fff;
-      padding: 10px 18px;
-      border-radius: var(--border-radius);
-      transition: all 0.3s ease;
-      font-size: 0.95rem;
+      background: var(--orix-primary-light-purple);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 50px;
+      transition: var(--transition);
+      font-size: 1rem;
       white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
     }
 
-    nav a:hover {
-      background-color: var(--button-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    nav a:hover, nav a.active-nav {
+      background: var(--orix-primary-dark-purple);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(60, 51, 91, 0.3);
     }
 
     section {
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: auto;
+      padding: 35px;
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--orix-card-shadow);
+      margin-bottom: 30px;
       display: none;
       opacity: 0;
-      transform: translateY(50px);
+      transform: translateY(30px);
       transition: all 0.6s ease-out;
     }
 
@@ -119,225 +206,293 @@
     }
 
     h2 {
-      margin-bottom: 20px;
-      font-size: 2rem;
-      color: var(--primary-color);
+      margin-bottom: 30px;
+      font-size: 2.4rem;
+      color: var(--orix-primary-dark-purple);
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 15px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid var(--orix-secondary-peach);
+      font-weight: 700;
     }
 
     .card {
-      background-color: var(--card-bg);
-      padding: 25px;
+      background: white;
+      padding: 30px;
       border-radius: var(--border-radius);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
       margin-bottom: 25px;
-      transition: all 0.3s ease;
+      transition: var(--transition);
+      border: 1px solid rgba(94, 83, 131, 0.1);
     }
 
     .card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      box-shadow: 0 15px 30px rgba(60, 51, 91, 0.15);
     }
 
     .skill-bar {
-      margin: 15px 0;
+      margin: 20px 0;
     }
 
     .skill-bar span {
       display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--orix-primary-dark-purple);
+      font-size: 1.1rem;
     }
 
     .skill-bar-fill {
-      height: 10px;
-      border-radius: 5px;
-      background: var(--success-color);
+      height: 16px;
+      border-radius: 8px;
+      background: linear-gradient(90deg, var(--orix-secondary-peach), var(--orix-primary-light-purple));
       transition: width 0.8s ease;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      animation: shine 2s infinite;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
     }
 
     footer {
       text-align: center;
-      padding: 25px;
-      background-color: #e6ecf2;
-      font-size: 0.9rem;
-      color: #666;
-      margin-top: 20px;
+      padding: 30px;
+      background: var(--orix-primary-dark-purple);
+      font-size: 1rem;
+      color: var(--orix-text-light);
+      margin-top: 50px;
+      border-radius: 40px 40px 0 0;
+      box-shadow: 0 -5px 25px rgba(0,0,0,0.1);
     }
 
     #musicControl {
       position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: var(--success-color);
+      bottom: 30px;
+      right: 30px;
+      background: var(--orix-primary-light-purple);
       color: white;
       border: none;
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: var(--orix-card-shadow);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s ease;
+      transition: var(--transition);
+      font-size: 1.6rem;
+      z-index: 100;
     }
 
     #musicControl:hover {
-      transform: scale(1.1);
-    }
-
-    canvas#heartbeatVisualizer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      width: 100%;
-      height: 200px;
-      opacity: 0.3;
+      transform: scale(1.1) rotate(10deg);
+      background: var(--orix-primary-dark-purple);
+      box-shadow: 0 8px 25px rgba(60, 51, 91, 0.3);
     }
 
     /* Tool Styles */
     .tool-container {
-      background-color: var(--card-bg);
-      padding: 25px;
+      background: var(--orix-light-grey);
+      padding: 30px;
       border-radius: var(--border-radius);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       margin-top: 30px;
+      border: 1px solid var(--orix-medium-grey);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .tool-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--orix-secondary-peach), var(--orix-primary-light-purple));
     }
     
     .tool-container h3 {
-      color: var(--primary-color);
-      margin-bottom: 20px;
+      color: var(--orix-primary-dark-purple);
+      margin-bottom: 25px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 15px;
+      font-size: 1.6rem;
+      font-weight: 600;
     }
     
     .tool-form {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 25px;
     }
     
     .tool-form input,
     .tool-form textarea {
-      padding: 14px 16px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: all 0.3s ease;
+      padding: 16px 20px;
+      border: 2px solid var(--orix-medium-grey);
+      border-radius: 12px;
+      font-size: 1.1rem;
+      transition: var(--transition);
       width: 100%;
       font-family: inherit;
+      background: white;
     }
     
     .tool-form textarea {
-      min-height: 120px;
+      min-height: 150px;
       resize: vertical;
     }
     
     .tool-form input:focus,
     .tool-form textarea:focus {
-      border-color: var(--primary-color);
+      border-color: var(--orix-primary-light-purple);
       outline: none;
-      box-shadow: 0 0 0 3px rgba(122, 119, 184, 0.2);
+      box-shadow: 0 0 0 4px rgba(94, 83, 131, 0.15);
     }
     
     .button-group {
       display: flex;
-      gap: 12px;
+      gap: 15px;
       flex-wrap: wrap;
     }
     
     .button-group button {
       flex: 1;
-      min-width: 120px;
+      min-width: 140px;
+      padding: 16px 25px;
+      font-size: 1.1rem;
+      border-radius: 12px;
     }
     
     button {
-      background: linear-gradient(135deg, var(--primary-color), var(--button-hover));
+      background: linear-gradient(135deg, var(--orix-primary-light-purple), var(--orix-primary-dark-purple));
       color: white;
       border: none;
-      padding: 14px 20px;
-      border-radius: 8px;
-      font-weight: bold;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 1rem;
+      transition: var(--transition);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(94, 83, 131, 0.25);
     }
     
     button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(94, 83, 131, 0.4);
     }
     
     button.secondary {
-      background: #f0f0f0;
-      color: #444;
+      background: white;
+      color: var(--orix-primary-dark-purple);
+      border: 2px solid var(--orix-primary-light-purple);
+      box-shadow: none;
+    }
+
+    button.secondary:hover {
+        background: #f9f7ff;
+        box-shadow: 0 4px 15px rgba(94, 83, 131, 0.15);
     }
     
     button.success {
-      background: var(--success-color);
+      background: linear-gradient(135deg, var(--orix-accent-green), #4d998c);
     }
     
     .result-container {
-      margin-top: 25px;
-      padding: 20px;
-      border-radius: 8px;
-      background-color: #f8f9fa;
-      border-left: 4px solid var(--primary-color);
+      margin-top: 30px;
+      padding: 25px;
+      border-radius: 12px;
+      background: var(--orix-light-grey);
+      border-left: 5px solid var(--orix-primary-light-purple);
       display: none;
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     
     .result-container h4 {
-      margin-bottom: 15px;
-      color: var(--primary-color);
+      margin-bottom: 20px;
+      color: var(--orix-primary-dark-purple);
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
     
     .protection-steps {
-      margin-top: 20px;
+      margin-top: 25px;
     }
     
     .protection-step {
       display: flex;
-      gap: 12px;
-      margin-bottom: 15px;
+      gap: 15px;
+      margin-bottom: 20px;
       align-items: flex-start;
+      font-size: 1.05rem;
+      padding: 15px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.7);
+      transition: var(--transition);
+    }
+
+    .protection-step:hover {
+      background: white;
+      transform: translateX(5px);
     }
     
     .step-number {
-      background-color: var(--primary-color);
-      color: white;
-      width: 26px;
-      height: 26px;
+      background: var(--orix-secondary-peach);
+      color: var(--orix-primary-dark-purple);
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      font-size: 0.9rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
     
     .loading {
       display: none;
       text-align: center;
-      margin: 20px 0;
+      margin: 30px 0;
+      color: var(--orix-primary-dark-purple);
+      font-size: 1.1rem;
     }
     
     .loading-spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid rgba(122, 119, 184, 0.2);
-      border-top: 4px solid var(--primary-color);
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(122, 119, 184, 0.2);
+      border-top: 5px solid var(--orix-primary-dark-purple);
       border-radius: 50%;
       animation: spin 1s linear infinite;
-      margin: 0 auto 15px;
+      margin: 0 auto 20px;
     }
     
     @keyframes spin {
@@ -350,129 +505,232 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.7);
       justify-content: center;
       align-items: center;
       z-index: 10000;
+      backdrop-filter: blur(5px);
     }
 
     .popup-content {
       background: white;
-      padding: 30px;
-      border-radius: 12px;
+      padding: 40px;
+      border-radius: var(--border-radius);
       width: 90%;
-      max-width: 450px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      max-width: 500px;
+      box-shadow: var(--orix-card-shadow);
+      text-align: center;
+      position: relative;
+      animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     .popup-content h3 {
-      margin-bottom: 20px;
-      color: var(--primary-color);
-      font-size: 1.4rem;
+      margin-bottom: 30px;
+      color: var(--orix-primary-dark-purple);
+      font-size: 1.8rem;
+      font-weight: 700;
     }
 
     .popup-content input {
       width: 100%;
-      padding: 12px 15px;
-      margin-bottom: 15px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-      font-size: 1rem;
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      border: 2px solid var(--orix-medium-grey);
+      border-radius: 12px;
+      transition: var(--transition);
+      font-size: 1.1rem;
     }
 
     .popup-content input:focus {
-      border-color: var(--primary-color);
+      border-color: var(--orix-primary-light-purple);
       outline: none;
-      box-shadow: 0 0 0 3px rgba(122, 119, 184, 0.2);
+      box-shadow: 0 0 0 4px rgba(94, 83, 131, 0.15);
     }
 
     .popup-buttons {
       display: flex;
-      gap: 12px;
-      margin-top: 20px;
+      gap: 15px;
+      margin-top: 25px;
+      justify-content: center;
+    }
+
+    .popup-buttons button {
+        min-width: 140px;
+        padding: 16px 25px;
+        font-size: 1.1rem;
     }
 
     .price-list {
-      margin-bottom: 20px;
-      background: #f8fafc;
-      padding: 20px;
-      border-radius: 10px;
-      font-size: 0.95rem;
+      margin-bottom: 25px;
+      background: var(--orix-light-grey);
+      padding: 25px;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      border: 1px solid var(--orix-medium-grey);
     }
 
     .price-title {
-      font-weight: bold;
-      margin-bottom: 12px;
-      color: var(--primary-color);
-      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: var(--orix-primary-dark-purple);
+      font-size: 1.2rem;
     }
 
     .gb-options {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
+      gap: 12px;
+      margin-bottom: 25px;
+      justify-content: center;
     }
 
     .gb-option {
-      background: #e6f0f7;
-      padding: 10px 15px;
-      border-radius: 8px;
+      background: white;
+      padding: 12px 20px;
+      border-radius: 50px;
       cursor: pointer;
-      transition: all 0.2s;
-      border: 1px solid #c8d6e5;
-      font-size: 0.9rem;
+      transition: var(--transition);
+      border: 2px solid var(--orix-medium-grey);
+      font-size: 1rem;
+      color: var(--orix-text-dark);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      font-weight: 500;
     }
 
     .gb-option:hover {
-      background: #d0e0ed;
+      background: #f9f7ff;
+      border-color: var(--orix-primary-light-purple);
     }
 
     .gb-option.active {
-      background: var(--primary-color);
+      background: var(--orix-primary-light-purple);
       color: white;
-      border-color: var(--primary-color);
+      border-color: var(--orix-primary-light-purple);
+      box-shadow: 0 5px 15px rgba(94, 83, 131, 0.3);
+      transform: translateY(-3px);
     }
     
     .token-input-container {
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
     
     .token-error {
       color: #e74c3c;
-      font-size: 0.85rem;
-      margin-top: 8px;
+      font-size: 0.95rem;
+      margin-top: 10px;
       display: none;
+      font-weight: 500;
     }
 
     /* Responsive adjustments */
     @media (max-width: 768px) {
       nav {
-        gap: 8px;
+        gap: 12px;
+        padding: 15px 20px;
+        margin-top: -40px;
+      }
+      
+      nav a {
+        padding: 10px 18px;
+        font-size: 0.95rem;
+      }
+      
+      .main-content-wrapper {
+        margin: 0 auto 20px;
+        padding: 0 15px;
+        gap: 20px;
+      }
+
+      section {
+        padding: 25px;
+        margin-bottom: 20px;
+      }
+      
+      .card {
+        padding: 25px;
+      }
+      
+      .button-group {
+        flex-direction: column;
+        gap: 12px;
+      }
+      
+      .button-group button {
+        width: 100%;
+      }
+
+      header {
+          padding: 60px 15px 40px;
+      }
+
+      header h1 {
+          font-size: 2.5rem;
+      }
+
+      header p {
+          font-size: 1.1rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 25px;
+      }
+
+      .popup-content {
+          padding: 30px;
+      }
+
+      .popup-content h3 {
+          font-size: 1.6rem;
+      }
+      
+      #intro h1 {
+        font-size: 2.2rem;
+      }
+      
+      #intro p {
+        font-size: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      nav {
+        gap: 10px;
         padding: 12px 15px;
       }
       
       nav a {
-        padding: 8px 12px;
-        font-size: 0.85rem;
+        padding: 8px 15px;
+        font-size: 0.9rem;
       }
       
       section {
-        padding: 30px 15px;
+        padding: 20px;
+      }
+      
+      h2 {
+        font-size: 1.8rem;
       }
       
       .card {
         padding: 20px;
       }
       
-      .button-group {
-        flex-direction: column;
-        gap: 10px;
+      .popup-content {
+        padding: 25px 20px;
       }
       
-      .button-group button {
-        width: 100%;
+      .popup-content h3 {
+        font-size: 1.4rem;
+      }
+      
+      #intro h1 {
+        font-size: 1.8rem;
       }
     }
   </style>
@@ -483,144 +741,200 @@
   <svg width="80" height="80" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
     <path d="M12 2l4 4-4 4-4-4 4-4zM2 12l4-4 4 4-4 4-4-4zM12 22l-4-4 4-4 4 4-4 4zM22 12l-4 4-4-4 4-4 4 4z"/>
   </svg>
-  <h1 style="margin-top: 20px;">Selamat Datang di Portofolio Wilkazxq</h1>
-  <p>Developer | Designer | Creator</p>
-  <button onclick="masukWebsite()" style="margin-top:30px;background:linear-gradient(135deg,#66b3a6,#4d998c);border:none;color:white;padding:14px 32px;border-radius:50px;font-size:1.1rem;cursor:pointer;transition:transform 0.3s ease,box-shadow 0.3s ease;font-weight:bold;box-shadow:0 4px 15px rgba(102,179,166,0.3);display:flex;align-items:center;gap:10px;">
-    <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    Mulai
+  <h1>Selamat Datang di Portofolio Wilkazxq</h1>
+  <p>Developer | Designer | Creator - Membangun solusi digital dengan kreativitas dan inovasi</p>
+  <button onclick="masukWebsite()" style="margin-top:30px;background:linear-gradient(135deg,var(--orix-accent-green),#4d998c);border:none;color:white;padding:16px 40px;border-radius:50px;font-size:1.2rem;cursor:pointer;transition:transform 0.3s ease,box-shadow 0.3s ease;font-weight:600;box-shadow:0 6px 20px rgba(102,179,166,0.35);display:flex;align-items:center;gap:12px;">
+    <svg width="22" height="22" fill="white" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    Mulai Pengalaman
   </button>
 </div>
 
-<header>
-  <canvas id="heartbeatVisualizer"></canvas>
-  <h1>WILKA</h1>
-  <p>Selamat datang di website portfolio saya</p>
-</header>
+<div class="app-container">
+    <header>
+      <canvas id="heartbeatVisualizer"></canvas>
+      <h1>WILKA</h1>
+      <p>Portofolio Kreatif & Solusi Digital</p>
+    </header>
 
-<nav>
-  <a href="#skills" onclick="toggleSection('skills')">⚙️ Skills</a>
-  <a href="#hobbies" onclick="toggleSection('hobbies')">🎮 Hobi</a>
-  <a href="#contact" onclick="toggleSection('contact')">✉️ Kontak</a>
-  <a href="#antiDDoS" onclick="toggleSection('antiDDoS')">🛡️ Anti-DDoS</a>
-  <a href="#base64" onclick="toggleSection('base64')">🔐 Base64 Tool</a>
-  <a href="#group" onclick="window.open('https://chat.whatsapp.com/CtzrdM40BIH7hxYGNogr89','_blank')">👨‍💻 Grup Developer</a>
-  <a href="#" onclick="showTokenPopup()">🛒 Beli Panel</a>
-</nav>
+    <div class="main-content-wrapper">
+        <nav>
+          <a href="#skills" onclick="toggleSection('skills')">⚙️ Skills</a>
+          <a href="#hobbies" onclick="toggleSection('hobbies')">🎮 Hobi</a>
+          <a href="#contact" onclick="toggleSection('contact')">✉️ Kontak</a>
+          <a href="#antiDDoS" onclick="toggleSection('antiDDoS')">🛡️ Anti-DDoS</a>
+          <a href="#base64" onclick="toggleSection('base64')">🔐 Base64 Tool</a>
+          <a href="#group" onclick="window.open('https://chat.whatsapp.com/CtzrdM40BIH7hxYGNogr89','_blank')">👨‍💻 Grup Developer</a>
+          <a href="#" onclick="showTokenPopup()">🛒 Beli Panel</a>
+        </nav>
 
-<section id="skills">
-  <h2><span>⚙️</span> Skills</h2>
-  <div class="card">
-    <div class="skill-bar">
-      <span>HTML — 90%</span>
-      <div class="skill-bar-fill" style="width:90%"></div>
-    </div>
-    <div class="skill-bar">
-      <span>CSS — 70%</span>
-      <div class="skill-bar-fill" style="width:70%"></div>
-    </div>
-    <div class="skill-bar">
-      <span>WhatsApp Bot Development — 80%</span>
-      <div class="skill-bar-fill" style="width:80%"></div>
-    </div>
-  </div>
-</section>
+        <section id="skills">
+          <h2><span>⚙️</span> Skills</h2>
+          <div class="card">
+            <div class="skill-bar">
+              <span>HTML — 90%</span>
+              <div class="skill-bar-fill" style="width:90%"></div>
+            </div>
+            <div class="skill-bar">
+              <span>CSS — 85%</span>
+              <div class="skill-bar-fill" style="width:85%"></div>
+            </div>
+            <div class="skill-bar">
+              <span>JavaScript — 75%</span>
+              <div class="skill-bar-fill" style="width:75%"></div>
+            </div>
+            <div class="skill-bar">
+              <span>WhatsApp Bot Development — 95%</span>
+              <div class="skill-bar-fill" style="width:95%"></div>
+            </div>
+            <div class="skill-bar">
+              <span>UI/UX Design — 80%</span>
+              <div class="skill-bar-fill" style="width:80%"></div>
+            </div>
+          </div>
+        </section>
 
-<section id="hobbies">
-  <h2><span>🎮</span> Hobi</h2>
-  <div class="card">
-    <p>Saya hobi menganalisis pasar market, politik, inovasi baru seperti AI (Artificial Intelligence), self-improvement, dan lain-lain.</p>
-  </div>
-</section>
+        <section id="hobbies">
+          <h2><span>🎮</span> Hobi & Minat</h2>
+          <div class="card">
+            <p>Saya memiliki minat yang luas dalam bidang teknologi dan pengembangan diri. Hobi utama saya meliputi:</p>
+            <ul style="margin: 20px 0 10px 30px;">
+              <li style="margin-bottom: 12px;">Menganalisis pasar dan tren teknologi terbaru</li>
+              <li style="margin-bottom: 12px;">Mempelajari perkembangan Artificial Intelligence dan penerapannya</li>
+              <li style="margin-bottom: 12px;">Pengembangan diri melalui membaca dan kursus online</li>
+              <li>Eksperimen dengan teknologi baru dan framework pengembangan</li>
+            </ul>
+            <p style="margin-top: 15px;">Saya percaya bahwa belajar terus-menerus adalah kunci untuk tetap relevan di industri teknologi yang terus berkembang.</p>
+          </div>
+        </section>
 
-<section id="contact">
-  <h2><span>✉️</span> Kontak</h2>
-  <div class="card">
-    <p>Email: yourmail@example.com</p>
-    <p>Instagram: @yourinstagram</p>
-  </div>
-</section>
+        <section id="contact">
+          <h2><span>✉️</span> Kontak & Media Sosial</h2>
+          <div class="card">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+              <div>
+                <h3 style="color: var(--orix-primary-dark-purple); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                  <svg width="24" height="24" fill="var(--orix-primary-light-purple)" viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                  </svg>
+                  Email
+                </h3>
+                <p>wilka.dev@example.com</p>
+              </div>
+              
+              <div>
+                <h3 style="color: var(--orix-primary-dark-purple); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                  <svg width="24" height="24" fill="var(--orix-primary-light-purple)" viewBox="0 0 24 24">
+                    <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                  </svg>
+                  Twitter
+                </h3>
+                <p>@wilka_dev</p>
+              </div>
+              
+              <div>
+                <h3 style="color: var(--orix-primary-dark-purple); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                  <svg width="24" height="24" fill="var(--orix-primary-light-purple)" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                  </svg>
+                  Instagram
+                </h3>
+                <p>@wilka.portfolio</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-<section id="antiDDoS">
-  <h2><span>🛡️</span> Tools Anti-DDoS</h2>
-  <div class="card">
-    <p>Lindungi website Anda dari serangan DDoS dengan tools kami. Masukkan domain Anda di bawah untuk mendapatkan rekomendasi perlindungan.</p>
-    
-    <div class="tool-container">
-      <h3><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Perlindungan Website</h3>
-      
-      <div class="tool-form">
-        <input type="text" id="domainInput" placeholder="Masukkan domain Anda (contoh: websiteku.com)" required>
-        <button onclick="analyzeDomain()">Analisis & Rekomendasi</button>
-      </div>
-      
-      <div class="loading" id="loadingIndicator">
-        <div class="loading-spinner"></div>
-        <p>Menganalisis domain dan menyiapkan rekomendasi...</p>
-      </div>
-      
-      <div class="result-container" id="resultContainer">
-        <h4>Rekomendasi Perlindungan untuk <span id="resultDomain"></span></h4>
-        <p>Berikut langkah-langkah untuk melindungi website Anda dari serangan DDoS:</p>
-        
-        <div class="protection-steps" id="protectionSteps">
-          <!-- Steps will be inserted by JavaScript -->
-        </div>
-        
-        <div class="result-container" style="margin-top: 20px;">
-          <p><strong>Catatan:</strong> Rekomendasi ini bersifat umum. Untuk perlindungan maksimal, pertimbangkan layanan profesional seperti Cloudflare, Akamai, atau AWS Shield.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        <section id="antiDDoS">
+          <h2><span>🛡️</span> Tools Anti-DDoS</h2>
+          <div class="card">
+            <p>Lindungi website Anda dari serangan DDoS dengan tools profesional kami. Masukkan domain Anda di bawah untuk mendapatkan rekomendasi perlindungan khusus.</p>
+            
+            <div class="tool-container">
+              <h3><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Perlindungan Website</h3>
+              
+              <div class="tool-form">
+                <input type="text" id="domainInput" placeholder="Masukkan domain Anda (contoh: websiteku.com)" required>
+                <button onclick="analyzeDomain()">
+                  <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                  </svg>
+                  Analisis & Rekomendasi
+                </button>
+              </div>
+              
+              <div class="loading" id="loadingIndicator">
+                <div class="loading-spinner"></div>
+                <p>Menganalisis domain dan menyiapkan rekomendasi...</p>
+              </div>
+              
+              <div class="result-container" id="resultContainer">
+                <h4>Rekomendasi Perlindungan untuk <span id="resultDomain" style="color: var(--orix-primary-light-purple);"></span></h4>
+                <p>Berikut langkah-langkah untuk melindungi website Anda dari serangan DDoS:</p>
+                
+                <div class="protection-steps" id="protectionSteps">
+                  <!-- Content will be generated by JavaScript -->
+                </div>
+                
+                <div class="result-container" style="margin-top: 20px; background: rgba(255, 212, 162, 0.15);">
+                  <p><strong>Catatan:</strong> Rekomendasi ini bersifat umum. Untuk perlindungan maksimal, pertimbangkan layanan profesional seperti Cloudflare, Akamai, atau AWS Shield.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-<section id="base64">
-  <h2><span>🔐</span> Base64 Encode/Decode</h2>
-  <div class="card">
-    <p>Tool untuk mengencode dan mendecode teks menggunakan Base64.</p>
-    
-    <div class="tool-container">
-      <div class="tool-form">
-        <textarea id="base64Input" placeholder="Masukkan teks atau Base64 di sini..." rows="5"></textarea>
-        <div class="button-group">
-          <button onclick="encodeBase64()">
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 3v18M17 14l5-5-5-5M7 4l-5 5 5 5"/></svg>
-            Encode
-          </button>
-          <button onclick="decodeBase64()">
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 3v18M7 14l-5-5 5-5M17 4l5 5-5 5"/></svg>
-            Decode
-          </button>
-          <button class="secondary" onclick="clearBase64()">
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
-            Clear
-          </button>
-        </div>
-      </div>
-      
-      <div class="result-container" id="base64ResultContainer">
-        <h4>Hasil:</h4>
-        <div id="base64Result" style="word-break: break-word; white-space: pre-wrap;"></div>
-        <div class="button-group" style="margin-top: 15px;">
-          <button class="success" onclick="copyBase64Result()">
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 17.929H6a2 2 0 01-2-2V6a2 2 0 012-2h12a2 2 0 012 2v2M16 7h4a1 1 0 011 1v12a1 1 0 01-1 1h-8a1 1 0 01-1-1V8a1 1 0 011-1z"/></svg>
-            Copy
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <p>&copy; 2025 WILKA. Hak cipta dilindungi.</p>
-  <p id="visitorCount">Total Kunjungan: Memuat...</p>
-</footer>
-
-<audio id="backgroundMusic" src="musik.mp3" loop></audio>
+        <section id="base64">
+          <h2><span>🔐</span> Base64 Encode/Decode</h2>
+          <div class="card">
+            <p>Tool untuk mengencode dan mendecode teks menggunakan Base64. Gunakan untuk keperluan encoding data sensitif atau transmisi data.</p>
+            
+            <div class="tool-container">
+              <div class="tool-form">
+                <textarea id="base64Input" placeholder="Masukkan teks atau Base64 di sini..." rows="5"></textarea>
+                <div class="button-group">
+                  <button onclick="encodeBase64()">
+                    <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+                      <path d="M12 3v18M17 14l5-5-5-5M7 4l-5 5 5 5"/>
+                    </svg>
+                    Encode
+                  </button>
+                  <button onclick="decodeBase64()">
+                    <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+                      <path d="M12 3v18M7 14l-5-5 5-5M17 4l5 5-5 5"/>
+                    </svg>
+                    Decode
+                  </button>
+                  <button class="secondary" onclick="clearBase64()">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                    Clear
+                  </button>
+                </div>
+              </div>
+              
+              <div class="result-container" id="base64ResultContainer">
+                <h4>Hasil:</h4>
+                <div id="base64Result" style="word-break: break-word; white-space: pre-wrap; padding: 15px; background: rgba(255,255,255,0.7); border-radius: 8px; margin: 15px 0;"></div>
+                <div class="button-group" style="margin-top: 15px;">
+                  <button class="success" onclick="copyBase64Result()">
+                    <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+                      <path d="M8 17.929H6a2 2 0 01-2-2V6a2 2 0 012-2h12a2 2 0 012 2v2M16 7h4a1 1 0 011 1v12a1 1 0 01-1 1h-8a1 1 0 01-1-1V8a1 1 0 011-1z"/>
+                    </svg>
+                    Copy
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+    </div> <footer>
+      <p>&copy; 2025 WILKA. Hak cipta dilindungi. | Portofolio Kreatif</p>
+      <p id="visitorCount" style="margin-top: 15px; font-size: 1.1rem; opacity: 0.9;">Total Kunjungan: Memuat...</p>
+    </footer>
+</div> <audio id="backgroundMusic" src="musik.mp3" loop></audio>
 <button id="musicControl" onclick="toggleMusic()">▶️</button>
 
-<!-- Popup Token -->
 <div id="tokenPopup" class="popup" onclick="if(event.target.id==='tokenPopup') hideTokenPopup()">
   <div class="popup-content">
     <h3>Masukkan Token Akses</h3>
@@ -635,7 +949,6 @@
   </div>
 </div>
 
-<!-- Popup Beli Panel -->
 <div id="buyPanelPopup" class="popup" onclick="if(event.target.id==='buyPanelPopup') this.style.display='none'">
   <div class="popup-content">
     <h3>Beli Panel</h3>
@@ -667,17 +980,27 @@
 
 <script>
 let isTokenVerified = false;
+let isMusicPlaying = false;
 
 function masukWebsite() {
   document.getElementById("intro").style.display = "none";
 }
 
+// Function to handle active navigation link
 function toggleSection(id) {
   document.querySelectorAll("section").forEach(sec => {
     sec.classList.remove("active", "visible");
     if (sec.id === id) {
       sec.classList.add("active");
       setTimeout(() => sec.classList.add("visible"), 10);
+    }
+  });
+
+  // Update active class for nav links
+  document.querySelectorAll('nav a').forEach(link => {
+    link.classList.remove('active-nav');
+    if (link.getAttribute('href') === '#' + id) {
+      link.classList.add('active-nav');
     }
   });
 }
@@ -690,12 +1013,14 @@ let audioCtx, analyser, source, bufferLength, dataArray;
 function toggleMusic() {
   if (!audioCtx) initAudio();
   if (audio.paused) {
-    audio.play();
+    audio.play().catch(e => console.log("Autoplay prevented:", e));
     musicBtn.textContent = "⏸️";
+    isMusicPlaying = true;
     drawHeartbeat();
   } else {
     audio.pause();
     musicBtn.textContent = "▶️";
+    isMusicPlaying = false;
   }
 }
 
@@ -706,8 +1031,8 @@ function initAudio() {
   source.connect(analyser);
   analyser.connect(audioCtx.destination);
   analyser.fftSize = 2048;
-  bufferLength = analyser.fftSize;
-  dataArray = new Float32Array(bufferLength);
+  bufferLength = analyser.frequencyBinCount;
+  dataArray = new Uint8Array(bufferLength);
 }
 
 function drawHeartbeat() {
@@ -715,31 +1040,41 @@ function drawHeartbeat() {
   const ctx = canvas.getContext("2d");
 
   function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = 200;
+    canvas.width = canvas.parentElement.offsetWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
   }
 
   resizeCanvas();
   window.addEventListener("resize", resizeCanvas);
 
   function animate() {
+    if (!isMusicPlaying) return;
+    
     requestAnimationFrame(animate);
-    if (!analyser) return;
-
-    analyser.getFloatTimeDomainData(dataArray);
+    analyser.getByteTimeDomainData(dataArray);
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = "#7a77b8";
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = "rgba(255,255,255,0.25)";
     ctx.beginPath();
 
-    const sliceWidth = canvas.width / bufferLength;
+    const sliceWidth = canvas.width * 1.0 / bufferLength;
     let x = 0;
+
     for (let i = 0; i < bufferLength; i++) {
-      const y = (dataArray[i] * 0.5 + 0.5) * canvas.height;
-      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      const v = dataArray[i] / 128.0;
+      const y = v * canvas.height / 2;
+      
+      if (i === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+      
       x += sliceWidth;
     }
+    
+    ctx.lineTo(canvas.width, canvas.height/2);
     ctx.stroke();
   }
 
@@ -900,9 +1235,9 @@ function copyBase64Result() {
   
   navigator.clipboard.writeText(result).then(() => {
     const btn = event.target;
-    btn.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Copied!';
+    btn.innerHTML = '<svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Copied!';
     setTimeout(() => {
-      btn.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 17.929H6a2 2 0 01-2-2V6a2 2 0 012-2h12a2 2 0 012 2v2M16 7h4a1 1 0 011 1v12a1 1 0 01-1 1h-8a1 1 0 01-1-1V8a1 1 0 011-1z"/></svg> Copy';
+      btn.innerHTML = '<svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M8 17.929H6a2 2 0 01-2-2V6a2 2 0 012-2h12a2 2 0 012 2v2M16 7h4a1 1 0 011 1v12a1 1 0 01-1 1h-8a1 1 0 01-1-1V8a1 1 0 011-1z"/></svg> Copy';
     }, 2000);
   });
 }
@@ -924,6 +1259,20 @@ window.addEventListener('load', () => {
     void bar.offsetWidth;
     bar.style.width = bar.style.width;
   });
+  
+  // Initially show the first section (Skills) if no hash in URL
+  if (!window.location.hash) {
+      toggleSection('skills');
+  } else {
+      toggleSection(window.location.hash.substring(1));
+  }
+  
+  // Add slight delay for intro animation
+  setTimeout(() => {
+    document.querySelectorAll('#intro h1, #intro p').forEach(el => {
+      el.style.animation = 'fadeInText 1s forwards';
+    });
+  }, 300);
 });
 </script>
 </body>
