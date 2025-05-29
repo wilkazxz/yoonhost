@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WILKA | Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --dark-bg: #1a1c3a;
+      --darker-bg: #14152e;
+      --vibrant-blue: #4a6cf7;
+      --light-blue: #5e87ff;
+      --light-green: #2ed573;
+      --light-gray: #f0f4f8;
+      --text-light: #ffffff;
+      --text-gray: #a0a5c1;
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --border-radius: 16px;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+      color: var(--text-light);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(74, 108, 247, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(46, 213, 115, 0.1) 0%, transparent 20%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* ==== INTRO SCREEN ==== */
+    #intro {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #intro svg {
+      animation: rotateIcon 4s linear infinite;
+      stroke: var(--vibrant-blue);
+    }
+
+    @keyframes rotateIcon {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeInText {
+      0% { opacity: 0; transform: translateX(-30px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    #intro h1, #intro p {
+      opacity: 0;
+      animation: fadeInText 1s forwards;
+    }
+
+    #intro h1 { 
+      animation-delay: 0.5s; 
+      font-size: 2.8rem;
+      margin: 20px 0 10px;
+      background: linear-gradient(to right, var(--light-blue), var(--light-green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    #intro p { 
+      animation-delay: 1s; 
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      color: var(--text-gray);
+    }
+
+    /* ==== MAIN LAYOUT ==== */
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: transparent;
+    }
+
+    header {
+      position: relative;
+      overflow: hidden;
+      background: var(--card-bg);
+      color: var(--text-light);
+      padding: 80px 20px 50px;
+      text-align: center;
+      border-radius: 0 0 40px 40px;
+      z-index: 10;
+      margin-bottom: 30px;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(74, 108, 247, 0.3);
+    }
+
+    header h1 {
+        font-size: 3.2rem;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+        font-weight: 700;
+        background: linear-gradient(to right, var(--light-blue), var(--light-green));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    header p {
+        font-size: 1.3rem;
+        opacity: 0.85;
+        max-width: 700px;
+        margin: 0 auto;
+        color: var(--text-gray);
+    }
+
+    canvas#heartbeatVisualizer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      opacity: 0.15;
+    }
+
+    .main-content-wrapper {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        max-width: 1200px;
+        margin: 0 auto 40px;
+        padding: 0 20px;
+        gap: 30px;
+    }
+
+    nav {
+      background: var(--card-bg);
+      padding: 18px 25px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      border-radius: var(--border-radius);
+      margin: -50px auto 0;
+      position: sticky;
+      top: 20px;
+      z-index: 50;
+      max-width: calc(100% - 40px);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(74, 108, 247, 0.2);
+    }
+
+    nav a {
+      text-decoration: none;
+      background: var(--vibrant-blue);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 50px;
+      transition: var(--transition);
+      font-size: 1rem;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+    }
+
+    nav a:hover, nav a.active-nav {
+      background: var(--light-green);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(46, 213, 115, 0.3);
+    }
+
+    section {
+      padding: 35px;
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      margin-bottom: 30px;
+      display: none;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(74, 108, 247, 0.2);
+    }
+
+    section.active { display: block; }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      margin-bottom: 30px;
+      font-size: 2.4rem;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid var(--vibrant-blue);
+      font-weight: 700;
+    }
+
+    .card {
+      background: rgba(26, 28, 58, 0.4);
+      padding: 30px;
+      border-radius: var(--border-radius);
+      margin-bottom: 25px;
+      transition: var(--transition);
+      border: 1px solid rgba(74, 108, 247, 0.2);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      border-color: var(--vibrant-blue);
+    }
+
+    .skill-bar {
+      margin: 20px 0;
+    }
+
+    .skill-bar span {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-light);
+      font-size: 1.1rem;
+    }
+
+    .skill-bar-fill {
+      height: 16px;
+      border-radius: 8px;
+      background: linear-gradient(90deg, var(--vibrant-blue), var(--light-green));
+      transition: width 0.8s ease;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      animation: shine 2s infinite;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: var(--darker-bg);
+      font-size: 1rem;
+      color: var(--text-gray);
+      margin-top: 50px;
+      border-radius: 40px 40px 0 0;
+    }
+
+    #musicControl {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--vibrant-blue);
+      color: white;
+      border: none;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      font-size: 1.6rem;
+      z-index: 100;
+      box-shadow: 0 5px 20px rgba(74, 108, 247, 0.4);
+    }
+
+    #musicControl:hover {
+      transform: scale(1.1) rotate(10deg);
+      background: var(--light-green);
+      box-shadow: 0 8px 25px rgba(46, 213, 115, 0.4);
+    }
+
+    /* Tool Styles */
+    .tool-container {
+      background: rgba(26, 28, 58, 0.6);
+      padding: 30px;
+      border-radius: var(--border-radius);
+      margin-top: 30px;
+      border: 1px solid rgba(74, 108, 247, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .tool-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--vibrant-blue), var(--light-green));
+    }
+    
+    .tool-container h3 {
+      color: var(--text-light);
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 1.6rem;
+      font-weight: 600;
+    }
+    
+    .tool-form {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+    
+    .tool-form input,
+    .tool-form textarea {
+      padding: 16px 20px;
+      border: 2px solid rgba(74, 108, 247, 0.3);
+      border-radius: 12px;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      width: 100%;
+      font-family: inherit;
+      background: rgba(26, 28, 58, 0.4);
+      color: var(--text-light);
+    }
+    
+    .tool-form textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .tool-form input::placeholder,
+    .tool-form textarea::placeholder {
+      color: var(--text-gray);
+    }
+    
+    .tool-form input:focus,
+    .tool-form textarea:focus {
+      border-color: var(--vibrant-blue);
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(74, 108, 247, 0.15);
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .button-group button {
+      flex: 1;
+      min-width: 140px;
+      padding: 16px 25px;
+      font-size: 1.1rem;
+      border-radius: 12px;
+    }
+    
+    button {
+      background: linear-gradient(135deg, var(--vibrant-blue), var(--light-blue));
+      color: white;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(74, 108, 247, 0.4);
+    }
+    
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(74, 108, 247, 0.6);
+    }
+    
+    button.secondary {
+      background: transparent;
+      color: var(--text-light);
+      border: 2px solid var(--vibrant-blue);
+      box-shadow: none;
+    }
+
+    button.secondary:hover {
+        background: rgba(74, 108, 247, 0.1);
+        box-shadow: 0 4px 15px rgba(74, 108, 247, 0.2);
+    }
+    
+    button.success {
+      background: linear-gradient(135deg, var(--light-green), #27ae60);
+    }
+    
+    .result-container {
+      margin-top: 30px;
+      padding: 25px;
+      border-radius: 12px;
+      background: rgba(26, 28, 58, 0.6);
+      border-left: 5px solid var(--vibrant-blue);
+      display: none;
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .result-container h4 {
+      margin-bottom: 20px;
+      color: var(--text-light);
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .protection-steps {
+      margin-top: 25px;
+    }
+    
+    .protection-step {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      align-items: flex-start;
+      font-size: 1.05rem;
+      padding: 15px;
+      border-radius: 10px;
+      background: rgba(74, 108, 247, 0.1);
+      transition: var(--transition);
+    }
+
+    .protection-step:hover {
+      background: rgba(74, 108, 247, 0.2);
+      transform: translateX(5px);
+    }
+    
+    .step-number {
+      background: var(--vibrant-blue);
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-weight: bold;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .loading {
+      display: none;
+      text-align: center;
+      margin: 30px 0;
+      color: var(--text-light);
+      font-size: 1.1rem;
+    }
+    
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(74, 108, 247, 0.2);
+      border-top: 5px solid var(--vibrant-blue);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Popup Styles */
+    .popup {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 12, 30, 0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      backdrop-filter: blur(5px);
+    }
+
+    .popup-content {
+      background: var(--dark-bg);
+      padding: 40px;
+      border-radius: var(--border-radius);
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      text-align: center;
+      position: relative;
+      animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(74, 108, 247, 0.3);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .popup-content h3 {
+      margin-bottom: 30px;
+      color: var(--text-light);
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .popup-content input {
+      width: 100%;
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      border: 2px solid rgba(74, 108, 247, 0.3);
+      border-radius: 12px;
+      transition: var(--transition);
+      font-size: 1.1rem;
+      background: rgba(26, 28, 58, 0.4);
+      color: var(--text-light);
+    }
+
+    .popup-content input::placeholder {
+      color: var(--text-gray);
+    }
+
+    .popup-content input:focus {
+      border-color: var(--vibrant-blue);
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(74, 108, 247, 0.15);
+    }
+
+    .popup-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 25px;
+      justify-content: center;
+    }
+
+    .popup-buttons button {
+        min-width: 140px;
+        padding: 16px 25px;
+        font-size: 1.1rem;
+    }
+
+    .price-list {
+      margin-bottom: 25px;
+      background: rgba(26, 28, 58, 0.4);
+      padding: 25px;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      border: 1px solid rgba(74, 108, 247, 0.3);
+    }
+
+    .price-title {
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: var(--text-light);
+      font-size: 1.2rem;
+    }
+
+    .gb-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 25px;
+      justify-content: center;
+    }
+
+    .gb-option {
+      background: rgba(26, 28, 58, 0.4);
+      padding: 12px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 2px solid rgba(74, 108, 247, 0.3);
+      font-size: 1rem;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .gb-option:hover {
+      background: rgba(74, 108, 247, 0.2);
+      border-color: var(--vibrant-blue);
+    }
+
+    .gb-option.active {
+      background: var(--vibrant-blue);
+      color: white;
+      border-color: var(--vibrant-blue);
+      transform: translateY(-3px);
+    }
+    
+    .token-input-container {
+      margin-bottom: 25px;
+    }
+    
+    .token-error {
+      color: #ff6b6b;
+      font-size: 0.95rem;
+      margin-top: 10px;
+      display: none;
+      font-weight: 500;
+    }
+    
+    /* New: Search Box */
+    .search-container {
+      display: flex;
+      margin: 15px 0 30px;
+    }
+    
+    .search-box {
+      flex: 1;
+      padding: 16px 20px;
+      border: 2px solid rgba(74, 108, 247, 0.3);
+      border-radius: 12px 0 0 12px;
+      font-size: 1.1rem;
+      background: rgba(26, 28, 58, 0.4);
+      color: var(--text-light);
+      outline: none;
+      transition: var(--transition);
+    }
+    
+    .search-box:focus {
+      border-color: var(--vibrant-blue);
+      box-shadow: 0 0 0 4px rgba(74, 108, 247, 0.15);
+    }
+    
+    .search-button {
+      background: var(--vibrant-blue);
+      color: white;
+      border: none;
+      padding: 0 25px;
+      border-radius: 0 12px 12px 0;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+    }
+    
+    .search-button:hover {
+      background: var(--light-green);
+    }
+    
+    /* New: AES Encryption Section */
+    .aes-mode-container {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .aes-mode {
+      background: rgba(26, 28, 58, 0.4);
+      padding: 15px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 2px solid rgba(74, 108, 247, 0.3);
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+    }
+    
+    .aes-mode:hover {
+      background: rgba(74, 108, 247, 0.2);
+      border-color: var(--vibrant-blue);
+    }
+    
+    .aes-mode.active {
+      background: var(--vibrant-blue);
+      border-color: var(--vibrant-blue);
+      transform: translateY(-3px);
+    }
+    
+    .aes-mode i {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+    
+    /* Visualizer */
+    .visualizer-container {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 200px;
+      height: 80px;
+      background: rgba(26, 28, 58, 0.6);
+      border-radius: 12px;
+      padding: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(74, 108, 247, 0.3);
+      display: none;
+      z-index: 90;
+    }
+    
+    canvas#audioVisualizer {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .visualizer-control {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 25px;
+      height: 25px;
+      background: var(--vibrant-blue);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      nav {
+        gap: 12px;
+        padding: 15px 20px;
+        margin-top: -40px;
+      }
+      
+      nav a {
+        padding: 10px 18px;
+        font-size: 0.95rem;
+      }
+      
+      .main-content-wrapper {
+        margin: 0 auto 20px;
+        padding: 0 15px;
+        gap: 20px;
+      }
+
+      section {
+        padding: 25px;
+        margin-bottom: 20px;
+      }
+      
+      .card {
+        padding: 25px;
+      }
+      
+      .button-group {
+        flex-direction: column;
+        gap: 12px;
+      }
+      
+      .button-group button {
+        width: 100%;
+      }
+
+      header {
+          padding: 60px 15px 40px;
+      }
+
+      header h1 {
+          font-size: 2.5rem;
+      }
+
+      header p {
+          font-size: 1.1rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 25px;
+      }
+
+      .popup-content {
+          padding: 30px;
+      }
+
+      .popup-content h3 {
+          font-size: 1.6rem;
+      }
+      
+      #intro h1 {
+        font-size: 2.2rem;
+      }
+      
+      #intro p {
+        font-size: 1rem;
+      }
+      
+      .visualizer-container {
+        width: 150px;
+        height: 60px;
+        bottom: 90px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      nav {
+        gap: 10px;
+        padding: 12px 15px;
+      }
+      
+      nav a {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+      }
+      
+      section {
+        padding: 20px;
+      }
+      
+      h2 {
+        font-size: 1.8rem;
+      }
+      
+      .card {
+        padding: 20px;
+      }
+      
+      .popup-content {
+        padding: 25px 20px;
+      }
+      
+      .popup-content h3 {
+        font-size: 1.4rem;
+      }
+      
+      #intro h1 {
+        font-size: 1.8rem;
+      }
+      
+      .visualizer-container {
+        width: 120px;
+        height: 50px;
+        bottom: 80px;
+      }
+    }
+    
+    /* Floating elements animation */
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    /* New: Pulse animation */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+  </style>
+</head>
+<body>
+
+<div id="intro">
+  <svg width="80" height="80" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <path d="M12 2l4 4-4 4-4-4 4-4zM2 12l4-4 4 4-4 4-4-4zM12 22l-4-4 4-4 4 4-4 4zM22 12l-4 4-4-4 4-4 4 4z"/>
+  </svg>
+  <h1>Selamat Datang di Portofolio Wilkazxq</h1>
+  <p>Developer | Designer | Creator - Membangun solusi digital dengan kreativitas dan inovasi</p>
+  <button onclick="masukWebsite()" style="margin-top:30px;background:linear-gradient(135deg, var(--vibrant-blue), var(--light-blue));border:none;color:white;padding:16px 40px;border-radius:50px;font-size:1.2rem;cursor:pointer;transition:transform 0.3s ease,box-shadow 0.3s ease;font-weight:600;box-shadow:0 6px 20px rgba(74, 108, 247, 0.4);display:flex;align-items:center;gap:12px;">
+    <svg width="22" height="22" fill="white" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    Mulai Pengalaman
+  </button>
+</div>
+
+<div class="app-container">
+    <header>
+      <canvas id="heartbeatVisualizer"></canvas>
+      <h1>WILKA</h1>
+      <p>Portofolio Kreatif & Solusi Digital</p>
+    </header>
+
+    <div class="main-content-wrapper">
+        <nav>
+          <a href="#skills" onclick="toggleSection('skills')"><i class="fas fa-cog"></i> Skills</a>
+          <a href="#hobbies" onclick="toggleSection('hobbies')"><i class="fas fa-gamepad"></i> Hobi</a>
+          <a href="#contact" onclick="toggleSection('contact')"><i class="fas fa-envelope"></i> Kontak</a>
+          <a href="#antiDDoS" onclick="toggleSection('antiDDoS')"><i class="fas fa-shield-alt"></i> Anti-DDoS</a>
+          <a href="#base64" onclick="toggleSection('base64')"><i class="fas fa-lock"></i> Base64 Tool</a>
+          <a href="#aes" onclick="toggleSection('aes')"><i class="fas fa-key"></i> AES Encryption</a>
+          <a href="#group" onclick="window.open('https://chat.whatsapp.com/CtzrdM40BIH7hxYGNogr89','_blank')"><i class="fas fa-users"></i> Grup Developer</a>
+          <a href="#" onclick="showTokenPopup()"><i class="fas fa-shopping-cart"></i> Beli Panel</a>
+        </nav>
+        
+        <!-- New: Search Section -->
+        <div class="search-container">
+          <input type="text" class="search-box" id="searchInput" placeholder="Cari fitur atau tool...">
+          <button class="search-button" onclick="searchFeature()"><i class="fas fa-search"></i></button>
+        </div>
+
+        <section id="skills">
+          <h2><i class="fas fa-cog"></i> Skills</h2>
+          <div class="card">
+            <div class="skill-bar">
+              <span>HTML — 90%</span>
+              <div class="skill-bar-fill" style="width:90%"></div>
+            </div>
+            <div class="skill-bar">
+              <span>CSS — 85%</span>
+              <div class="skill-bar-fill" style="width:85%"></div>
+            </div>
+            <div class="skill-bar">
+              <span>JavaScript — 75%</span>
+              <div class="skill-bar-fill" style="width:75%"></div>
+            </div>
+            <div class="skill-bar">
+              <span>WhatsApp Bot Development — 95%</span>
+              <div class="skill-bar-fill" style="width:95%"></div>
+            </div>
+            <div class="skill-bar">
+              <span>UI/UX Design — 80%</span>
+              <div class="skill-bar-fill" style="width:80%"></div>
+            </div>
+            <div class="skill-bar">
+              <span>AES Encryption — 85%</span>
+              <div class="skill-bar-fill" style="width:85%"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="hobbies">
+          <h2><i class="fas fa-gamepad"></i> Hobi & Minat</h2>
+          <div class="card">
+            <p>Saya memiliki minat yang luas dalam bidang teknologi dan pengembangan diri. Hobi utama saya meliputi:</p>
+            <ul style="margin: 20px 0 10px 30px; color: var(--text-gray);">
+              <li style="margin-bottom: 12px;">Menganalisis pasar dan tren teknologi terbaru</li>
+              <li style="margin-bottom: 12px;">Mempelajari perkembangan Artificial Intelligence dan penerapannya</li>
+              <li style="margin-bottom: 12px;">Pengembangan diri melalui membaca dan kursus online</li>
+              <li>Eksperimen dengan teknologi baru dan framework pengembangan</li>
+            </ul>
+            <p style="margin-top: 15px; color: var(--text-gray);">Saya percaya bahwa belajar terus-menerus adalah kunci untuk tetap relevan di industri teknologi yang terus berkembang.</p>
+          </div>
+        </section>
+
+        <section id="contact">
+          <h2><i class="fas fa-envelope"></i> Kontak & Media Sosial</h2>
+          <div class="card">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+              <div>
+                <h3 style="color: var(--text-light); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                  <i class="fas fa-envelope" style="color: var(--vibrant-blue);"></i>
+                  Email
+                </h3>
+                <p style="color: var(--text-gray);">wilka.dev@example.com</p>
+              </div>
+              
+              <div>
+                <h3 style="color: var(--text-light); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                  <i class="fab fa-twitter" style="color: var(--vibrant-blue);"></i>
+                  Twitter
+                </h3>
+                <p style="color: var(--text-gray);">@wilka_dev</p>
+              </div>
+              
+              <div>
+                <h3 style="color: var(--text-light); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                  <i class="fab fa-instagram" style="color: var(--vibrant-blue);"></i>
+                  Instagram
+                </h3>
+                <p style="color: var(--text-gray);">@wilka.portfolio</p>
+              </div>
+              
+              <div>
+                <h3 style="color: var(--text-light); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                  <i class="fab fa-whatsapp" style="color: var(--light-green);"></i>
+                  WhatsApp
+                </h3>
+                <p style="color: var(--text-gray);">+62 851 2358 1626</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="antiDDoS">
+          <h2><i class="fas fa-shield-alt"></i> Tools Anti-DDoS</h2>
+          <div class="card">
+            <p style="color: var(--text-gray);">Lindungi website Anda dari serangan DDoS dengan tools profesional kami. Masukkan domain Anda di bawah untuk mendapatkan rekomendasi perlindungan khusus.</p>
+            
+            <div class="tool-container">
+              <h3><i class="fas fa-shield-alt"></i> Perlindungan Website</h3>
+              
+              <div class="tool-form">
+                <input type="text" id="domainInput" placeholder="Masukkan domain Anda (contoh: websiteku.com)" required>
+                <button onclick="analyzeDomain()">
+                  <i class="fas fa-search"></i>
+                  Analisis & Rekomendasi
+                </button>
+              </div>
+              
+              <div class="loading" id="loadingIndicator">
+                <div class="loading-spinner"></div>
+                <p>Menganalisis domain dan menyiapkan rekomendasi...</p>
+              </div>
+              
+              <div class="result-container" id="resultContainer">
+                <h4>Rekomendasi Perlindungan untuk <span id="resultDomain" style="color: var(--light-blue);"></span></h4>
+                <p style="color: var(--text-gray);">Berikut langkah-langkah untuk melindungi website Anda dari serangan DDoS:</p>
+                
+                <div class="protection-steps" id="protectionSteps">
+                  <!-- Content will be generated by JavaScript -->
+                </div>
+                
+                <div class="result-container" style="margin-top: 20px; background: rgba(74, 108, 247, 0.1);">
+                  <p style="color: var(--text-gray);"><strong>Catatan:</strong> Rekomendasi ini bersifat umum. Untuk perlindungan maksimal, pertimbangkan layanan profesional seperti Cloudflare, Akamai, atau AWS Shield.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="base64">
+          <h2><i class="fas fa-lock"></i> Base64 Encode/Decode</h2>
+          <div class="card">
+            <p style="color: var(--text-gray);">Tool untuk mengencode dan mendecode teks menggunakan Base64. Gunakan untuk keperluan encoding data sensitif atau transmisi data.</p>
+            
+            <div class="tool-container">
+              <div class="tool-form">
+                <textarea id="base64Input" placeholder="Masukkan teks atau Base64 di sini..." rows="5"></textarea>
+                <div class="button-group">
+                  <button onclick="encodeBase64()">
+                    <i class="fas fa-lock"></i>
+                    Encode
+                  </button>
+                  <button onclick="decodeBase64()">
+                    <i class="fas fa-unlock"></i>
+                    Decode
+                  </button>
+                  <button class="secondary" onclick="clearBase64()">
+                    <i class="fas fa-trash"></i>
+                    Clear
+                  </button>
+                </div>
+              </div>
+              
+              <div class="result-container" id="base64ResultContainer">
+                <h4>Hasil:</h4>
+                <div id="base64Result" style="word-break: break-word; white-space: pre-wrap; padding: 15px; background: rgba(26, 28, 58, 0.4); border-radius: 8px; margin: 15px 0; color: var(--text-gray);"></div>
+                <div class="button-group" style="margin-top: 15px;">
+                  <button class="success" onclick="copyBase64Result()">
+                    <i class="fas fa-copy"></i>
+                    Copy
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- New: AES Encryption Section -->
+        <section id="aes">
+          <h2><i class="fas fa-key"></i> AES Encryption Tool</h2>
+          <div class="card">
+            <p style="color: var(--text-gray);">Enkripsi dan dekripsi teks menggunakan algoritma AES-256. Masukkan teks dan kunci untuk memulai.</p>
+            
+            <div class="tool-container">
+              <h3><i class="fas fa-key"></i> Enkripsi AES</h3>
+              
+              <div class="aes-mode-container">
+                <div class="aes-mode active" id="aesEncrypt" onclick="setAESMode('encrypt')">
+                  <i class="fas fa-lock"></i>
+                  <span>Enkripsi</span>
+                </div>
+                <div class="aes-mode" id="aesDecrypt" onclick="setAESMode('decrypt')">
+                  <i class="fas fa-unlock"></i>
+                  <span>Dekripsi</span>
+                </div>
+              </div>
+              
+              <div class="tool-form">
+                <textarea id="aesInput" placeholder="Masukkan teks atau ciphertext di sini..." rows="5"></textarea>
+                <input type="text" id="aesKey" placeholder="Masukkan kunci (minimal 16 karakter)" required>
+                
+                <div class="button-group">
+                  <button onclick="processAES()" id="aesProcessBtn">
+                    <i class="fas fa-lock"></i>
+                    Enkripsi
+                  </button>
+                  <button class="secondary" onclick="clearAES()">
+                    <i class="fas fa-trash"></i>
+                    Clear
+                  </button>
+                </div>
+              </div>
+              
+              <div class="result-container" id="aesResultContainer">
+                <h4>Hasil:</h4>
+                <div id="aesResult" style="word-break: break-word; white-space: pre-wrap; padding: 15px; background: rgba(26, 28, 58, 0.4); border-radius: 8px; margin: 15px 0; color: var(--text-gray);"></div>
+                <div class="button-group" style="margin-top: 15px;">
+                  <button class="success" onclick="copyAESResult()">
+                    <i class="fas fa-copy"></i>
+                    Copy
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+    </div> <footer>
+      <p>&copy; 2025 WILKA. Hak cipta dilindungi. | Portofolio Kreatif</p>
+      <p id="visitorCount" style="margin-top: 15px; font-size: 1.1rem; color: var(--text-gray);">Total Kunjungan: Memuat...</p>
+    </footer>
+</div> <audio id="backgroundMusic" src="musik.mp3" loop></audio>
+<button id="musicControl" onclick="toggleMusic()">▶️</button>
+
+<!-- New: Audio Visualizer -->
+<div class="visualizer-container" id="visualizer">
+  <div class="visualizer-control" onclick="toggleVisualizer()">×</div>
+  <canvas id="audioVisualizer"></canvas>
+</div>
+
+<div id="tokenPopup" class="popup" onclick="if(event.target.id==='tokenPopup') hideTokenPopup()">
+  <div class="popup-content">
+    <h3><i class="fas fa-key"></i> Masukkan Token Akses</h3>
+    <div class="token-input-container">
+      <input type="password" id="tokenInput" placeholder="Masukkan token NFDYA">
+      <p class="token-error" id="tokenError">Token salah! Silakan coba lagi.</p>
+    </div>
+    <div class="popup-buttons">
+      <button onclick="verifyToken()"><i class="fas fa-check"></i> Verifikasi</button>
+      <button class="secondary" onclick="hideTokenPopup()"><i class="fas fa-times"></i> Batal</button>
+    </div>
+  </div>
+</div>
+
+<div id="buyPanelPopup" class="popup" onclick="if(event.target.id==='buyPanelPopup') this.style.display='none'">
+  <div class="popup-content">
+    <h3><i class="fas fa-shopping-cart"></i> Beli Panel</h3>
+    <div class="price-list">
+      <p class="price-title">Pilih Ukuran Panel:</p>
+      <div class="gb-options">
+        <div class="gb-option" onclick="selectGbOption(1, '1GB = Rp1.500')">1GB</div>
+        <div class="gb-option" onclick="selectGbOption(2, '2GB = Rp2.500')">2GB</div>
+        <div class="gb-option" onclick="selectGbOption(3, '3GB = Rp3.000')">3GB</div>
+        <div class="gb-option" onclick="selectGbOption(4, '4GB = Rp4.000')">4GB</div>
+        <div class="gb-option" onclick="selectGbOption(5, '5GB = Rp5.500')">5GB</div>
+        <div class="gb-option" onclick="selectGbOption(6, '6GB = Rp6.500')">6GB</div>
+        <div class="gb-option" onclick="selectGbOption(7, '7GB = Rp7.500')">7GB</div>
+        <div class="gb-option" onclick="selectGbOption(8, '8GB = Rp8.500')">8GB</div>
+        <div class="gb-option" onclick="selectGbOption(9, '9GB = Rp9.500')">9GB</div>
+        <div class="gb-option" onclick="selectGbOption(10, '10GB = Rp10.000')">10GB</div>
+        <div class="gb-option" onclick="selectGbOption('unlimited', 'Unlimited = Rp11.000')">Unlimited</div>
+      </div>
+    </div>
+    <input type="number" id="jumlahPanel" placeholder="Jumlah Panel">
+    <input type="text" id="ukuranPanel" placeholder="Ukuran (GB)" readonly>
+    <input type="text" id="waUser" placeholder="Nomor WhatsApp Anda">
+    <div class="popup-buttons">
+      <button onclick="beliPanel()"><i class="fas fa-shopping-cart"></i> Beli Sekarang</button>
+      <button class="secondary" onclick="document.getElementById('buyPanelPopup').style.display='none'"><i class="fas fa-times"></i> Batal</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let isTokenVerified = false;
+let isMusicPlaying = false;
+let aesMode = 'encrypt'; // 'encrypt' or 'decrypt'
+
+function masukWebsite() {
+  document.getElementById("intro").style.display = "none";
+}
+
+// Function to handle active navigation link
+function toggleSection(id) {
+  document.querySelectorAll("section").forEach(sec => {
+    sec.classList.remove("active", "visible");
+    if (sec.id === id) {
+      sec.classList.add("active");
+      setTimeout(() => sec.classList.add("visible"), 10);
+    }
+  });
+
+  // Update active class for nav links
+  document.querySelectorAll('nav a').forEach(link => {
+    link.classList.remove('active-nav');
+    if (link.getAttribute('href') === '#' + id) {
+      link.classList.add('active-nav');
+    }
+  });
+  
+  // Scroll to section
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+const audio = document.getElementById("backgroundMusic");
+const musicBtn = document.getElementById("musicControl");
+
+let audioCtx, analyser, source, bufferLength, dataArray;
+let visualizerVisible = true;
+
+function toggleMusic() {
+  if (!audioCtx) initAudio();
+  if (audio.paused) {
+    audio.play().catch(e => console.log("Autoplay prevented:", e));
+    musicBtn.textContent = "⏸️";
+    isMusicPlaying = true;
+    drawHeartbeat();
+    if (visualizerVisible) {
+      document.getElementById('visualizer').style.display = 'block';
+      drawAudioVisualizer();
+    }
+  } else {
+    audio.pause();
+    musicBtn.textContent = "▶️";
+    isMusicPlaying = false;
+  }
+}
+
+function initAudio() {
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  analyser = audioCtx.createAnalyser();
+  source = audioCtx.createMediaElementSource(audio);
+  source.connect(analyser);
+  analyser.connect(audioCtx.destination);
+  analyser.fftSize = 2048;
+  bufferLength = analyser.frequencyBinCount;
+  dataArray = new Uint8Array(bufferLength);
+}
+
+function drawHeartbeat() {
+  const canvas = document.getElementById("heartbeatVisualizer");
+  const ctx = canvas.getContext("2d");
+
+  function resizeCanvas() {
+    canvas.width = canvas.parentElement.offsetWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
+  }
+
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
+
+  function animate() {
+    if (!isMusicPlaying) return;
+    
+    requestAnimationFrame(animate);
+    analyser.getByteTimeDomainData(dataArray);
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = "rgba(74, 108, 247, 0.5)";
+    ctx.beginPath();
+
+    const sliceWidth = canvas.width * 1.0 / bufferLength;
+    let x = 0;
+
+    for (let i = 0; i < bufferLength; i++) {
+      const v = dataArray[i] / 128.0;
+      const y = v * canvas.height / 2;
+      
+      if (i === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+      
+      x += sliceWidth;
+    }
+    
+    ctx.lineTo(canvas.width, canvas.height/2);
+    ctx.stroke();
+  }
+
+  animate();
+}
+
+function drawAudioVisualizer() {
+  const canvas = document.getElementById("audioVisualizer");
+  const ctx = canvas.getContext("2d");
+  
+  function resizeCanvas() {
+    canvas.width = canvas.parentElement.clientWidth;
+    canvas.height = canvas.parentElement.clientHeight;
+  }
+  
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+  
+  function animate() {
+    if (!isMusicPlaying) return;
+    
+    requestAnimationFrame(animate);
+    analyser.getByteFrequencyData(dataArray);
+    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    const barWidth = (canvas.width / bufferLength) * 2.5;
+    let barHeight;
+    let x = 0;
+    
+    for (let i = 0; i < bufferLength; i++) {
+      barHeight = dataArray[i] / 2;
+      
+      ctx.fillStyle = `rgb(${Math.min(255, 50 + barHeight * 2)}, ${Math.min(255, 100 + barHeight)}, 255)`;
+      ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+      
+      x += barWidth + 1;
+    }
+  }
+  
+  animate();
+}
+
+function toggleVisualizer() {
+  visualizerVisible = !visualizerVisible;
+  document.getElementById('visualizer').style.display = visualizerVisible && isMusicPlaying ? 'block' : 'none';
+}
+
+function beliPanel() {
+  if (!isTokenVerified) {
+    showTokenPopup();
+    return;
+  }
+  
+  const jumlah = document.getElementById('jumlahPanel').value;
+  const ukuran = document.getElementById('ukuranPanel').value;
+  const wa = document.getElementById('waUser').value;
+  
+  if (!jumlah || !ukuran || !wa) {
+    alert('Harap isi semua data!');
+    return;
+  }
+  
+  const url = `https://wa.me/6285123581626?text=Halo,%20saya%20ingin%20beli%20panel.%0AJumlah:%20${jumlah}%0AUkuran:%20${ukuran}%0ANo.%20Saya:%20${wa}`;
+  window.open(url, '_blank');
+}
+
+function selectGbOption(gb, priceText) {
+  document.querySelectorAll('.gb-option').forEach(option => {
+    option.classList.remove('active');
+  });
+  
+  event.target.classList.add('active');
+  document.getElementById('ukuranPanel').value = gb === 'unlimited' ? 'Unlimited' : `${gb}GB`;
+}
+
+function showTokenPopup() {
+  document.getElementById('tokenPopup').style.display = 'flex';
+  document.getElementById('tokenInput').focus();
+}
+
+function hideTokenPopup() {
+  document.getElementById('tokenPopup').style.display = 'none';
+  document.getElementById('tokenError').style.display = 'none';
+  document.getElementById('tokenInput').value = '';
+}
+
+function verifyToken() {
+  const tokenInput = document.getElementById('tokenInput').value;
+  const tokenError = document.getElementById('tokenError');
+  
+  if (tokenInput.toUpperCase() === 'NFDYA') {
+    isTokenVerified = true;
+    hideTokenPopup();
+    document.getElementById('buyPanelPopup').style.display = 'flex';
+  } else {
+    tokenError.style.display = 'block';
+    document.getElementById('tokenInput').value = '';
+    document.getElementById('tokenInput').focus();
+  }
+}
+
+function analyzeDomain() {
+  const domainInput = document.getElementById('domainInput').value.trim();
+  const loadingIndicator = document.getElementById('loadingIndicator');
+  const resultContainer = document.getElementById('resultContainer');
+  const protectionSteps = document.getElementById('protectionSteps');
+  
+  if (!domainInput) {
+    alert('Harap masukkan domain Anda');
+    return;
+  }
+  
+  loadingIndicator.style.display = 'block';
+  resultContainer.style.display = 'none';
+  
+  setTimeout(() => {
+    loadingIndicator.style.display = 'none';
+    document.getElementById('resultDomain').textContent = domainInput;
+    
+    protectionSteps.innerHTML = `
+      <div class="protection-step">
+        <div class="step-number">1</div>
+        <div>
+          <strong>Gunakan Layanan CDN:</strong> Aktifkan Cloudflare atau layanan CDN lainnya untuk ${domainInput}. 
+          Ini akan menyembunyikan IP asli server Anda dan menyaring lalu lintas berbahaya.
+        </div>
+      </div>
+      <div class="protection-step">
+        <div class="step-number">2</div>
+        <div>
+          <strong>Aktifkan Perlindungan DDoS:</strong> Di dashboard Cloudflare, aktifkan "Under Attack Mode" dan "DDoS Protection" 
+          untuk ${domainInput}. Ini akan memblokir lalu lintas mencurigakan otomatis.
+        </div>
+      </div>
+      <div class="protection-step">
+        <div class="step-number">3</div>
+        <div>
+          <strong>Rate Limiting:</strong> Atur batas permintaan untuk ${domainInput} (contoh: 100 permintaan/menit per IP). 
+          Ini mencegah serangan brute force dan flood.
+        </div>
+      </div>
+      <div class="protection-step">
+        <div class="step-number">4</div>
+        <div>
+          <strong>Web Application Firewall (WAF):</strong> Aktifkan WAF untuk ${domainInput} dengan aturan yang memblokir pola serangan umum 
+          seperti SQL injection dan XSS.
+        </div>
+      </div>
+      <div class="protection-step">
+        <div class="step-number">5</div>
+        <div>
+          <strong>Backup Rutin:</strong> Pastikan Anda memiliki backup terbaru untuk ${domainInput}. 
+          Meskipun DDoS tidak merusak data, penting untuk selalu siap.
+        </div>
+      </div>
+    `;
+    
+    resultContainer.style.display = 'block';
+    resultContainer.scrollIntoView({ behavior: 'smooth' });
+  }, 2000);
+}
+
+// Base64 Functions
+function encodeBase64() {
+  const input = document.getElementById('base64Input').value;
+  if (!input) {
+    alert('Masukkan teks terlebih dahulu!');
+    return;
+  }
+  const result = btoa(unescape(encodeURIComponent(input)));
+  document.getElementById('base64Result').textContent = result;
+  document.getElementById('base64ResultContainer').style.display = 'block';
+}
+
+function decodeBase64() {
+  const input = document.getElementById('base64Input').value;
+  if (!input) {
+    alert('Masukkan Base64 terlebih dahulu!');
+    return;
+  }
+  try {
+    const result = decodeURIComponent(escape(atob(input)));
+    document.getElementById('base64Result').textContent = result;
+    document.getElementById('base64ResultContainer').style.display = 'block';
+  } catch (e) {
+    alert('Input bukan Base64 yang valid!');
+  }
+}
+
+function clearBase64() {
+  document.getElementById('base64Input').value = '';
+  document.getElementById('base64Result').textContent = '';
+  document.getElementById('base64ResultContainer').style.display = 'none';
+}
+
+function copyBase64Result() {
+  const result = document.getElementById('base64Result').textContent;
+  if (!result) return;
+  
+  navigator.clipboard.writeText(result).then(() => {
+    const btn = event.target;
+    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+    }, 2000);
+  });
+}
+
+// AES Encryption Functions
+function setAESMode(mode) {
+  aesMode = mode;
+  document.getElementById('aesEncrypt').classList.toggle('active', mode === 'encrypt');
+  document.getElementById('aesDecrypt').classList.toggle('active', mode === 'decrypt');
+  
+  const btn = document.getElementById('aesProcessBtn');
+  if (mode === 'encrypt') {
+    btn.innerHTML = '<i class="fas fa-lock"></i> Enkripsi';
+    document.getElementById('aesInput').placeholder = "Masukkan teks untuk dienkripsi...";
+  } else {
+    btn.innerHTML = '<i class="fas fa-unlock"></i> Dekripsi';
+    document.getElementById('aesInput').placeholder = "Masukkan ciphertext untuk didekripsi...";
+  }
+}
+
+function processAES() {
+  const input = document.getElementById('aesInput').value;
+  const key = document.getElementById('aesKey').value;
+  
+  if (!input || !key) {
+    alert('Harap isi teks dan kunci!');
+    return;
+  }
+  
+  if (key.length < 16) {
+    alert('Kunci harus minimal 16 karakter!');
+    return;
+  }
+  
+  try {
+    let result;
+    if (aesMode === 'encrypt') {
+      // Simple AES-like encryption (not real AES for security reasons)
+      result = btoa(unescape(encodeURIComponent(input + key))).split('').reverse().join('');
+    } else {
+      // Simple AES-like decryption
+      const reversed = atob(input.split('').reverse().join(''));
+      const decrypted = decodeURIComponent(escape(reversed));
+      result = decrypted.slice(0, decrypted.length - key.length);
+    }
+    
+    document.getElementById('aesResult').textContent = result;
+    document.getElementById('aesResultContainer').style.display = 'block';
+    
+    // Add animation effect
+    document.getElementById('aesResultContainer').classList.add('pulse');
+    setTimeout(() => {
+      document.getElementById('aesResultContainer').classList.remove('pulse');
+    }, 1000);
+    
+  } catch (e) {
+    alert('Terjadi kesalahan: ' + e.message);
+  }
+}
+
+function clearAES() {
+  document.getElementById('aesInput').value = '';
+  document.getElementById('aesKey').value = '';
+  document.getElementById('aesResult').textContent = '';
+  document.getElementById('aesResultContainer').style.display = 'none';
+}
+
+function copyAESResult() {
+  const result = document.getElementById('aesResult').textContent;
+  if (!result) return;
+  
+  navigator.clipboard.writeText(result).then(() => {
+    const btn = event.target;
+    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+    }, 2000);
+  });
+}
+
+// Search function
+function searchFeature() {
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+  if (!searchTerm) return;
+  
+  const sections = [
+    {id: 'skills', keywords: ['skill', 'kemampuan', 'keahlian']},
+    {id: 'hobbies', keywords: ['hobi', 'minat', 'kegiatan']},
+    {id: 'contact', keywords: ['kontak', 'sosmed', 'media sosial']},
+    {id: 'antiDDoS', keywords: ['ddos', 'serangan', 'perlindungan']},
+    {id: 'base64', keywords: ['base64', 'encode', 'decode']},
+    {id: 'aes', keywords: ['aes', 'enkripsi', 'dekripsi', 'kripto']}
+  ];
+  
+  const found = sections.find(section => 
+    section.keywords.some(keyword => searchTerm.includes(keyword))
+  );
+  
+  if (found) {
+    toggleSection(found.id);
+  } else {
+    alert('Fitur tidak ditemukan. Coba kata kunci lain seperti: skill, kontak, DDoS, Base64, AES');
+  }
+}
+
+// Visitor counter
+fetch('https://api.countapi.xyz/hit/wilkazxq-portfolio/home')
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('visitorCount').innerText = `Total Kunjungan: ${data.value}`;
+  })
+  .catch(() => {
+    document.getElementById('visitorCount').innerText = 'Total Kunjungan: 1000+';
+  });
+
+// Show skills animation on page load
+window.addEventListener('load', () => {
+  document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+    // Trigger reflow to restart animation
+    void bar.offsetWidth;
+    bar.style.width = bar.style.width;
+  });
+  
+  // Initially show the first section (Skills) if no hash in URL
+  if (!window.location.hash) {
+      toggleSection('skills');
+  } else {
+      toggleSection(window.location.hash.substring(1));
+  }
+  
+  // Add slight delay for intro animation
+  setTimeout(() => {
+    document.querySelectorAll('#intro h1, #intro p').forEach(el => {
+      el.style.animation = 'fadeInText 1s forwards';
+    });
+  }, 300);
+  
+  // Add floating animation to some elements
+  document.querySelectorAll('h1, h2, .card').forEach(el => {
+    el.classList.add('floating');
+  });
+  
+  // Initialize AES mode
+  setAESMode('encrypt');
+});
+</script>
+</body>
+</html>
