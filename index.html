@@ -4,17 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>WILKA | Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --orix-primary-dark-purple: #3C335B;
-      --orix-primary-light-purple: #5E5383;
-      --orix-secondary-peach: #FFD4A2;
-      --orix-accent-green: #66b3a6;
-      --orix-text-dark: #333333;
-      --orix-text-light: #F0F0F0;
-      --orix-light-grey: #F5F5F5;
-      --orix-medium-grey: #E0E0E0;
-      --orix-card-shadow: 0 10px 30px rgba(60, 51, 91, 0.15);
+      --dark-bg: #1a1c3a;
+      --darker-bg: #14152e;
+      --vibrant-blue: #4a6cf7;
+      --light-blue: #5e87ff;
+      --light-green: #2ed573;
+      --light-gray: #f0f4f8;
+      --text-light: #ffffff;
+      --text-gray: #a0a5c1;
+      --card-bg: rgba(255, 255, 255, 0.08);
       --border-radius: 16px;
       --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
@@ -28,18 +29,33 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f9f7ff 0%, #f0edf7 100%);
-      color: var(--orix-text-dark);
+      background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+      color: var(--text-light);
       line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(74, 108, 247, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(46, 213, 115, 0.1) 0%, transparent 20%);
+      pointer-events: none;
+      z-index: -1;
     }
 
     /* ==== INTRO SCREEN ==== */
     #intro {
       position: fixed;
       inset: 0;
-      background: linear-gradient(135deg, var(--orix-primary-dark-purple) 0%, var(--orix-primary-light-purple) 100%);
+      background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
       color: white;
       display: flex;
       flex-direction: column;
@@ -52,6 +68,7 @@
 
     #intro svg {
       animation: rotateIcon 4s linear infinite;
+      stroke: var(--vibrant-blue);
     }
 
     @keyframes rotateIcon {
@@ -73,6 +90,10 @@
       animation-delay: 0.5s; 
       font-size: 2.8rem;
       margin: 20px 0 10px;
+      background: linear-gradient(to right, var(--light-blue), var(--light-green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
     
     #intro p { 
@@ -80,7 +101,7 @@
       font-size: 1.2rem;
       max-width: 600px;
       margin: 0 auto 30px;
-      opacity: 0.9;
+      color: var(--text-gray);
     }
 
     /* ==== MAIN LAYOUT ==== */
@@ -94,25 +115,15 @@
     header {
       position: relative;
       overflow: hidden;
-      background: linear-gradient(135deg, var(--orix-primary-dark-purple) 0%, var(--orix-primary-light-purple) 100%);
-      color: var(--orix-text-light);
+      background: var(--card-bg);
+      color: var(--text-light);
       padding: 80px 20px 50px;
       text-align: center;
       border-radius: 0 0 40px 40px;
-      box-shadow: var(--orix-card-shadow);
       z-index: 10;
       margin-bottom: 30px;
-    }
-
-    header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 10% 20%, rgba(255, 212, 162, 0.1) 0%, transparent 20%);
-      pointer-events: none;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(74, 108, 247, 0.3);
     }
 
     header h1 {
@@ -120,7 +131,10 @@
         margin-bottom: 10px;
         letter-spacing: 1px;
         font-weight: 700;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        background: linear-gradient(to right, var(--light-blue), var(--light-green));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
     }
 
     header p {
@@ -128,6 +142,7 @@
         opacity: 0.85;
         max-width: 700px;
         margin: 0 auto;
+        color: var(--text-gray);
     }
 
     canvas#heartbeatVisualizer {
@@ -151,24 +166,25 @@
     }
 
     nav {
-      background: white;
+      background: var(--card-bg);
       padding: 18px 25px;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 15px;
-      box-shadow: var(--orix-card-shadow);
       border-radius: var(--border-radius);
       margin: -50px auto 0;
       position: sticky;
       top: 20px;
       z-index: 50;
       max-width: calc(100% - 40px);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(74, 108, 247, 0.2);
     }
 
     nav a {
       text-decoration: none;
-      background: var(--orix-primary-light-purple);
+      background: var(--vibrant-blue);
       color: white;
       padding: 12px 25px;
       border-radius: 50px;
@@ -182,21 +198,22 @@
     }
 
     nav a:hover, nav a.active-nav {
-      background: var(--orix-primary-dark-purple);
+      background: var(--light-green);
       transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(60, 51, 91, 0.3);
+      box-shadow: 0 6px 15px rgba(46, 213, 115, 0.3);
     }
 
     section {
       padding: 35px;
-      background: white;
+      background: var(--card-bg);
       border-radius: var(--border-radius);
-      box-shadow: var(--orix-card-shadow);
       margin-bottom: 30px;
       display: none;
       opacity: 0;
       transform: translateY(30px);
       transition: all 0.6s ease-out;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(74, 108, 247, 0.2);
     }
 
     section.active { display: block; }
@@ -208,28 +225,28 @@
     h2 {
       margin-bottom: 30px;
       font-size: 2.4rem;
-      color: var(--orix-primary-dark-purple);
+      color: var(--text-light);
       display: flex;
       align-items: center;
       gap: 15px;
       padding-bottom: 15px;
-      border-bottom: 2px solid var(--orix-secondary-peach);
+      border-bottom: 2px solid var(--vibrant-blue);
       font-weight: 700;
     }
 
     .card {
-      background: white;
+      background: rgba(26, 28, 58, 0.4);
       padding: 30px;
       border-radius: var(--border-radius);
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
       margin-bottom: 25px;
       transition: var(--transition);
-      border: 1px solid rgba(94, 83, 131, 0.1);
+      border: 1px solid rgba(74, 108, 247, 0.2);
     }
 
     .card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(60, 51, 91, 0.15);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      border-color: var(--vibrant-blue);
     }
 
     .skill-bar {
@@ -240,14 +257,14 @@
       display: block;
       font-weight: 600;
       margin-bottom: 8px;
-      color: var(--orix-primary-dark-purple);
+      color: var(--text-light);
       font-size: 1.1rem;
     }
 
     .skill-bar-fill {
       height: 16px;
       border-radius: 8px;
-      background: linear-gradient(90deg, var(--orix-secondary-peach), var(--orix-primary-light-purple));
+      background: linear-gradient(90deg, var(--vibrant-blue), var(--light-green));
       transition: width 0.8s ease;
       box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
       position: relative;
@@ -273,47 +290,46 @@
     footer {
       text-align: center;
       padding: 30px;
-      background: var(--orix-primary-dark-purple);
+      background: var(--darker-bg);
       font-size: 1rem;
-      color: var(--orix-text-light);
+      color: var(--text-gray);
       margin-top: 50px;
       border-radius: 40px 40px 0 0;
-      box-shadow: 0 -5px 25px rgba(0,0,0,0.1);
     }
 
     #musicControl {
       position: fixed;
       bottom: 30px;
       right: 30px;
-      background: var(--orix-primary-light-purple);
+      background: var(--vibrant-blue);
       color: white;
       border: none;
       width: 60px;
       height: 60px;
       border-radius: 50%;
       cursor: pointer;
-      box-shadow: var(--orix-card-shadow);
       display: flex;
       align-items: center;
       justify-content: center;
       transition: var(--transition);
       font-size: 1.6rem;
       z-index: 100;
+      box-shadow: 0 5px 20px rgba(74, 108, 247, 0.4);
     }
 
     #musicControl:hover {
       transform: scale(1.1) rotate(10deg);
-      background: var(--orix-primary-dark-purple);
-      box-shadow: 0 8px 25px rgba(60, 51, 91, 0.3);
+      background: var(--light-green);
+      box-shadow: 0 8px 25px rgba(46, 213, 115, 0.4);
     }
 
     /* Tool Styles */
     .tool-container {
-      background: var(--orix-light-grey);
+      background: rgba(26, 28, 58, 0.6);
       padding: 30px;
       border-radius: var(--border-radius);
       margin-top: 30px;
-      border: 1px solid var(--orix-medium-grey);
+      border: 1px solid rgba(74, 108, 247, 0.3);
       position: relative;
       overflow: hidden;
     }
@@ -325,11 +341,11 @@
       left: 0;
       width: 5px;
       height: 100%;
-      background: linear-gradient(to bottom, var(--orix-secondary-peach), var(--orix-primary-light-purple));
+      background: linear-gradient(to bottom, var(--vibrant-blue), var(--light-green));
     }
     
     .tool-container h3 {
-      color: var(--orix-primary-dark-purple);
+      color: var(--text-light);
       margin-bottom: 25px;
       display: flex;
       align-items: center;
@@ -347,13 +363,14 @@
     .tool-form input,
     .tool-form textarea {
       padding: 16px 20px;
-      border: 2px solid var(--orix-medium-grey);
+      border: 2px solid rgba(74, 108, 247, 0.3);
       border-radius: 12px;
       font-size: 1.1rem;
       transition: var(--transition);
       width: 100%;
       font-family: inherit;
-      background: white;
+      background: rgba(26, 28, 58, 0.4);
+      color: var(--text-light);
     }
     
     .tool-form textarea {
@@ -361,11 +378,16 @@
       resize: vertical;
     }
     
+    .tool-form input::placeholder,
+    .tool-form textarea::placeholder {
+      color: var(--text-gray);
+    }
+    
     .tool-form input:focus,
     .tool-form textarea:focus {
-      border-color: var(--orix-primary-light-purple);
+      border-color: var(--vibrant-blue);
       outline: none;
-      box-shadow: 0 0 0 4px rgba(94, 83, 131, 0.15);
+      box-shadow: 0 0 0 4px rgba(74, 108, 247, 0.15);
     }
     
     .button-group {
@@ -383,7 +405,7 @@
     }
     
     button {
-      background: linear-gradient(135deg, var(--orix-primary-light-purple), var(--orix-primary-dark-purple));
+      background: linear-gradient(135deg, var(--vibrant-blue), var(--light-blue));
       color: white;
       border: none;
       font-weight: 600;
@@ -393,36 +415,36 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      box-shadow: 0 4px 15px rgba(94, 83, 131, 0.25);
+      box-shadow: 0 4px 15px rgba(74, 108, 247, 0.4);
     }
     
     button:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(94, 83, 131, 0.4);
+      box-shadow: 0 8px 25px rgba(74, 108, 247, 0.6);
     }
     
     button.secondary {
-      background: white;
-      color: var(--orix-primary-dark-purple);
-      border: 2px solid var(--orix-primary-light-purple);
+      background: transparent;
+      color: var(--text-light);
+      border: 2px solid var(--vibrant-blue);
       box-shadow: none;
     }
 
     button.secondary:hover {
-        background: #f9f7ff;
-        box-shadow: 0 4px 15px rgba(94, 83, 131, 0.15);
+        background: rgba(74, 108, 247, 0.1);
+        box-shadow: 0 4px 15px rgba(74, 108, 247, 0.2);
     }
     
     button.success {
-      background: linear-gradient(135deg, var(--orix-accent-green), #4d998c);
+      background: linear-gradient(135deg, var(--light-green), #27ae60);
     }
     
     .result-container {
       margin-top: 30px;
       padding: 25px;
       border-radius: 12px;
-      background: var(--orix-light-grey);
-      border-left: 5px solid var(--orix-primary-light-purple);
+      background: rgba(26, 28, 58, 0.6);
+      border-left: 5px solid var(--vibrant-blue);
       display: none;
       animation: fadeIn 0.5s ease-out;
     }
@@ -434,7 +456,7 @@
     
     .result-container h4 {
       margin-bottom: 20px;
-      color: var(--orix-primary-dark-purple);
+      color: var(--text-light);
       font-size: 1.3rem;
       display: flex;
       align-items: center;
@@ -453,18 +475,18 @@
       font-size: 1.05rem;
       padding: 15px;
       border-radius: 10px;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(74, 108, 247, 0.1);
       transition: var(--transition);
     }
 
     .protection-step:hover {
-      background: white;
+      background: rgba(74, 108, 247, 0.2);
       transform: translateX(5px);
     }
     
     .step-number {
-      background: var(--orix-secondary-peach);
-      color: var(--orix-primary-dark-purple);
+      background: var(--vibrant-blue);
+      color: white;
       width: 32px;
       height: 32px;
       border-radius: 50%;
@@ -481,15 +503,15 @@
       display: none;
       text-align: center;
       margin: 30px 0;
-      color: var(--orix-primary-dark-purple);
+      color: var(--text-light);
       font-size: 1.1rem;
     }
     
     .loading-spinner {
       width: 50px;
       height: 50px;
-      border: 5px solid rgba(122, 119, 184, 0.2);
-      border-top: 5px solid var(--orix-primary-dark-purple);
+      border: 5px solid rgba(74, 108, 247, 0.2);
+      border-top: 5px solid var(--vibrant-blue);
       border-radius: 50%;
       animation: spin 1s linear infinite;
       margin: 0 auto 20px;
@@ -505,7 +527,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.7);
+      background: rgba(10, 12, 30, 0.9);
       justify-content: center;
       align-items: center;
       z-index: 10000;
@@ -513,15 +535,16 @@
     }
 
     .popup-content {
-      background: white;
+      background: var(--dark-bg);
       padding: 40px;
       border-radius: var(--border-radius);
       width: 90%;
       max-width: 500px;
-      box-shadow: var(--orix-card-shadow);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
       text-align: center;
       position: relative;
       animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(74, 108, 247, 0.3);
     }
 
     @keyframes popIn {
@@ -531,7 +554,7 @@
 
     .popup-content h3 {
       margin-bottom: 30px;
-      color: var(--orix-primary-dark-purple);
+      color: var(--text-light);
       font-size: 1.8rem;
       font-weight: 700;
     }
@@ -540,16 +563,22 @@
       width: 100%;
       padding: 15px 20px;
       margin-bottom: 20px;
-      border: 2px solid var(--orix-medium-grey);
+      border: 2px solid rgba(74, 108, 247, 0.3);
       border-radius: 12px;
       transition: var(--transition);
       font-size: 1.1rem;
+      background: rgba(26, 28, 58, 0.4);
+      color: var(--text-light);
+    }
+
+    .popup-content input::placeholder {
+      color: var(--text-gray);
     }
 
     .popup-content input:focus {
-      border-color: var(--orix-primary-light-purple);
+      border-color: var(--vibrant-blue);
       outline: none;
-      box-shadow: 0 0 0 4px rgba(94, 83, 131, 0.15);
+      box-shadow: 0 0 0 4px rgba(74, 108, 247, 0.15);
     }
 
     .popup-buttons {
@@ -567,17 +596,17 @@
 
     .price-list {
       margin-bottom: 25px;
-      background: var(--orix-light-grey);
+      background: rgba(26, 28, 58, 0.4);
       padding: 25px;
       border-radius: var(--border-radius);
       font-size: 1rem;
-      border: 1px solid var(--orix-medium-grey);
+      border: 1px solid rgba(74, 108, 247, 0.3);
     }
 
     .price-title {
       font-weight: 700;
       margin-bottom: 15px;
-      color: var(--orix-primary-dark-purple);
+      color: var(--text-light);
       font-size: 1.2rem;
     }
 
@@ -590,28 +619,26 @@
     }
 
     .gb-option {
-      background: white;
+      background: rgba(26, 28, 58, 0.4);
       padding: 12px 20px;
       border-radius: 50px;
       cursor: pointer;
       transition: var(--transition);
-      border: 2px solid var(--orix-medium-grey);
+      border: 2px solid rgba(74, 108, 247, 0.3);
       font-size: 1rem;
-      color: var(--orix-text-dark);
-      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      color: var(--text-light);
       font-weight: 500;
     }
 
     .gb-option:hover {
-      background: #f9f7ff;
-      border-color: var(--orix-primary-light-purple);
+      background: rgba(74, 108, 247, 0.2);
+      border-color: var(--vibrant-blue);
     }
 
     .gb-option.active {
-      background: var(--orix-primary-light-purple);
+      background: var(--vibrant-blue);
       color: white;
-      border-color: var(--orix-primary-light-purple);
-      box-shadow: 0 5px 15px rgba(94, 83, 131, 0.3);
+      border-color: var(--vibrant-blue);
       transform: translateY(-3px);
     }
     
@@ -620,7 +647,7 @@
     }
     
     .token-error {
-      color: #e74c3c;
+      color: #ff6b6b;
       font-size: 0.95rem;
       margin-top: 10px;
       display: none;
@@ -733,17 +760,28 @@
         font-size: 1.8rem;
       }
     }
+    
+    /* Floating elements animation */
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
   </style>
 </head>
 <body>
 
 <div id="intro">
-  <svg width="80" height="80" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+  <svg width="80" height="80" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
     <path d="M12 2l4 4-4 4-4-4 4-4zM2 12l4-4 4 4-4 4-4-4zM12 22l-4-4 4-4 4 4-4 4zM22 12l-4 4-4-4 4-4 4 4z"/>
   </svg>
   <h1>Selamat Datang di Portofolio Wilkazxq</h1>
   <p>Developer | Designer | Creator - Membangun solusi digital dengan kreativitas dan inovasi</p>
-  <button onclick="masukWebsite()" style="margin-top:30px;background:linear-gradient(135deg,var(--orix-accent-green),#4d998c);border:none;color:white;padding:16px 40px;border-radius:50px;font-size:1.2rem;cursor:pointer;transition:transform 0.3s ease,box-shadow 0.3s ease;font-weight:600;box-shadow:0 6px 20px rgba(102,179,166,0.35);display:flex;align-items:center;gap:12px;">
+  <button onclick="masukWebsite()" style="margin-top:30px;background:linear-gradient(135deg, var(--vibrant-blue), var(--light-blue));border:none;color:white;padding:16px 40px;border-radius:50px;font-size:1.2rem;cursor:pointer;transition:transform 0.3s ease,box-shadow 0.3s ease;font-weight:600;box-shadow:0 6px 20px rgba(74, 108, 247, 0.4);display:flex;align-items:center;gap:12px;">
     <svg width="22" height="22" fill="white" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
     Mulai Pengalaman
   </button>
@@ -758,17 +796,17 @@
 
     <div class="main-content-wrapper">
         <nav>
-          <a href="#skills" onclick="toggleSection('skills')">⚙️ Skills</a>
-          <a href="#hobbies" onclick="toggleSection('hobbies')">🎮 Hobi</a>
-          <a href="#contact" onclick="toggleSection('contact')">✉️ Kontak</a>
-          <a href="#antiDDoS" onclick="toggleSection('antiDDoS')">🛡️ Anti-DDoS</a>
-          <a href="#base64" onclick="toggleSection('base64')">🔐 Base64 Tool</a>
-          <a href="#group" onclick="window.open('https://chat.whatsapp.com/CtzrdM40BIH7hxYGNogr89','_blank')">👨‍💻 Grup Developer</a>
-          <a href="#" onclick="showTokenPopup()">🛒 Beli Panel</a>
+          <a href="#skills" onclick="toggleSection('skills')"><i class="fas fa-cog"></i> Skills</a>
+          <a href="#hobbies" onclick="toggleSection('hobbies')"><i class="fas fa-gamepad"></i> Hobi</a>
+          <a href="#contact" onclick="toggleSection('contact')"><i class="fas fa-envelope"></i> Kontak</a>
+          <a href="#antiDDoS" onclick="toggleSection('antiDDoS')"><i class="fas fa-shield-alt"></i> Anti-DDoS</a>
+          <a href="#base64" onclick="toggleSection('base64')"><i class="fas fa-lock"></i> Base64 Tool</a>
+          <a href="#group" onclick="window.open('https://chat.whatsapp.com/CtzrdM40BIH7hxYGNogr89','_blank')"><i class="fas fa-users"></i> Grup Developer</a>
+          <a href="#" onclick="showTokenPopup()"><i class="fas fa-shopping-cart"></i> Beli Panel</a>
         </nav>
 
         <section id="skills">
-          <h2><span>⚙️</span> Skills</h2>
+          <h2><i class="fas fa-cog"></i> Skills</h2>
           <div class="card">
             <div class="skill-bar">
               <span>HTML — 90%</span>
@@ -794,70 +832,70 @@
         </section>
 
         <section id="hobbies">
-          <h2><span>🎮</span> Hobi & Minat</h2>
+          <h2><i class="fas fa-gamepad"></i> Hobi & Minat</h2>
           <div class="card">
             <p>Saya memiliki minat yang luas dalam bidang teknologi dan pengembangan diri. Hobi utama saya meliputi:</p>
-            <ul style="margin: 20px 0 10px 30px;">
+            <ul style="margin: 20px 0 10px 30px; color: var(--text-gray);">
               <li style="margin-bottom: 12px;">Menganalisis pasar dan tren teknologi terbaru</li>
               <li style="margin-bottom: 12px;">Mempelajari perkembangan Artificial Intelligence dan penerapannya</li>
               <li style="margin-bottom: 12px;">Pengembangan diri melalui membaca dan kursus online</li>
               <li>Eksperimen dengan teknologi baru dan framework pengembangan</li>
             </ul>
-            <p style="margin-top: 15px;">Saya percaya bahwa belajar terus-menerus adalah kunci untuk tetap relevan di industri teknologi yang terus berkembang.</p>
+            <p style="margin-top: 15px; color: var(--text-gray);">Saya percaya bahwa belajar terus-menerus adalah kunci untuk tetap relevan di industri teknologi yang terus berkembang.</p>
           </div>
         </section>
 
         <section id="contact">
-          <h2><span>✉️</span> Kontak & Media Sosial</h2>
+          <h2><i class="fas fa-envelope"></i> Kontak & Media Sosial</h2>
           <div class="card">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
               <div>
-                <h3 style="color: var(--orix-primary-dark-purple); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-                  <svg width="24" height="24" fill="var(--orix-primary-light-purple)" viewBox="0 0 24 24">
-                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                  </svg>
+                <h3 style="color: var(--text-light); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                  <i class="fas fa-envelope" style="color: var(--vibrant-blue);"></i>
                   Email
                 </h3>
-                <p>wilka.dev@example.com</p>
+                <p style="color: var(--text-gray);">wilka.dev@example.com</p>
               </div>
               
               <div>
-                <h3 style="color: var(--orix-primary-dark-purple); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-                  <svg width="24" height="24" fill="var(--orix-primary-light-purple)" viewBox="0 0 24 24">
-                    <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
-                  </svg>
+                <h3 style="color: var(--text-light); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                  <i class="fab fa-twitter" style="color: var(--vibrant-blue);"></i>
                   Twitter
                 </h3>
-                <p>@wilka_dev</p>
+                <p style="color: var(--text-gray);">@wilka_dev</p>
               </div>
               
               <div>
-                <h3 style="color: var(--orix-primary-dark-purple); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-                  <svg width="24" height="24" fill="var(--orix-primary-light-purple)" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
-                  </svg>
+                <h3 style="color: var(--text-light); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                  <i class="fab fa-instagram" style="color: var(--vibrant-blue);"></i>
                   Instagram
                 </h3>
-                <p>@wilka.portfolio</p>
+                <p style="color: var(--text-gray);">@wilka.portfolio</p>
+              </div>
+              
+              <div>
+                <h3 style="color: var(--text-light); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                  <i class="fab fa-whatsapp" style="color: var(--light-green);"></i>
+                  WhatsApp
+                </h3>
+                <p style="color: var(--text-gray);">+62 851 2358 1626</p>
               </div>
             </div>
           </div>
         </section>
 
         <section id="antiDDoS">
-          <h2><span>🛡️</span> Tools Anti-DDoS</h2>
+          <h2><i class="fas fa-shield-alt"></i> Tools Anti-DDoS</h2>
           <div class="card">
-            <p>Lindungi website Anda dari serangan DDoS dengan tools profesional kami. Masukkan domain Anda di bawah untuk mendapatkan rekomendasi perlindungan khusus.</p>
+            <p style="color: var(--text-gray);">Lindungi website Anda dari serangan DDoS dengan tools profesional kami. Masukkan domain Anda di bawah untuk mendapatkan rekomendasi perlindungan khusus.</p>
             
             <div class="tool-container">
-              <h3><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Perlindungan Website</h3>
+              <h3><i class="fas fa-shield-alt"></i> Perlindungan Website</h3>
               
               <div class="tool-form">
                 <input type="text" id="domainInput" placeholder="Masukkan domain Anda (contoh: websiteku.com)" required>
                 <button onclick="analyzeDomain()">
-                  <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
-                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                  </svg>
+                  <i class="fas fa-search"></i>
                   Analisis & Rekomendasi
                 </button>
               </div>
@@ -868,15 +906,15 @@
               </div>
               
               <div class="result-container" id="resultContainer">
-                <h4>Rekomendasi Perlindungan untuk <span id="resultDomain" style="color: var(--orix-primary-light-purple);"></span></h4>
-                <p>Berikut langkah-langkah untuk melindungi website Anda dari serangan DDoS:</p>
+                <h4>Rekomendasi Perlindungan untuk <span id="resultDomain" style="color: var(--light-blue);"></span></h4>
+                <p style="color: var(--text-gray);">Berikut langkah-langkah untuk melindungi website Anda dari serangan DDoS:</p>
                 
                 <div class="protection-steps" id="protectionSteps">
                   <!-- Content will be generated by JavaScript -->
                 </div>
                 
-                <div class="result-container" style="margin-top: 20px; background: rgba(255, 212, 162, 0.15);">
-                  <p><strong>Catatan:</strong> Rekomendasi ini bersifat umum. Untuk perlindungan maksimal, pertimbangkan layanan profesional seperti Cloudflare, Akamai, atau AWS Shield.</p>
+                <div class="result-container" style="margin-top: 20px; background: rgba(74, 108, 247, 0.1);">
+                  <p style="color: var(--text-gray);"><strong>Catatan:</strong> Rekomendasi ini bersifat umum. Untuk perlindungan maksimal, pertimbangkan layanan profesional seperti Cloudflare, Akamai, atau AWS Shield.</p>
                 </div>
               </div>
             </div>
@@ -884,30 +922,24 @@
         </section>
 
         <section id="base64">
-          <h2><span>🔐</span> Base64 Encode/Decode</h2>
+          <h2><i class="fas fa-lock"></i> Base64 Encode/Decode</h2>
           <div class="card">
-            <p>Tool untuk mengencode dan mendecode teks menggunakan Base64. Gunakan untuk keperluan encoding data sensitif atau transmisi data.</p>
+            <p style="color: var(--text-gray);">Tool untuk mengencode dan mendecode teks menggunakan Base64. Gunakan untuk keperluan encoding data sensitif atau transmisi data.</p>
             
             <div class="tool-container">
               <div class="tool-form">
                 <textarea id="base64Input" placeholder="Masukkan teks atau Base64 di sini..." rows="5"></textarea>
                 <div class="button-group">
                   <button onclick="encodeBase64()">
-                    <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
-                      <path d="M12 3v18M17 14l5-5-5-5M7 4l-5 5 5 5"/>
-                    </svg>
+                    <i class="fas fa-lock"></i>
                     Encode
                   </button>
                   <button onclick="decodeBase64()">
-                    <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
-                      <path d="M12 3v18M7 14l-5-5 5-5M17 4l5 5-5 5"/>
-                    </svg>
+                    <i class="fas fa-unlock"></i>
                     Decode
                   </button>
                   <button class="secondary" onclick="clearBase64()">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                      <path d="M18 6L6 18M6 6l12 12"/>
-                    </svg>
+                    <i class="fas fa-trash"></i>
                     Clear
                   </button>
                 </div>
@@ -915,12 +947,10 @@
               
               <div class="result-container" id="base64ResultContainer">
                 <h4>Hasil:</h4>
-                <div id="base64Result" style="word-break: break-word; white-space: pre-wrap; padding: 15px; background: rgba(255,255,255,0.7); border-radius: 8px; margin: 15px 0;"></div>
+                <div id="base64Result" style="word-break: break-word; white-space: pre-wrap; padding: 15px; background: rgba(26, 28, 58, 0.4); border-radius: 8px; margin: 15px 0; color: var(--text-gray);"></div>
                 <div class="button-group" style="margin-top: 15px;">
                   <button class="success" onclick="copyBase64Result()">
-                    <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
-                      <path d="M8 17.929H6a2 2 0 01-2-2V6a2 2 0 012-2h12a2 2 0 012 2v2M16 7h4a1 1 0 011 1v12a1 1 0 01-1 1h-8a1 1 0 01-1-1V8a1 1 0 011-1z"/>
-                    </svg>
+                    <i class="fas fa-copy"></i>
                     Copy
                   </button>
                 </div>
@@ -930,28 +960,28 @@
         </section>
     </div> <footer>
       <p>&copy; 2025 WILKA. Hak cipta dilindungi. | Portofolio Kreatif</p>
-      <p id="visitorCount" style="margin-top: 15px; font-size: 1.1rem; opacity: 0.9;">Total Kunjungan: Memuat...</p>
+      <p id="visitorCount" style="margin-top: 15px; font-size: 1.1rem; color: var(--text-gray);">Total Kunjungan: Memuat...</p>
     </footer>
 </div> <audio id="backgroundMusic" src="musik.mp3" loop></audio>
 <button id="musicControl" onclick="toggleMusic()">▶️</button>
 
 <div id="tokenPopup" class="popup" onclick="if(event.target.id==='tokenPopup') hideTokenPopup()">
   <div class="popup-content">
-    <h3>Masukkan Token Akses</h3>
+    <h3><i class="fas fa-key"></i> Masukkan Token Akses</h3>
     <div class="token-input-container">
       <input type="password" id="tokenInput" placeholder="Masukkan token NFDYA">
       <p class="token-error" id="tokenError">Token salah! Silakan coba lagi.</p>
     </div>
     <div class="popup-buttons">
-      <button onclick="verifyToken()">Verifikasi</button>
-      <button class="secondary" onclick="hideTokenPopup()">Batal</button>
+      <button onclick="verifyToken()"><i class="fas fa-check"></i> Verifikasi</button>
+      <button class="secondary" onclick="hideTokenPopup()"><i class="fas fa-times"></i> Batal</button>
     </div>
   </div>
 </div>
 
 <div id="buyPanelPopup" class="popup" onclick="if(event.target.id==='buyPanelPopup') this.style.display='none'">
   <div class="popup-content">
-    <h3>Beli Panel</h3>
+    <h3><i class="fas fa-shopping-cart"></i> Beli Panel</h3>
     <div class="price-list">
       <p class="price-title">Pilih Ukuran Panel:</p>
       <div class="gb-options">
@@ -972,8 +1002,8 @@
     <input type="text" id="ukuranPanel" placeholder="Ukuran (GB)" readonly>
     <input type="text" id="waUser" placeholder="Nomor WhatsApp Anda">
     <div class="popup-buttons">
-      <button onclick="beliPanel()">Beli Sekarang</button>
-      <button class="secondary" onclick="document.getElementById('buyPanelPopup').style.display='none'">Batal</button>
+      <button onclick="beliPanel()"><i class="fas fa-shopping-cart"></i> Beli Sekarang</button>
+      <button class="secondary" onclick="document.getElementById('buyPanelPopup').style.display='none'"><i class="fas fa-times"></i> Batal</button>
     </div>
   </div>
 </div>
@@ -1055,7 +1085,7 @@ function drawHeartbeat() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.lineWidth = 3;
-    ctx.strokeStyle = "rgba(255,255,255,0.25)";
+    ctx.strokeStyle = "rgba(74, 108, 247, 0.5)";
     ctx.beginPath();
 
     const sliceWidth = canvas.width * 1.0 / bufferLength;
@@ -1235,9 +1265,9 @@ function copyBase64Result() {
   
   navigator.clipboard.writeText(result).then(() => {
     const btn = event.target;
-    btn.innerHTML = '<svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Copied!';
+    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
     setTimeout(() => {
-      btn.innerHTML = '<svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M8 17.929H6a2 2 0 01-2-2V6a2 2 0 012-2h12a2 2 0 012 2v2M16 7h4a1 1 0 011 1v12a1 1 0 01-1 1h-8a1 1 0 01-1-1V8a1 1 0 011-1z"/></svg> Copy';
+      btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
     }, 2000);
   });
 }
@@ -1273,6 +1303,11 @@ window.addEventListener('load', () => {
       el.style.animation = 'fadeInText 1s forwards';
     });
   }, 300);
+  
+  // Add floating animation to some elements
+  document.querySelectorAll('h1, h2, .card').forEach(el => {
+    el.classList.add('floating');
+  });
 });
 </script>
 </body>
